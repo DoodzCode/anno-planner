@@ -1,0 +1,3 @@
+[submodule "agent/scripts/tests/bats"]
+	path = agent/scripts/tests/bats
+	url = https://github.com/bats-core/bats-core
