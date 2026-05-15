@@ -61,6 +61,26 @@ Three-pane layout: **palette (left) · canvas (center) · inspector/stats (right
 
 ---
 
+## Branch Strategy
+
+```
+origin/main   ← production; receives merges from dev only via PR
+origin/dev    ← integration branch; all feature work targets here
+origin/kaleb  ← Kaleb's personal branch (cut from dev)
+origin/ian    ← Ian's personal branch (cut from dev)
+```
+
+Agents operate in **git worktrees on the human's personal branch** — never push directly to `dev` or `main`.
+
+See `CONTRIBUTING.md` for the full PR workflow and guardrails.
+
+## Tracking
+
+- Roadmap: `docs/ROADMAP.md`
+- Live dashboard: `dashboard/index.html` (open in browser)
+
+---
+
 ## Agent Collaboration
 
 This project pairs 2 human developers with Citadel Coding Agents. Agents compress calendar time ~2–3×.
