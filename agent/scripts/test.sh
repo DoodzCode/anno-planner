@@ -13,7 +13,9 @@ VERBOSE=false
 
 while [ $# -gt 0 ]; do
   case "$1" in
-    --filter)      FILTER="$2"; shift 2 ;;
+    --filter)
+      [ $# -ge 2 ] || { echo "--filter requires a value" >&2; exit 1; }
+      FILTER="$2"; shift 2 ;;
     --integration) INTEGRATION=true; shift ;;
     --verbose|-v)  VERBOSE=true; shift ;;
     --help|-h)     sed -n '2,4p' "$0"; exit 0 ;;
