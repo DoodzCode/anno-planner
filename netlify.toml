@@ -1,0 +1,23 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Production (main branch)
+[context.production]
+  command = "npm run build"
+
+# Dev branch deploy
+[context.branch-deploy]
+  command = "npm run build"
+
+[context."dev"]
+  command = "npm run build"
+
+# SPA fallback — all routes → index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
