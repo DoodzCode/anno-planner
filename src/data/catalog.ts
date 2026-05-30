@@ -1,56 +1,27 @@
 import type { Building } from '../types/domain'
+import rawBuildings from './buildings-1800.json'
 
-export const BUILDINGS: Building[] = [
-  {
-    id: 'marketplace',
-    name: 'Marketplace',
-    tier: 'farmers',
-    footprint: { w: 3, h: 3 },
-    category: 'public',
-    color: '#c8942a',
-    influenceRadius: 20,
-  },
-  {
-    id: 'lumberjack',
-    name: "Lumberjack's Hut",
-    tier: 'farmers',
-    footprint: { w: 2, h: 2 },
-    category: 'production',
-    color: '#4a7c3a',
-    outputs: ['timber'],
-    productionTime: 30,
-  },
-  {
-    id: 'sawmill',
-    name: 'Sawmill',
-    tier: 'farmers',
-    footprint: { w: 4, h: 3 },
-    category: 'production',
-    color: '#7c5a3a',
-    inputs: ['timber'],
-    outputs: ['planks'],
-    productionTime: 60,
-    roadRequired: true,
-  },
-  {
-    id: 'sheep-farm',
-    name: 'Sheep Farm',
-    tier: 'workers',
-    footprint: { w: 5, h: 4 },
-    category: 'production',
-    color: '#4a7a60',
-    outputs: ['wool'],
-    productionTime: 60,
-  },
-  {
-    id: 'guard-tower',
-    name: 'Guard Tower',
-    tier: 'farmers',
-    footprint: { w: 1, h: 1 },
-    category: 'military',
-    color: '#8a4a4a',
-    influenceRadius: 7,
-  },
-]
+export const BUILDINGS: Building[] = rawBuildings as Building[]
 
 export const BUILDING_MAP = new Map(BUILDINGS.map(b => [b.id, b]))
+
+export const TIERS = [
+  { id: 'all',       label: 'All' },
+  { id: 'farmers',   label: 'Farmers' },
+  { id: 'workers',   label: 'Workers' },
+  { id: 'artisans',  label: 'Artisans' },
+  { id: 'engineers', label: 'Engineers' },
+  { id: 'investors', label: 'Investors' },
+  { id: 'scholars',  label: 'Scholars' },
+  { id: 'harbor',    label: 'Harbor' },
+  { id: 'all-world', label: 'Special' },
+] as const
+
+export const CATEGORIES = [
+  { id: 'all',        label: 'All' },
+  { id: 'residence',  label: 'Residences' },
+  { id: 'production', label: 'Production' },
+  { id: 'public',     label: 'Public' },
+  { id: 'harbor',     label: 'Harbor' },
+  { id: 'military',   label: 'Military' },
+] as const

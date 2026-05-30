@@ -1,0 +1,2100 @@
+[
+  {
+    "id": "dockland-main",
+    "name": "Docklands Main Wharf",
+    "tier": "harbor",
+    "footprint": {
+      "w": 7,
+      "h": 6
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_docklands_main.png",
+    "group": "General",
+    "workRadius": 30.0
+  },
+  {
+    "id": "residence-old-world",
+    "name": "Farmer Residence",
+    "tier": "farmers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#8B6330",
+    "iconFile": "A7_resident.png",
+    "group": "(1) Old World"
+  },
+  {
+    "id": "residence-tier02",
+    "name": "Worker Residence",
+    "tier": "workers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#2E6040",
+    "iconFile": "A7_resident.png",
+    "group": "(1) Old World"
+  },
+  {
+    "id": "residence-tier03",
+    "name": "Artisan Residence",
+    "tier": "artisans",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#A05A20",
+    "iconFile": "A7_resident.png",
+    "group": "(1) Old World"
+  },
+  {
+    "id": "residence-tier04",
+    "name": "Engineer Residence",
+    "tier": "engineers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#2A4A7A",
+    "iconFile": "A7_resident.png",
+    "group": "(1) Old World"
+  },
+  {
+    "id": "residence-tier05",
+    "name": "Investor Residence",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#7A3A6A",
+    "iconFile": "A7_resident.png",
+    "group": "(1) Old World"
+  },
+  {
+    "id": "guild-house",
+    "name": "Trade Union",
+    "tier": "all",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "public",
+    "color": "#5A5A5A",
+    "iconFile": "A7_guildhouse.png",
+    "group": "Special Buildings",
+    "workRadius": 15.0
+  },
+  {
+    "id": "town-hall",
+    "name": "Town Hall",
+    "tier": "all",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "public",
+    "color": "#5A5A5A",
+    "iconFile": "A7_townhall.png",
+    "group": "Special Buildings",
+    "workRadius": 20.0
+  },
+  {
+    "id": "harbor-office",
+    "name": "Harbourmaster's Office",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_harbour_kontor.png",
+    "group": "Special Buildings",
+    "workRadius": 20.0
+  },
+  {
+    "id": "kontor-imperial-01",
+    "name": "Small Trading Post",
+    "tier": "harbor",
+    "footprint": {
+      "w": 9,
+      "h": 7
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_kontor_main.png",
+    "group": "General"
+  },
+  {
+    "id": "harbor-01-depot",
+    "name": "Depot",
+    "tier": "harbor",
+    "footprint": {
+      "w": 10,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_depot.png",
+    "group": "Depots"
+  },
+  {
+    "id": "harbor-02-sailing-shipyard",
+    "name": "Sailing Shipyard",
+    "tier": "harbor",
+    "footprint": {
+      "w": 17,
+      "h": 6
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_sail_shipyard.png",
+    "group": "Shipyards"
+  },
+  {
+    "id": "harbor-03-steam-shipyard",
+    "name": "Steam Shipyard",
+    "tier": "harbor",
+    "footprint": {
+      "w": 17,
+      "h": 7
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_steam_shipyard.png",
+    "group": "Shipyards"
+  },
+  {
+    "id": "harbor-04-tower-01-puckle-gun",
+    "name": "Mounted Guns",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_defense_tower_pucklegun.png",
+    "group": "Military"
+  },
+  {
+    "id": "harbor-05-tower-02-cannon-tower",
+    "name": "Cannon Tower",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_defense_tower_cannon.png",
+    "group": "Military"
+  },
+  {
+    "id": "harbor-17-tower-04-fire-tower",
+    "name": "Flame Tower",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_flame_tower.png",
+    "group": "Military"
+  },
+  {
+    "id": "harbor-18-tower-06-armor-pierce-tower",
+    "name": "Anti-Armour Gun",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_he_guntower.png",
+    "group": "Military"
+  },
+  {
+    "id": "harbor-06-tower-03-monster-gun",
+    "name": "Big Betty",
+    "tier": "harbor",
+    "footprint": {
+      "w": 6,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_defense_tower_monstergun.png",
+    "group": "Military"
+  },
+  {
+    "id": "harbor-07-repair-crane",
+    "name": "Repair Crane",
+    "tier": "harbor",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_repair_crane.png",
+    "group": "Special Buildings",
+    "workRadius": 20.0
+  },
+  {
+    "id": "harbor-08-pier",
+    "name": "Pier",
+    "tier": "harbor",
+    "footprint": {
+      "w": 6,
+      "h": 7
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_pier.png",
+    "group": "General"
+  },
+  {
+    "id": "harbor-09-tourism-pier-01",
+    "name": "Public Mooring",
+    "tier": "harbor",
+    "footprint": {
+      "w": 25,
+      "h": 8
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_visitor_harbour.png",
+    "group": "Special Buildings"
+  },
+  {
+    "id": "harbor-14a-oil-harbor-i",
+    "name": "Small Oil Harbour",
+    "tier": "harbor",
+    "footprint": {
+      "w": 10,
+      "h": 7
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_oil_habour_01.png",
+    "group": "Logistics"
+  },
+  {
+    "id": "harbor-15-oil-storage",
+    "name": "Oil Store",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 8
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_oil_storage.png",
+    "group": "Depots"
+  },
+  {
+    "id": "harbor-16-commuter-pier",
+    "name": "Commuter Pier",
+    "tier": "harbor",
+    "footprint": {
+      "w": 15,
+      "h": 5
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_commuter_pier.png",
+    "group": "Special Buildings"
+  },
+  {
+    "id": "harbor-colony01-17-tower-03-fire-tower",
+    "name": "Flame Tower",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_flame_tower.png",
+    "group": "Military"
+  },
+  {
+    "id": "harbor-colony01-18-tower-06-armor-pierce-tower",
+    "name": "Anti-Armour Gun",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_he_guntower.png",
+    "group": "Military"
+  },
+  {
+    "id": "electricity-03-gas-power-plant",
+    "name": "Gas-Fired Power Plant",
+    "tier": "investors",
+    "footprint": {
+      "w": 5,
+      "h": 6
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_electric_works_gas.png",
+    "group": "Public Buildings",
+    "influenceRadius": 42.0,
+    "overlayType": "power"
+  },
+  {
+    "id": "harbor-arctic18-tower-06-armor-pierce-tower",
+    "name": "Anti-Armour Gun",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_he_guntower.png",
+    "group": "Military"
+  },
+  {
+    "id": "palace",
+    "name": "Palace",
+    "tier": "investors",
+    "footprint": {
+      "w": 9,
+      "h": 9
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_palace.png",
+    "group": "Palace Buildings",
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "dockland-module-pier",
+    "name": "Pier",
+    "tier": "harbor",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_docklands_module_pier.png",
+    "group": "Docklands Modules",
+    "dlc": "Docklands"
+  },
+  {
+    "id": "dockland-module-item",
+    "name": "Harbourmaster",
+    "tier": "harbor",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_docklands_module_item.png",
+    "group": "Docklands Modules",
+    "dlc": "Docklands"
+  },
+  {
+    "id": "dockland-module-export",
+    "name": "Exports Office",
+    "tier": "harbor",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_docklands_module_export.png",
+    "group": "Docklands Modules",
+    "dlc": "Docklands"
+  },
+  {
+    "id": "dockland-module-storage",
+    "name": "Depot",
+    "tier": "harbor",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_docklands_module_depot.png",
+    "group": "Docklands Modules",
+    "dlc": "Docklands"
+  },
+  {
+    "id": "dockland-module-repaircrane",
+    "name": "Repair Crane",
+    "tier": "harbor",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_docklands_module_crane.png",
+    "group": "Docklands Modules",
+    "workRadius": 20.0,
+    "dlc": "Docklands"
+  },
+  {
+    "id": "dockland-module-speedup",
+    "name": "Loading Wharf",
+    "tier": "harbor",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_docklands_module_speed.png",
+    "group": "Docklands Modules",
+    "dlc": "Docklands"
+  },
+  {
+    "id": "farm-fertilizer-module-moderate",
+    "name": "Fertiliser Silo",
+    "tier": "farmers",
+    "footprint": {
+      "w": 3,
+      "h": 2
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_silo.png",
+    "group": "General"
+  },
+  {
+    "id": "agriculture-01-grain-farm",
+    "name": "Grain Farm",
+    "tier": "workers",
+    "footprint": {
+      "w": 4,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_cereals_2.png",
+    "group": "Farm Buildings"
+  },
+  {
+    "id": "agriculture-02-cattle-farm",
+    "name": "Cattle Farm",
+    "tier": "artisans",
+    "footprint": {
+      "w": 4,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_meat_raw.png",
+    "group": "Farm Buildings",
+    "workRadius": 7.0
+  },
+  {
+    "id": "agriculture-03-hop-farm",
+    "name": "Hop Farm",
+    "tier": "workers",
+    "footprint": {
+      "w": 3,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_hops.png",
+    "group": "Farm Buildings"
+  },
+  {
+    "id": "agriculture-04-potato-farm",
+    "name": "Potato Farm",
+    "tier": "farmers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_potatoes.png",
+    "group": "Farm Buildings"
+  },
+  {
+    "id": "agriculture-05-timber-yard",
+    "name": "Lumberjack's Hut",
+    "tier": "farmers",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_wood_log.png",
+    "group": "Production Buildings",
+    "workRadius": 9.0
+  },
+  {
+    "id": "agriculture-06-sheep-farm",
+    "name": "Sheep Farm",
+    "tier": "farmers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_wool.png",
+    "group": "Farm Buildings",
+    "workRadius": 7.0
+  },
+  {
+    "id": "agriculture-08-pig-farm",
+    "name": "Pig Farm",
+    "tier": "workers",
+    "footprint": {
+      "w": 4,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_pigs.png",
+    "group": "Farm Buildings",
+    "workRadius": 7.0
+  },
+  {
+    "id": "agriculture-09-hunter-s-cabin",
+    "name": "Hunting Cabin",
+    "tier": "artisans",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_fur.png",
+    "group": "Production Buildings",
+    "workRadius": 11.0
+  },
+  {
+    "id": "agriculture-11-bell-pepper-farm",
+    "name": "Red Pepper Farm",
+    "tier": "artisans",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_pepper.png",
+    "group": "Farm Buildings"
+  },
+  {
+    "id": "agriculture-10-vineyard",
+    "name": "Vineyard",
+    "tier": "investors",
+    "footprint": {
+      "w": 4,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#7A3A6A",
+    "iconFile": "A7_grapes.png",
+    "group": "Farm Buildings"
+  },
+  {
+    "id": "coastal-01-fish-coast-building",
+    "name": "Fishery",
+    "tier": "farmers",
+    "footprint": {
+      "w": 11,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_fish.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "coastal-02-niter-coast-building",
+    "name": "Saltpetre Works",
+    "tier": "engineers",
+    "footprint": {
+      "w": 10,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_niter.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "coastal-03-quartz-sand-coast-building",
+    "name": "Sand Mine",
+    "tier": "all",
+    "footprint": {
+      "w": 10,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#5A5A5A",
+    "iconFile": "A7_quartz_sand.png",
+    "group": "Mining Buildings"
+  },
+  {
+    "id": "factory-01-concrete-factory",
+    "name": "Concrete Factory",
+    "tier": "engineers",
+    "footprint": {
+      "w": 6,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_reinforced_concrete.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "factory-02-soap-factory",
+    "name": "Soap Factory",
+    "tier": "workers",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_soap_2.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "factory-04-brick-factory",
+    "name": "Brick Factory",
+    "tier": "workers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_bricks.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "factory-03-timber-factory",
+    "name": "Sawmill",
+    "tier": "farmers",
+    "footprint": {
+      "w": 4,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_wooden_planks.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "factory-05-fur-coat-workshop",
+    "name": "Fur Dealer",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_fur_coats.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "factory-06-light-bulb-factory",
+    "name": "Light Bulb Factory",
+    "tier": "engineers",
+    "footprint": {
+      "w": 6,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_light_bulb.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "factory-07-window-factory",
+    "name": "Window Makers",
+    "tier": "artisans",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_glass_window_3.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "factory-09-sailcloth-factory",
+    "name": "Sailmakers",
+    "tier": "workers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_sail.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "factory-11-clay-pit",
+    "name": "Clay Pit",
+    "tier": "all",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#5A5A5A",
+    "iconFile": "A7_clay.png",
+    "group": "Mining Buildings"
+  },
+  {
+    "id": "factory-10-chassis-factory",
+    "name": "Coachmakers",
+    "tier": "investors",
+    "footprint": {
+      "w": 9,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#7A3A6A",
+    "iconFile": "A7_chassis.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "food-01-bread-maker",
+    "name": "Bakery",
+    "tier": "workers",
+    "footprint": {
+      "w": 4,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_bread.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "food-02-beer-maker",
+    "name": "Brewery",
+    "tier": "workers",
+    "footprint": {
+      "w": 5,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_beer.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "food-03-goulash-factory",
+    "name": "Artisanal Kitchen",
+    "tier": "artisans",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_goulash_01.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "food-05-canned-food-factory",
+    "name": "Cannery",
+    "tier": "artisans",
+    "footprint": {
+      "w": 7,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_canned_goulash.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "food-06-schnapps-maker",
+    "name": "Schnapps Distillery",
+    "tier": "farmers",
+    "footprint": {
+      "w": 3,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_schnapps_4.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "food-07-sausage-maker",
+    "name": "Slaughterhouse",
+    "tier": "workers",
+    "footprint": {
+      "w": 4,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_meat_sausage.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "food-08-champagne-maker",
+    "name": "Champagne Cellar",
+    "tier": "investors",
+    "footprint": {
+      "w": 6,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#7A3A6A",
+    "iconFile": "A7_champagne.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "heavy-01-beams-heavy-industry",
+    "name": "Steelworks",
+    "tier": "workers",
+    "footprint": {
+      "w": 10,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_beams.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "heavy-02-steel-heavy-industry",
+    "name": "Furnace",
+    "tier": "workers",
+    "footprint": {
+      "w": 7,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_steel.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "heavy-03-coal-heavy-industry",
+    "name": "Charcoal Kiln",
+    "tier": "workers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_coal_burn.png",
+    "group": "Production Buildings",
+    "workRadius": 11.0
+  },
+  {
+    "id": "heavy-04-weapons-heavy-industry",
+    "name": "Weapon Factory",
+    "tier": "workers",
+    "footprint": {
+      "w": 7,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_weapons.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "heavy-06-advanced-weapons-heavy-industry",
+    "name": "Heavy Weapons Factory",
+    "tier": "engineers",
+    "footprint": {
+      "w": 10,
+      "h": 9
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_advanced_weaponry.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "heavy-07-steam-motors-heavy-industry",
+    "name": "Motor Assembly Line",
+    "tier": "engineers",
+    "footprint": {
+      "w": 9,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_steam_machine.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "heavy-08-steam-carriages-heavy-industry",
+    "name": "Cab Assembly Line",
+    "tier": "investors",
+    "footprint": {
+      "w": 12,
+      "h": 8
+    },
+    "category": "production",
+    "color": "#7A3A6A",
+    "iconFile": "A7_steam_carriage.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "heavy-09-brass-heavy-industry",
+    "name": "Brass Smeltery",
+    "tier": "engineers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_brass.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "heavy-10-oil-heavy-industry",
+    "name": "Oil Refinery",
+    "tier": "engineers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_oil.png",
+    "group": "Production Buildings",
+    "workRadius": 12.0
+  },
+  {
+    "id": "mining-01-coal-mine",
+    "name": "Coal Mine",
+    "tier": "all",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#5A5A5A",
+    "iconFile": "A7_coal_2.png",
+    "group": "Mining Buildings"
+  },
+  {
+    "id": "mining-02-iron-mine",
+    "name": "Iron Mine",
+    "tier": "all",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#5A5A5A",
+    "iconFile": "A7_iron.png",
+    "group": "Mining Buildings"
+  },
+  {
+    "id": "mining-04-zinc-mine",
+    "name": "Zinc Mine",
+    "tier": "all",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#5A5A5A",
+    "iconFile": "A7_tin_ore.png",
+    "group": "Mining Buildings"
+  },
+  {
+    "id": "mining-05-copper-mine",
+    "name": "Copper Mine",
+    "tier": "all",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#5A5A5A",
+    "iconFile": "A7_copper.png",
+    "group": "Mining Buildings"
+  },
+  {
+    "id": "mining-06-cement-mine",
+    "name": "Limestone Quarry",
+    "tier": "all",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#5A5A5A",
+    "iconFile": "A7_cement.png",
+    "group": "Mining Buildings"
+  },
+  {
+    "id": "mining-08-gold-ore-mine",
+    "name": "Gold Mine",
+    "tier": "all",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#5A5A5A",
+    "iconFile": "A7_gold_ore.png",
+    "group": "Mining Buildings"
+  },
+  {
+    "id": "processing-01-tallow-processing",
+    "name": "Rendering Works",
+    "tier": "workers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_tallow.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "processing-02-flour-processing",
+    "name": "Flour Mill",
+    "tier": "workers",
+    "footprint": {
+      "w": 4,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_flour.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "processing-03-malt-processing",
+    "name": "Malthouse",
+    "tier": "workers",
+    "footprint": {
+      "w": 5,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_malt.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "processing-04-weavery",
+    "name": "Framework Knitters",
+    "tier": "farmers",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_working_cloth.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "processing-05-dynamite-processing",
+    "name": "Dynamite Factory",
+    "tier": "engineers",
+    "footprint": {
+      "w": 5,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_dynamite.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "processing-06-glass-processing",
+    "name": "Glassmakers",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_glass.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "processing-07-inlay-processing",
+    "name": "Marquetry Workshop",
+    "tier": "investors",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#7A3A6A",
+    "iconFile": "A7_inlay.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "processing-08-carbon-filament-processing",
+    "name": "Filament Factory",
+    "tier": "engineers",
+    "footprint": {
+      "w": 7,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_carbon_filament.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "workshop-01-high-wheeler-workshop",
+    "name": "Bicycle Factory",
+    "tier": "engineers",
+    "footprint": {
+      "w": 6,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_high_wheeler.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "workshop-02-pocket-watch-workshop",
+    "name": "Clockmakers",
+    "tier": "engineers",
+    "footprint": {
+      "w": 7,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_pocket_watch.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "workshop-03-sewing-machines-factory",
+    "name": "Sewing Machine Factory",
+    "tier": "artisans",
+    "footprint": {
+      "w": 9,
+      "h": 6
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_sewing_machine.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "workshop-04-phonographs-workshop",
+    "name": "Gramophone Factory",
+    "tier": "investors",
+    "footprint": {
+      "w": 7,
+      "h": 7
+    },
+    "category": "production",
+    "color": "#7A3A6A",
+    "iconFile": "A7_phonographs.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "workshop-05-gold-workshop",
+    "name": "Goldsmiths",
+    "tier": "engineers",
+    "footprint": {
+      "w": 5,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_gold.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "workshop-06-jewelry-workshop",
+    "name": "Jewellers",
+    "tier": "investors",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#7A3A6A",
+    "iconFile": "A7_jewelry.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "workshop-07-glasses-workshop",
+    "name": "Spectacle Factory",
+    "tier": "engineers",
+    "footprint": {
+      "w": 6,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_glasses.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "agriculture-01-field-grain-field",
+    "name": "Grain Field",
+    "tier": "farmers",
+    "footprint": {
+      "w": 1,
+      "h": 1
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_farmfield_module.png",
+    "group": "General"
+  },
+  {
+    "id": "agriculture-02-field-pasture",
+    "name": "Pasture",
+    "tier": "farmers",
+    "footprint": {
+      "w": 3,
+      "h": 4
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_general_module_01.png",
+    "group": "General"
+  },
+  {
+    "id": "agriculture-03-field-hop-field",
+    "name": "Hop Field",
+    "tier": "farmers",
+    "footprint": {
+      "w": 1,
+      "h": 1
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_farmfield_module.png",
+    "group": "General"
+  },
+  {
+    "id": "agriculture-04-field-potato-field",
+    "name": "Potato Field",
+    "tier": "farmers",
+    "footprint": {
+      "w": 1,
+      "h": 1
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_farmfield_module.png",
+    "group": "General"
+  },
+  {
+    "id": "agriculture-06-field-sheepfold",
+    "name": "Sheepfold",
+    "tier": "farmers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_general_module_01.png",
+    "group": "General"
+  },
+  {
+    "id": "agriculture-08-field-pig-sty",
+    "name": "Pig Sty",
+    "tier": "farmers",
+    "footprint": {
+      "w": 2,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_general_module_01.png",
+    "group": "General"
+  },
+  {
+    "id": "agriculture-10-field-vines",
+    "name": "Vines",
+    "tier": "farmers",
+    "footprint": {
+      "w": 1,
+      "h": 1
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_farmfield_module.png",
+    "group": "General"
+  },
+  {
+    "id": "agriculture-11-field-pepper-field",
+    "name": "Pepper Crop",
+    "tier": "farmers",
+    "footprint": {
+      "w": 1,
+      "h": 1
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_farmfield_module.png",
+    "group": "General"
+  },
+  {
+    "id": "heavy-10-field-oil-pump",
+    "name": "Oil Well",
+    "tier": "engineers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_oil_rig.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "service-01-pub",
+    "name": "Pub",
+    "tier": "farmers",
+    "footprint": {
+      "w": 6,
+      "h": 4
+    },
+    "category": "public",
+    "color": "#8B6330",
+    "iconFile": "A7_pub.png",
+    "group": "Public Buildings",
+    "influenceRadius": 30.0,
+    "overlayType": "pub"
+  },
+  {
+    "id": "service-02-school",
+    "name": "School",
+    "tier": "workers",
+    "footprint": {
+      "w": 5,
+      "h": 6
+    },
+    "category": "public",
+    "color": "#2E6040",
+    "iconFile": "A7_school.png",
+    "group": "Public Buildings",
+    "influenceRadius": 35.0,
+    "overlayType": "education"
+  },
+  {
+    "id": "service-03-bank",
+    "name": "Bank",
+    "tier": "engineers",
+    "footprint": {
+      "w": 12,
+      "h": 10
+    },
+    "category": "public",
+    "color": "#2A4A7A",
+    "iconFile": "A7_bank.png",
+    "group": "Public Buildings",
+    "influenceRadius": 45.0,
+    "overlayType": "bank"
+  },
+  {
+    "id": "service-04-church",
+    "name": "Church",
+    "tier": "workers",
+    "footprint": {
+      "w": 8,
+      "h": 6
+    },
+    "category": "public",
+    "color": "#2E6040",
+    "iconFile": "A7_church.png",
+    "group": "Public Buildings",
+    "influenceRadius": 40.0,
+    "overlayType": "religion"
+  },
+  {
+    "id": "service-05-cabaret",
+    "name": "Variety Theatre",
+    "tier": "artisans",
+    "footprint": {
+      "w": 4,
+      "h": 5
+    },
+    "category": "public",
+    "color": "#A05A20",
+    "iconFile": "A7_cabaret.png",
+    "group": "Public Buildings",
+    "influenceRadius": 40.0,
+    "overlayType": "culture"
+  },
+  {
+    "id": "service-07-university",
+    "name": "University",
+    "tier": "artisans",
+    "footprint": {
+      "w": 9,
+      "h": 6
+    },
+    "category": "public",
+    "color": "#A05A20",
+    "iconFile": "A7_university.png",
+    "group": "Public Buildings",
+    "influenceRadius": 45.0,
+    "overlayType": "education"
+  },
+  {
+    "id": "service-09-club-house",
+    "name": "Members Club",
+    "tier": "investors",
+    "footprint": {
+      "w": 6,
+      "h": 6
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_club_house.png",
+    "group": "Public Buildings",
+    "influenceRadius": 35.0,
+    "overlayType": "culture"
+  },
+  {
+    "id": "institution-01-police",
+    "name": "Police Station",
+    "tier": "workers",
+    "footprint": {
+      "w": 4,
+      "h": 6
+    },
+    "category": "public",
+    "color": "#2E6040",
+    "iconFile": "A7_police.png",
+    "group": "Public Buildings",
+    "influenceRadius": 26.0,
+    "overlayType": "police"
+  },
+  {
+    "id": "institution-02-fire-department",
+    "name": "Fire Station",
+    "tier": "farmers",
+    "footprint": {
+      "w": 5,
+      "h": 3
+    },
+    "category": "public",
+    "color": "#8B6330",
+    "iconFile": "A7_fire_house.png",
+    "group": "Public Buildings",
+    "influenceRadius": 26.0,
+    "overlayType": "fire"
+  },
+  {
+    "id": "institution-03-hospital",
+    "name": "Hospital",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 6
+    },
+    "category": "public",
+    "color": "#A05A20",
+    "iconFile": "A7_hospital.png",
+    "group": "Public Buildings",
+    "influenceRadius": 26.0,
+    "overlayType": "health"
+  },
+  {
+    "id": "logistic-01-marketplace",
+    "name": "Marketplace",
+    "tier": "farmers",
+    "footprint": {
+      "w": 5,
+      "h": 6
+    },
+    "category": "public",
+    "color": "#8B6330",
+    "iconFile": "A7_market.png",
+    "group": "Public Buildings",
+    "influenceRadius": 35.0,
+    "overlayType": "market"
+  },
+  {
+    "id": "logistic-02-warehouse-i",
+    "name": "Small Warehouse",
+    "tier": "farmers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_warehouse.png",
+    "group": "General"
+  },
+  {
+    "id": "electricity-02-oil-power-plant",
+    "name": "Oil Power Plant",
+    "tier": "engineers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "public",
+    "color": "#2A4A7A",
+    "iconFile": "A7_electric_works_oil.png",
+    "group": "Public Buildings",
+    "influenceRadius": 35.0,
+    "overlayType": "power"
+  },
+  {
+    "id": "palace-module-01-straight",
+    "name": "Palace Wing",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_ornament_palace_hall_01.png",
+    "group": "Palace Buildings",
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-02-angle",
+    "name": "Palace Wing - Corner",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_ornament_palace_hall_02.png",
+    "group": "Palace Buildings",
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-03-crossing",
+    "name": "Palace Wing - Cross",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_ornament_palace_corner.png",
+    "group": "Palace Buildings",
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-04-end",
+    "name": "Palace Wing - End",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_ornament_palace_end_building.png",
+    "group": "Palace Buildings",
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-05-gate",
+    "name": "Palace Wing - Gate",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_ornament_palace_arch_gate.png",
+    "group": "Palace Buildings",
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-06-junction",
+    "name": "Palace Wing - Junction",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "public",
+    "color": "#7A3A6A",
+    "iconFile": "A7_ornament_palace_tcrossing.png",
+    "group": "Palace Buildings",
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-ministry",
+    "name": "Local Department",
+    "tier": "all",
+    "footprint": {
+      "w": 8,
+      "h": 5
+    },
+    "category": "public",
+    "color": "#5A5A5A",
+    "iconFile": "A7_local_department.png",
+    "group": "Special Buildings"
+  },
+  {
+    "id": "moderate-fuel-station-01-fuelstation",
+    "name": "Fuel Station",
+    "tier": "engineers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_gasoline.png",
+    "group": "Production Buildings"
+  },
+  {
+    "id": "tractor-module-01-tractor",
+    "name": "Tractor Barn",
+    "tier": "farmers",
+    "footprint": {
+      "w": 2,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_tractor.png",
+    "group": "General"
+  },
+  {
+    "id": "silo-grain",
+    "name": "Silo",
+    "tier": "farmers",
+    "footprint": {
+      "w": 3,
+      "h": 2
+    },
+    "category": "production",
+    "color": "#8B6330",
+    "iconFile": "A7_silo.png",
+    "group": "General"
+  },
+  {
+    "id": "harbor-colony02-18-tower-06-armor-pierce-tower",
+    "name": "Anti-Armour Gun",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_he_guntower.png",
+    "group": "Military"
+  },
+  {
+    "id": "residence-tier05b",
+    "name": "Scholar Residence",
+    "tier": "scholars",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "residence",
+    "color": "#5A4A8A",
+    "iconFile": "A7_residence_scholars.png",
+    "group": "(1) Old World"
+  },
+  {
+    "id": "harbor-18-tower-05-flak",
+    "name": "Flak Emplacement",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_flack_tower.png",
+    "group": "Military"
+  },
+  {
+    "id": "airship-landing-platform",
+    "name": "Airship Platform",
+    "tier": "artisans",
+    "footprint": {
+      "w": 10,
+      "h": 15
+    },
+    "category": "public",
+    "color": "#A05A20",
+    "iconFile": "A7_airship_platform_southamerica.png",
+    "group": "Public Buildings"
+  },
+  {
+    "id": "platform-module-item-storage",
+    "name": "Item Transfer Depot",
+    "tier": "artisans",
+    "footprint": {
+      "w": 5,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_airship_platform_items.png",
+    "group": "Airship Platform Module",
+    "dlc": "Empire of the Skies"
+  },
+  {
+    "id": "platform-module-post",
+    "name": "Airmail Sorting Office",
+    "tier": "artisans",
+    "footprint": {
+      "w": 5,
+      "h": 3
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_airship_platform_post.png",
+    "group": "Airship Platform Module",
+    "dlc": "Empire of the Skies"
+  },
+  {
+    "id": "post-office",
+    "name": "Post Office",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 4
+    },
+    "category": "public",
+    "color": "#A05A20",
+    "iconFile": "A7_post_office_dlc11.png",
+    "group": "Public Buildings",
+    "workRadius": 24.0
+  },
+  {
+    "id": "post-box",
+    "name": "Post Box",
+    "tier": "artisans",
+    "footprint": {
+      "w": 1,
+      "h": 1
+    },
+    "category": "public",
+    "color": "#A05A20",
+    "iconFile": "A7_postbox_b.png",
+    "group": "Public Buildings",
+    "workRadius": 12.0
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-blank",
+    "name": "Supply Factory",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 10
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_ship_repair_2.png",
+    "group": "Multifactory",
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-bombs",
+    "name": "Bomb Factory",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 10
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_dropgood_bomb_b.png",
+    "group": "Multifactory",
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-seamines",
+    "name": "Sea Mine Factory",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 10
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_dropgood_seamines.png",
+    "group": "Multifactory",
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-flyers",
+    "name": "Pamphlet Printer",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 10
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_dropgood_pamphlets.png",
+    "group": "Multifactory",
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-care-packages",
+    "name": "Care Package Factory",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 10
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_dropgood_care_packages.png",
+    "group": "Multifactory",
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-waterdrop",
+    "name": "Water Drop Factory",
+    "tier": "artisans",
+    "footprint": {
+      "w": 6,
+      "h": 10
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_dropgood_water.png",
+    "group": "Multifactory",
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "harbor-18-colony01-tower-05-flak",
+    "name": "Flak Emplacement",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_flack_tower.png",
+    "group": "Military"
+  },
+  {
+    "id": "harbor-03-colony02-tower-05-flak",
+    "name": "Flak Emplacement",
+    "tier": "harbor",
+    "footprint": {
+      "w": 4,
+      "h": 4
+    },
+    "category": "harbor",
+    "color": "#1A5A6A",
+    "iconFile": "A7_flack_tower.png",
+    "group": "Military"
+  },
+  {
+    "id": "logistic-02-warehouse-i-1010371",
+    "name": "Small Warehouse",
+    "tier": "workers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2E6040",
+    "iconFile": "A7_warehouse.png",
+    "group": "General"
+  },
+  {
+    "id": "logistic-02-warehouse-i-1010371",
+    "name": "Small Warehouse",
+    "tier": "artisans",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#A05A20",
+    "iconFile": "A7_warehouse.png",
+    "group": "General"
+  },
+  {
+    "id": "logistic-02-warehouse-i-1010371",
+    "name": "Small Warehouse",
+    "tier": "engineers",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#2A4A7A",
+    "iconFile": "A7_warehouse.png",
+    "group": "General"
+  },
+  {
+    "id": "logistic-02-warehouse-i-1010371",
+    "name": "Small Warehouse",
+    "tier": "investors",
+    "footprint": {
+      "w": 5,
+      "h": 5
+    },
+    "category": "production",
+    "color": "#7A3A6A",
+    "iconFile": "A7_warehouse.png",
+    "group": "General"
+  },
+  {
+    "id": "a7-residence-skyscraper-4lvl1",
+    "name": "Skyscraper (T4 I)",
+    "tier": "engineers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#2A4A7A",
+    "iconFile": "A7_dlc_high_life_256.png",
+    "group": "Skyscraper",
+    "workRadius": 4.0
+  },
+  {
+    "id": "a7-residence-skyscraper-4lvl2",
+    "name": "Skyscraper (T4 II)",
+    "tier": "engineers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#2A4A7A",
+    "iconFile": "A7_dlc_high_life_256.png",
+    "group": "Skyscraper",
+    "workRadius": 4.25
+  },
+  {
+    "id": "a7-residence-skyscraper-4lvl3",
+    "name": "Skyscraper (T4 III)",
+    "tier": "engineers",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#2A4A7A",
+    "iconFile": "A7_dlc_high_life_256.png",
+    "group": "Skyscraper",
+    "workRadius": 5.0
+  },
+  {
+    "id": "a7-residence-skyscraper-5lvl1",
+    "name": "Skyscraper (T5 I)",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#7A3A6A",
+    "iconFile": "A7_dlc_high_life_256.png",
+    "group": "Skyscraper",
+    "workRadius": 4.0
+  },
+  {
+    "id": "a7-residence-skyscraper-5lvl2",
+    "name": "Skyscraper (T5 II)",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#7A3A6A",
+    "iconFile": "A7_dlc_high_life_256.png",
+    "group": "Skyscraper",
+    "workRadius": 4.25
+  },
+  {
+    "id": "a7-residence-skyscraper-5lvl3",
+    "name": "Skyscraper (T5 III)",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#7A3A6A",
+    "iconFile": "A7_dlc_high_life_256.png",
+    "group": "Skyscraper",
+    "workRadius": 5.0
+  },
+  {
+    "id": "a7-residence-skyscraper-5lvl4",
+    "name": "Skyscraper (T5 IV)",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#7A3A6A",
+    "iconFile": "A7_dlc_high_life_256.png",
+    "group": "Skyscraper",
+    "workRadius": 6.0
+  },
+  {
+    "id": "a7-residence-skyscraper-5lvl5",
+    "name": "Skyscraper (T5 V)",
+    "tier": "investors",
+    "footprint": {
+      "w": 3,
+      "h": 3
+    },
+    "category": "residence",
+    "color": "#7A3A6A",
+    "iconFile": "A7_dlc_high_life_256.png",
+    "group": "Skyscraper",
+    "workRadius": 6.75
+  }
+]

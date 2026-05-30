@@ -12,10 +12,17 @@ export interface Building {
   footprint: Footprint
   category: string
   color: string
+  group?: string
+  iconFile?: string
   inputs?: string[]
   outputs?: string[]
   productionTime?: number
+  /** service influence radius in tiles (marketplace, pub, fire station…) */
   influenceRadius?: number
+  /** work area radius for production buildings (lumberjack, farm…) */
+  workRadius?: number
+  /** which overlay layer this building contributes to */
+  overlayType?: string
   roadRequired?: boolean
   dlc?: string
 }

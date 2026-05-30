@@ -137,7 +137,7 @@
 
 <header>
   <h1>Anno Planner</h1>
-  <span class="subtitle">Dev Dashboard — updated 2026-05-29</span>
+  <span class="subtitle">Dev Dashboard — updated 2026-05-30</span>
   <a href="../docs/ROADMAP.html">Full Roadmap →</a>
 </header>
 
@@ -175,22 +175,22 @@
     <span class="badge done">Done</span>
   </div>
 
-  <div class="milestone active">
+  <div class="milestone done">
     <div>
       <div class="label">M2 · Catalog</div>
       <div class="desc">3–5 days · Ian</div>
     </div>
     <div>
-      <div class="name">Old World buildings · searchable palette · influence overlays · DLC badges</div>
+      <div class="name">156 Old World buildings · searchable palette · influence overlays · DLC badges</div>
       <div class="progress-wrap">
-        <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
-        <div class="progress-label">0 / 6 tasks</div>
+        <div class="progress-bar"><div class="fill done" style="width:100%"></div></div>
+        <div class="progress-label">6 / 6 tasks</div>
       </div>
     </div>
-    <span class="badge active">Up Next</span>
+    <span class="badge done">Done</span>
   </div>
 
-  <div class="milestone">
+  <div class="milestone active">
     <div>
       <div class="label">M3 · Math &amp; Export</div>
       <div class="desc">3–5 days · Ian</div>
@@ -202,7 +202,7 @@
         <div class="progress-label">0 / 7 tasks</div>
       </div>
     </div>
-    <span class="badge pending">Pending</span>
+    <span class="badge active">Up Next</span>
   </div>
 
   <div class="milestone">
@@ -241,14 +241,24 @@
 <div class="grid-2">
 
   <div class="card">
-    <h3>Current Focus — M2 Building Catalog</h3>
+    <h3>M2 Building Catalog — Complete</h3>
     <ul class="task-list">
-      <li class="todo">Finalize building JSON schema</li>
-      <li class="todo">Ingest Old World buildings (residential, production, public)</li>
-      <li class="todo">Categorized, searchable building palette (left pane)</li>
-      <li class="todo">DLC badges on buildings</li>
-      <li class="todo">Influence overlay system (toggleable radii per type)</li>
-      <li class="todo">Overlay toggle bar at top of canvas</li>
+      <li class="done">Building JSON schema finalized (iconFile, workRadius, overlayType, group)</li>
+      <li class="done">156 Old World buildings ingested from presets.json (farmers → investors + harbor)</li>
+      <li class="done">Categorized, searchable palette — tier tabs + live search + grouped display</li>
+      <li class="done">DLC badges (Seat of Power, Docklands, Empire of the Skies, Seeds of Change)</li>
+      <li class="done">Influence overlay system — 13 service buildings, 10 overlay types</li>
+      <li class="done">Overlay toggle bar above canvas with color-coded toggles</li>
+    </ul>
+    <h3 style="margin-top:1rem">Current Focus — M3 Math &amp; Export</h3>
+    <ul class="task-list">
+      <li class="todo">Production math engine (pure functions, unit-tested)</li>
+      <li class="todo">Live input/output tallies in inspector pane</li>
+      <li class="todo">Blueprint library (IndexedDB): save, load, rename, duplicate, delete</li>
+      <li class="todo">JSON export / import</li>
+      <li class="todo">PNG export (canvas snapshot)</li>
+      <li class="todo">Compressed URL share (LZ-string → URL fragment)</li>
+      <li class="todo">File System Access API (power users)</li>
     </ul>
   </div>
 
@@ -261,7 +271,7 @@
       <li><span class="d-decided">Decided</span> Persistence: IndexedDB via Dexie</li>
       <li><span class="d-decided">Decided</span> Sharing: LZ-string → URL fragment</li>
       <li><span class="d-decided">Decided</span> Tile units: 1:1 with in-game tiles (24 px)</li>
-      <li><span class="d-open">Open</span> Canonical building data source (wiki / dataset / manual)</li>
+      <li><span class="d-decided">Decided</span> Building data: resources/presets.json v5.1 (community dataset)</li>
       <li><span class="d-open">Open</span> Static host: GitHub Pages vs Cloudflare vs Netlify</li>
     </ul>
   </div>

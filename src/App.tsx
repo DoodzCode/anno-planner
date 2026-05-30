@@ -3,6 +3,7 @@ import './App.css'
 import Palette from './components/Palette'
 import Canvas from './components/Canvas'
 import Inspector from './components/Inspector'
+import OverlayBar from './components/OverlayBar'
 import { loadCurrentBlueprint, startAutoSave } from './state/persistence'
 
 export default function App() {
@@ -17,7 +18,10 @@ export default function App() {
   return (
     <div className="app-shell">
       <Palette />
-      <Canvas />
+      <div className="canvas-column">
+        <OverlayBar />
+        <Canvas />
+      </div>
       <Inspector />
     </div>
   )
