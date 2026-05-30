@@ -17,7 +17,7 @@
 
 | Milestone | Name | Est. days | Status | Owner |
 |---|---|---|---|---|
-| M0 | Spike | 1–2 | `[ ]` | Both |
+| M0 | Spike | 1–2 | `[~]` | Both |
 | M1 | Core canvas | 4–6 | `[ ]` | Kaleb (lead) |
 | M2 | Building catalog | 3–5 | `[ ]` | Ian (lead) |
 | M3 | Math, library & export | 3–5 | `[ ]` | Ian (lead) |
@@ -32,17 +32,17 @@
 
 **Open decisions (blockers)**
 
-- [ ] Framework: React+Vite vs Svelte/SvelteKit
-- [ ] Canvas renderer: PixiJS vs Konva
+- [x] Framework: React + Vite + TypeScript (decided 2026-05-29)
+- [x] Canvas renderer: Konva via react-konva (decided 2026-05-29)
 - [ ] Canonical building data source (Anno wiki / community dataset / manual)
 - [ ] Three-pane wireframe sketch
 
 **Tasks**
 
-- [ ] Scaffold Vite project with chosen framework
-- [ ] Render a tile grid on screen
+- [x] Scaffold Vite project with chosen framework
+- [x] Render a tile grid on screen
 - [ ] Place one hardcoded building on the grid
-- [ ] Record stack decision in `docs/`
+- [x] Record stack decision in `docs/`
 
 **Agent work:** scaffold the Vite skeleton; generate both React and Svelte prototypes for comparison if needed.
 
