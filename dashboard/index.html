@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anno Planner — Dev Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0f1117;
+      --surface: #1a1d27;
+      --border:  #2a2d3a;
+      --accent:  #c8a96e;
+      --blue:    #5b8dd9;
+      --text:    #e2e4ed;
+      --muted:   #7a7f96;
+      --done:    #4caf7d;
+      --prog:    #c8a96e;
+      --block:   #e05c5c;
+      --todo:    #3a3d4f;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 { font-size: 1.6rem; color: var(--accent); letter-spacing: .04em; }
+    h2 { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .75rem; }
+    h3 { font-size: .95rem; color: var(--accent); margin-bottom: .5rem; }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+    header .subtitle { color: var(--muted); font-size: .85rem; }
+    header a { margin-left: auto; font-size: .8rem; color: var(--blue); text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; }
+    @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    /* Milestone rows */
+    .milestones { display: flex; flex-direction: column; gap: .75rem; margin-bottom: 1.5rem; }
+    .milestone {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: grid;
+      grid-template-columns: 8rem 1fr auto;
+      align-items: center;
+      gap: 1rem;
+    }
+    .milestone.done   { border-color: #1e4030; }
+    .milestone.active { border-color: var(--accent); }
+    .milestone .label { font-weight: 700; font-size: .95rem; }
+    .milestone .desc  { color: var(--muted); font-size: .8rem; }
+    .milestone .name  { font-size: .9rem; margin-bottom: .3rem; }
+
+    .badge {
+      display: inline-block;
+      padding: .2rem .6rem;
+      border-radius: 4px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      white-space: nowrap;
+    }
+    .badge.done    { background: #1a3a2a; color: var(--done); }
+    .badge.active  { background: #3a2e14; color: var(--accent); }
+    .badge.blocked { background: #3a1a1a; color: var(--block); }
+    .badge.pending { background: var(--todo); color: var(--muted); }
+
+    .progress-wrap { margin-top: .3rem; }
+    .progress-bar { background: var(--border); border-radius: 4px; height: 5px; overflow: hidden; }
+    .progress-bar .fill { height: 100%; border-radius: 4px; background: var(--prog); }
+    .progress-bar .fill.done { background: var(--done); }
+    .progress-label { font-size: .7rem; color: var(--muted); margin-top: .2rem; }
+
+    /* Task list */
+    .task-list { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .task-list li { font-size: .84rem; display: flex; align-items: baseline; gap: .5rem; }
+    .task-list li::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: .25em;
+    }
+    .task-list li.done::before    { background: var(--done); }
+    .task-list li.active::before  { background: var(--prog); }
+    .task-list li.todo::before    { background: transparent; border: 1.5px solid var(--border); }
+    .task-list li.blocked::before { background: var(--block); }
+    .task-list li.done { color: var(--muted); text-decoration: line-through; text-decoration-color: #3a4030; }
+
+    /* Team */
+    .team-row { display: flex; flex-direction: column; gap: .5rem; }
+    .team-member { display: flex; align-items: center; gap: .75rem; font-size: .9rem; }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .8rem; flex-shrink: 0; }
+    .avatar.ian { background: var(--done); }
+    .member-name { font-weight: 600; }
+    .member-role { color: var(--muted); font-size: .78rem; }
+
+    /* Decisions */
+    .decision-list { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .decision-list li { font-size: .84rem; display: flex; gap: .5rem; align-items: baseline; }
+    .d-open    { font-size: .65rem; font-weight: 700; text-transform: uppercase; color: var(--block); flex-shrink: 0; }
+    .d-decided { font-size: .65rem; font-weight: 700; text-transform: uppercase; color: var(--done);  flex-shrink: 0; }
+
+    /* Agent rules */
+    .agent-rule { font-size: .82rem; color: var(--muted); border-left: 2px solid var(--border); padding-left: .75rem; margin-bottom: .5rem; line-height: 1.5; }
+    .agent-rule strong { color: var(--text); }
+
+    footer { margin-top: 2rem; text-align: center; color: var(--muted); font-size: .78rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Anno Planner</h1>
+  <span class="subtitle">Dev Dashboard — updated 2026-05-30 (M3 complete)</span>
+  <a href="../docs/ROADMAP.html">Full Roadmap →</a>
+</header>
+
+<!-- ── Milestones ── -->
+<h2>Milestones</h2>
+<div class="milestones">
+
+  <div class="milestone done">
+    <div>
+      <div class="label">M0 · Spike</div>
+      <div class="desc">1–2 days · Both</div>
+    </div>
+    <div>
+      <div class="name">Pick stack · render grid · place one building</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="fill done" style="width:100%"></div></div>
+        <div class="progress-label">4 / 4 tasks</div>
+      </div>
+    </div>
+    <span class="badge done">Done</span>
+  </div>
+
+  <div class="milestone done">
+    <div>
+      <div class="label">M1 · Core Canvas</div>
+      <div class="desc">4–6 days · Kaleb</div>
+    </div>
+    <div>
+      <div class="name">Pan/zoom · place/delete/rotate · undo/redo · multi-select · IndexedDB</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="fill done" style="width:100%"></div></div>
+        <div class="progress-label">9 / 9 tasks</div>
+      </div>
+    </div>
+    <span class="badge done">Done</span>
+  </div>
+
+  <div class="milestone done">
+    <div>
+      <div class="label">M2 · Catalog</div>
+      <div class="desc">3–5 days · Ian</div>
+    </div>
+    <div>
+      <div class="name">156 Old World buildings · searchable palette · influence overlays · DLC badges</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="fill done" style="width:100%"></div></div>
+        <div class="progress-label">6 / 6 tasks</div>
+      </div>
+    </div>
+    <span class="badge done">Done</span>
+  </div>
+
+  <div class="milestone done">
+    <div>
+      <div class="label">M3 · Math &amp; Export</div>
+      <div class="desc">3–5 days · Ian</div>
+    </div>
+    <div>
+      <div class="name">Production tallies · blueprint library · JSON/PNG/URL share · FSAA</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="fill done" style="width:100%"></div></div>
+        <div class="progress-label">7 / 7 tasks</div>
+      </div>
+    </div>
+    <span class="badge done">Done</span>
+  </div>
+
+  <div class="milestone active">
+    <div>
+      <div class="label">M4 · PWA Polish</div>
+      <div class="desc">2–3 days · Both</div>
+    </div>
+    <div>
+      <div class="name">Offline install · onboarding · dark mode · sprite pass</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
+        <div class="progress-label">0 / 6 tasks</div>
+      </div>
+    </div>
+    <span class="badge active">Up Next</span>
+  </div>
+
+  <div class="milestone">
+    <div>
+      <div class="label">M5 · Release</div>
+      <div class="desc">0.5–1 day · Both</div>
+    </div>
+    <div>
+      <div class="name">Build · deploy · smoke-test · tag v1.0.0</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
+        <div class="progress-label">0 / 4 tasks</div>
+      </div>
+    </div>
+    <span class="badge pending">Pending</span>
+  </div>
+
+</div>
+
+<!-- ── Current sprint + open decisions ── -->
+<div class="grid-2">
+
+  <div class="card">
+    <h3>M3 Math &amp; Export — Complete</h3>
+    <ul class="task-list">
+      <li class="done">Production math engine — 32 buildings, 47 goods, 13 Vitest tests passing (incl. Furnace ratio)</li>
+      <li class="done">Live t/min tallies in Inspector — green surplus / red deficit, memoized</li>
+      <li class="done">Blueprint library — save, load, rename (double-click), duplicate, delete via Dexie</li>
+      <li class="done">JSON export / import with unknown-building skip</li>
+      <li class="done">PNG export at 2× pixel ratio via Konva stage.toDataURL</li>
+      <li class="done">Compressed URL share — LZ-string → #bp= fragment, clipboard copy + toast</li>
+      <li class="done">File System Access API (showSaveFilePicker / showOpenFilePicker) with blob fallback</li>
+    </ul>
+    <h3 style="margin-top:1rem">Current Focus — M4 PWA Polish</h3>
+    <ul class="task-list">
+      <li class="todo">Workbox service worker (offline asset caching)</li>
+      <li class="todo">Installable PWA manifest</li>
+      <li class="todo">Dark mode + Anno-themed palette</li>
+      <li class="todo">First-run onboarding tutorial blueprint</li>
+      <li class="todo">Minimap for large islands</li>
+      <li class="todo">Top-down sprite pass (replace placeholder icons)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Decisions</h3>
+    <ul class="decision-list">
+      <li><span class="d-decided">Decided</span> Framework: React + Vite + TypeScript</li>
+      <li><span class="d-decided">Decided</span> Canvas renderer: Konva via react-konva</li>
+      <li><span class="d-decided">Decided</span> State: Zustand + Immer (undo/redo history)</li>
+      <li><span class="d-decided">Decided</span> Persistence: IndexedDB via Dexie</li>
+      <li><span class="d-decided">Decided</span> Sharing: LZ-string → URL fragment</li>
+      <li><span class="d-decided">Decided</span> Tile units: 1:1 with in-game tiles (24 px)</li>
+      <li><span class="d-decided">Decided</span> Building data: resources/presets.json v5.1 (community dataset)</li>
+      <li><span class="d-open">Open</span> Static host: GitHub Pages vs Cloudflare vs Netlify</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ── Team + guardrails ── -->
+<div class="grid-2">
+
+  <div class="card">
+    <h3>Team</h3>
+    <div class="team-row" style="margin-bottom:1rem">
+      <div class="team-member">
+        <div class="avatar">K</div>
+        <div>
+          <div class="member-name">Kaleb</div>
+          <div class="member-role">Canvas / UX — pan-zoom feel, snap, rotate, sprites</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="avatar ian">I</div>
+        <div>
+          <div class="member-name">Ian</div>
+          <div class="member-role">Data / Math — production ratios, building stats, influence radii</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:.75rem">Branch Structure</h3>
+    <ul class="task-list" style="margin-top:.4rem">
+      <li class="todo" style="font-family:monospace;font-size:.8rem">origin/main — production</li>
+      <li class="todo" style="font-family:monospace;font-size:.8rem">origin/dev — integration</li>
+      <li class="active" style="font-family:monospace;font-size:.8rem">origin/kaleb — Kaleb's branch</li>
+      <li class="active" style="font-family:monospace;font-size:.8rem">origin/ian — Ian's branch</li>
+    </ul>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem">Agents run in git worktrees on the human's personal branch. Never push directly to dev or main.</p>
+  </div>
+
+  <div class="card">
+    <h3>Agent Guardrails</h3>
+    <div class="agent-rule"><strong>Branch scope</strong> — Work only in worktrees on the human's personal branch.</div>
+    <div class="agent-rule"><strong>Scope guard</strong> — Optimizer, multiplayer, mod support, island templates = Phase 2. Do not implement without explicit human approval.</div>
+    <div class="agent-rule"><strong>Stack lock</strong> — No framework / major library changes after M0 without a decision recorded in docs/.</div>
+    <div class="agent-rule"><strong>No silent decisions</strong> — Any change spanning &gt;2 files requires a plan before implementation.</div>
+    <div class="agent-rule"><strong>Math deferred</strong> — Agents scaffold the math engine; humans verify ratio values before merge.</div>
+    <div class="agent-rule"><strong>PR hygiene</strong> — Every PR must state: what changed, why, and what the human reviewer should check.</div>
+  </div>
+
+</div>
+
+<footer>Anno Planner · Personal use only · <a href="../docs/ROADMAP.html" style="color:var(--muted)">Full roadmap</a></footer>
+
+</body>
+</html>

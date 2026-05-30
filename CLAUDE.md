@@ -12,9 +12,9 @@ Brainstorm doc: `docs/Anno_1800_Offline_Blueprint_Builder.md`
 
 | Layer | Candidates | Status |
 |---|---|---|
-| Frontend | React+Vite **or** Svelte/SvelteKit | **Undecided — M0 spike** |
-| Canvas/render | PixiJS (2D WebGL) **or** Konva | **Undecided — M0 spike** |
-| State | Zustand/Jotai (React) or Svelte stores; Immer for undo/redo | Follows framework choice |
+| Frontend | React + Vite + TypeScript | **Decided (M0, 2026-05-29)** |
+| Canvas/render | Konva via react-konva | **Decided (M0, 2026-05-29)** |
+| State | Zustand + Immer | **Decided (M0, 2026-05-29)** |
 | Persistence | IndexedDB via Dexie; File System Access API for power users | Decided |
 | PWA | Workbox | Decided |
 | Sharing | LZ-string → URL fragment, no server | Decided |
@@ -55,9 +55,29 @@ Three-pane layout: **palette (left) · canvas (center) · inspector/stats (right
 
 ## Open Decisions (blockers before M0)
 
-- [ ] Framework: React+Pixi vs Svelte+Konva
+- [x] Framework: React + Vite + TypeScript; Canvas: Konva via react-konva (2026-05-29)
 - [ ] Canonical building data source (Anno wiki, community dataset, manual)
 - [ ] Three-pane wireframe sketch
+
+---
+
+## Branch Strategy
+
+```
+origin/main   ← production; receives merges from dev only via PR
+origin/dev    ← integration branch; all feature work targets here
+origin/kaleb  ← Kaleb's personal branch (cut from dev)
+origin/ian    ← Ian's personal branch (cut from dev)
+```
+
+Agents operate in **git worktrees on the human's personal branch** — never push directly to `dev` or `main`.
+
+See `CONTRIBUTING.md` for the full PR workflow and guardrails.
+
+## Tracking
+
+- Roadmap: `docs/ROADMAP.md`
+- Live dashboard: `dashboard/index.html` (open in browser)
 
 ---
 

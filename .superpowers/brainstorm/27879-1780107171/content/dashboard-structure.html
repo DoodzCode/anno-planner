@@ -1,0 +1,74 @@
+<h2>How should the dashboard be structured?</h2>
+<p class="subtitle">Pick the structure that best fits how you and Kaleb will actually use it day-to-day.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>One Unified Page</h3>
+      <p>Single scrollable dashboard. Milestone overview, all tasks, open decisions, blockers — everything on one URL. Both devs use the same file.</p>
+      <div class="mockup" style="margin-top:.75rem">
+        <div class="mockup-header">dashboard/index.html</div>
+        <div class="mockup-body" style="padding:.5rem;font-size:.75rem;line-height:1.6">
+          <div style="color:#c8a96e;font-weight:700;margin-bottom:.25rem">▸ Milestone Progress</div>
+          <div style="background:#2a2d3a;border-radius:4px;padding:.4rem;margin-bottom:.4rem">M0 Spike · M1 Canvas · M2 Catalog · M3 Math · M4 PWA · M5 Release</div>
+          <div style="color:#c8a96e;font-weight:700;margin-bottom:.25rem">▸ Task Board (Ian / Kaleb / Both)</div>
+          <div style="background:#2a2d3a;border-radius:4px;padding:.4rem;margin-bottom:.4rem">☐ Scaffold Vite · ☐ Pan/Zoom · ☐ Building JSON…</div>
+          <div style="color:#c8a96e;font-weight:700;margin-bottom:.25rem">▸ Open Decisions · Blockers</div>
+          <div style="background:#2a2d3a;border-radius:4px;padding:.4rem">Framework? · Canvas renderer? · Data source?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Two Files: Overview + Per-Dev</h3>
+      <p>Shared overview page for milestones and decisions. Separate personal views (ian.html / kaleb.html) showing only that dev's tasks and status.</p>
+      <div class="mockup" style="margin-top:.75rem">
+        <div class="mockup-header">dashboard/</div>
+        <div class="mockup-body" style="padding:.5rem;font-size:.75rem;line-height:1.6">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem">
+            <div style="background:#2a2d3a;border-radius:4px;padding:.4rem">
+              <div style="color:#c8a96e;font-weight:700">index.html</div>
+              <div style="color:#7a7f96;font-size:.7rem">Shared overview<br>Milestones<br>Decisions<br>Blockers</div>
+            </div>
+            <div style="background:#2a2d3a;border-radius:4px;padding:.4rem">
+              <div style="color:#5b8dd9;font-weight:700">ian.html</div>
+              <div style="color:#7a7f96;font-size:.7rem">Ian's tasks<br>My queue<br>My PRs<br>My notes</div>
+            </div>
+            <div style="background:#2a2d3a;border-radius:4px;padding:.4rem">
+              <div style="color:#4caf7d;font-weight:700">kaleb.html</div>
+              <div style="color:#7a7f96;font-size:.7rem">Kaleb's tasks<br>His queue<br>His PRs<br>His notes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Tabbed Single Page</h3>
+      <p>One file, multiple tab views: Overview · Ian · Kaleb · Decisions · Log. JS tab switching — no page loads, always at hand.</p>
+      <div class="mockup" style="margin-top:.75rem">
+        <div class="mockup-header">dashboard/index.html</div>
+        <div class="mockup-body" style="padding:.5rem;font-size:.75rem">
+          <div style="display:flex;gap:.3rem;margin-bottom:.5rem">
+            <div style="background:#c8a96e;color:#0f1117;border-radius:4px 4px 0 0;padding:.2rem .5rem;font-weight:700;font-size:.7rem">Overview</div>
+            <div style="background:#2a2d3a;border-radius:4px 4px 0 0;padding:.2rem .5rem;color:#7a7f96;font-size:.7rem">Ian</div>
+            <div style="background:#2a2d3a;border-radius:4px 4px 0 0;padding:.2rem .5rem;color:#7a7f96;font-size:.7rem">Kaleb</div>
+            <div style="background:#2a2d3a;border-radius:4px 4px 0 0;padding:.2rem .5rem;color:#7a7f96;font-size:.7rem">Decisions</div>
+            <div style="background:#2a2d3a;border-radius:4px 4px 0 0;padding:.2rem .5rem;color:#7a7f96;font-size:.7rem">Log</div>
+          </div>
+          <div style="background:#2a2d3a;border-radius:0 4px 4px 4px;padding:.5rem;line-height:1.6">
+            <div style="color:#c8a96e;font-weight:700">M0 Spike — Not Started</div>
+            <div style="color:#7a7f96">Framework · Renderer · Data · Wireframe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
