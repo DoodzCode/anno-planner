@@ -1,8 +1,9 @@
 import { useRef, useEffect, useState, useMemo } from 'react'
-import { Stage, Layer, Line, Rect, Group, Text } from 'react-konva'
+import { Stage, Layer, Line, Rect, Group, Text, Circle } from 'react-konva'
 import type Konva from 'konva'
 import { useBlueprintStore } from '../state/blueprintStore'
 import { BUILDING_MAP } from '../data/catalog'
+import { useOverlayStore, OVERLAY_DEFS } from '../state/overlayStore'
 import {
   TILE_PX,
   GRID_COLS,
@@ -44,6 +45,12 @@ export default function Canvas() {
   // Pan mode
   const isSpaceDown = useRef(false)
   const [isPanning, setIsPanning] = useState(false)
+
+  const activeOverlays = useOverlayStore((s) => s.active)
+  const overlayColorMap = useMemo(
+    () => new Map(OVERLAY_DEFS.map(d => [d.id, d.color])),
+    []
+  )
 
   // Store
   const placements = useBlueprintStore((s) => s.placements)
@@ -239,6 +246,34 @@ export default function Canvas() {
           onMouseLeave={() => { setGhostTile(null); isDrawingBox.current = false; setSelBox(null) }}
         >
           <Layer listening={false}>{gridLines}</Layer>
+
+          {/* Influence radius overlay circles */}
+          {activeOverlays.size > 0 && (
+            <Layer listening={false}>
+              {placements.map((p) => {
+                const building = BUILDING_MAP.get(p.buildingId)
+                if (!building?.overlayType) return null
+                if (!activeOverlays.has(building.overlayType)) return null
+                const color = overlayColorMap.get(building.overlayType) ?? '#ffffff'
+                const fp = effectiveFootprint(building.footprint, p.rotation)
+                const cx = tileToPx(p.x) + tileToPx(fp.w) / 2
+                const cy = tileToPx(p.y) + tileToPx(fp.h) / 2
+                const r = (building.influenceRadius ?? 0) * TILE_PX
+                return (
+                  <Circle
+                    key={`overlay-${p.id}`}
+                    x={cx} y={cy}
+                    radius={r}
+                    fill={`${color}18`}
+                    stroke={color}
+                    strokeWidth={1}
+                    dash={[6, 4]}
+                    opacity={0.85}
+                  />
+                )
+              })}
+            </Layer>
+          )}
 
           <Layer>
             {placements.map((p) => {

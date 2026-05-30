@@ -1,6 +1,6 @@
 .app-shell {
   display: grid;
-  grid-template-columns: 200px 1fr 240px;
+  grid-template-columns: 220px 1fr 240px;
   height: 100vh;
   overflow: hidden;
   background: #0a0a16;
@@ -8,16 +8,34 @@
   font-family: system-ui, -apple-system, sans-serif;
 }
 
+.canvas-column {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
 /* ── Palette ────────────────────────────────────────────── */
 
 .palette {
   background: #13131f;
   border-right: 1px solid #252538;
-  padding: 12px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
+}
+
+.palette-header {
+  padding: 10px 12px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-bottom: 1px solid #1e1e32;
+  position: sticky;
+  top: 0;
+  background: #13131f;
+  z-index: 1;
 }
 
 .palette h2,
@@ -29,42 +47,88 @@
   color: #5a5a80;
 }
 
+.palette-search {
+  background: #0a0a16;
+  border: 1px solid #252538;
+  border-radius: 4px;
+  color: #c8c8d4;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.palette-search:focus { border-color: #4a4a7a; }
+
+.palette-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 6px 12px;
+  border-bottom: 1px solid #1e1e32;
+  background: #13131f;
+  position: sticky;
+  top: 68px;
+  z-index: 1;
+}
+
+.tier-btn {
+  padding: 2px 7px;
+  background: none;
+  border: 1px solid #252538;
+  border-radius: 10px;
+  color: #5a5a80;
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: border-color 0.1s, color 0.1s, background 0.1s;
+}
+.tier-btn:hover { border-color: #4a4a6a; color: #9090b0; }
+.tier-btn--active { border-color: #6060b0; color: #a0a0d0; background: #1a1a3a; }
+
 .palette-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0;
+  padding: 6px 0;
+}
+
+.palette-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.palette-group-header {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: #3a3a5a;
+  padding: 8px 12px 3px;
+  margin-top: 2px;
 }
 
 .palette-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 8px;
+  padding: 5px 12px;
   background: none;
-  border: 1px solid #252538;
-  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
   color: #c8c8d4;
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.1s, background 0.1s;
+  transition: background 0.08s;
+  width: 100%;
 }
 
-.palette-item:hover {
-  background: #1e1e34;
-  border-color: #3a3a5a;
-}
-
-.palette-item--active {
-  border-color: #6060b0;
-  background: #1a1a3a;
-}
+.palette-item:hover { background: #1a1a2e; }
+.palette-item--active { background: #1a1a3a; border-bottom-color: #4040a0; }
 
 .palette-preview {
   border-radius: 2px;
   flex-shrink: 0;
   opacity: 0.85;
-  min-width: 10px;
-  min-height: 10px;
 }
 
 .palette-info {
@@ -72,24 +136,96 @@
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  flex: 1;
 }
 
 .palette-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .palette-size {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   color: #5a5a80;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dlc-badge {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #fff;
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+}
+
+.palette-empty {
+  padding: 16px 12px;
+  font-size: 0.75rem;
+  color: #3a3a58;
+  font-style: italic;
 }
 
 .palette-hint {
+  padding: 6px 12px;
   font-size: 0.65rem;
   color: #4a4a6a;
   font-style: italic;
+  border-top: 1px solid #1e1e32;
+  margin-top: auto;
+}
+
+/* ── Overlay Bar ─────────────────────────────────────────── */
+
+.overlay-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: #0e0e1c;
+  border-bottom: 1px solid #1e1e32;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.overlay-bar-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: #3a3a5a;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.overlay-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: none;
+  border: 1px solid #252538;
+  border-radius: 10px;
+  color: #5a5a80;
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: border-color 0.1s, color 0.1s, background 0.1s;
+  white-space: nowrap;
+}
+.overlay-btn:hover { border-color: #4a4a6a; color: #9090b0; }
+.overlay-btn--on { font-weight: 600; }
+
+.overlay-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* ── Canvas ─────────────────────────────────────────────── */
