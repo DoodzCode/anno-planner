@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="32" fill="#0a0a16"/>
+  <rect x="12" y="12" width="168" height="168" rx="24" fill="none" stroke="#c8a96e" stroke-width="3" opacity="0.4"/>
+  <!-- Grid lines -->
+  <line x1="32" y1="32" x2="160" y2="32" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="32" y1="64" x2="160" y2="64" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="32" y1="96" x2="160" y2="96" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="32" y1="128" x2="160" y2="128" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="32" y1="160" x2="160" y2="160" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="32" y1="32" x2="32" y2="160" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="64" y1="32" x2="64" y2="160" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="96" y1="32" x2="96" y2="160" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="128" y1="32" x2="128" y2="160" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <line x1="160" y1="32" x2="160" y2="160" stroke="#c8a96e" stroke-width="1" opacity="0.2"/>
+  <!-- Buildings -->
+  <rect x="40" y="70" width="36" height="28" rx="3" fill="#8B6330" opacity="0.9"/>
+  <rect x="84" y="56" width="52" height="44" rx="3" fill="#2A4A7A" opacity="0.9"/>
+  <rect x="100" y="108" width="28" height="36" rx="3" fill="#2E6040" opacity="0.9"/>
+  <rect x="44" y="112" width="44" height="32" rx="3" fill="#7A3A6A" opacity="0.9"/>
+  <!-- Anno A letterform -->
+  <text x="96" y="104" font-family="Georgia, serif" font-size="48" font-weight="bold"
+        text-anchor="middle" fill="#c8a96e" opacity="0.15">A</text>
+</svg>

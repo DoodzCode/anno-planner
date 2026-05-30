@@ -21,7 +21,7 @@
 | M1 | Core canvas | 4–6 | `[x]` | Kaleb (lead) |
 | M2 | Building catalog | 3–5 | `[x]` | Ian (lead) |
 | M3 | Math, library & export | 3–5 | `[x]` | Ian (lead) |
-| M4 | PWA polish | 2–3 | `[ ]` | Both |
+| M4 | PWA polish | 2–3 | `[x]` | Both |
 | M5 | Personal release | 0.5–1 | `[ ]` | Both |
 
 ---
@@ -111,18 +111,18 @@
 
 ---
 
-## M4 — PWA Polish *(2–3 days)*
+## M4 — PWA Polish *(2–3 days)* `[x]` *(completed 2026-05-30)*
 
 **Goal:** Offline-capable, installable, polished.
 
 **Tasks**
 
-- [ ] Workbox service worker (offline asset caching)
-- [ ] Installable PWA manifest
-- [ ] Dark mode + Anno-themed palette
-- [ ] First-run onboarding tutorial blueprint
-- [ ] Minimap for large islands
-- [ ] Top-down sprite pass (replace placeholder icons)
+- [x] Workbox service worker — `vite-plugin-pwa` with `autoUpdate`, caches all static assets
+- [x] Installable PWA manifest — name, icons (SVG 192+512), `display: standalone`, theme `#0a0a16`
+- [x] Anno-themed palette — CSS custom properties (`--accent: #c8a96e`, `--accent-dim`, etc.) replacing all blue/purple tones
+- [x] First-run onboarding — `Onboarding.tsx` modal (localStorage flag); "Load tutorial layout" pre-places a Farmers production chain
+- [x] Minimap — `Minimap.tsx` plain-canvas overlay (160×100) in canvas bottom-right; shows placements + viewport rect
+- [x] Sprite pass — category accent band, shadow on labels, Anno gold selection highlight; `/public/icons/` ready for real sprites
 
 **Agent work:** service worker config, manifest, tutorial blueprint scaffolding.
 

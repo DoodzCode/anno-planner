@@ -4,6 +4,7 @@ import type Konva from 'konva'
 import { useBlueprintStore } from '../state/blueprintStore'
 import { BUILDING_MAP } from '../data/catalog'
 import { useOverlayStore, OVERLAY_DEFS } from '../state/overlayStore'
+import Minimap from './Minimap'
 import {
   TILE_PX,
   GRID_COLS,
@@ -119,29 +120,33 @@ export default function Canvas({ onStageReady }: CanvasProps) {
     }
   }, [])
 
-  // Memoised grid lines
+  // Grid lines sized to fill the canvas pane at current dimensions
   const gridLines = useMemo(() => {
+    const cols = Math.ceil(size.w / TILE_PX) + 1
+    const rows = Math.ceil(size.h / TILE_PX) + 1
+    const totalH = rows * TILE_PX
+    const totalW = cols * TILE_PX
     const lines = []
-    for (let c = 0; c <= GRID_COLS; c++) {
+    for (let c = 0; c <= cols; c++) {
       const accent = c % 5 === 0
       lines.push(
         <Line key={`v${c}`}
-          points={[c * TILE_PX, 0, c * TILE_PX, GRID_ROWS * TILE_PX]}
+          points={[c * TILE_PX, 0, c * TILE_PX, totalH]}
           stroke={accent ? GRID_ACCENT : GRID_LINE}
           strokeWidth={accent ? 1 : 0.5} listening={false} />,
       )
     }
-    for (let r = 0; r <= GRID_ROWS; r++) {
+    for (let r = 0; r <= rows; r++) {
       const accent = r % 5 === 0
       lines.push(
         <Line key={`h${r}`}
-          points={[0, r * TILE_PX, GRID_COLS * TILE_PX, r * TILE_PX]}
+          points={[0, r * TILE_PX, totalW, r * TILE_PX]}
           stroke={accent ? GRID_ACCENT : GRID_LINE}
           strokeWidth={accent ? 1 : 0.5} listening={false} />,
       )
     }
     return lines
-  }, [])
+  }, [size.w, size.h])
 
   const activeBuilding = activeBuildingId ? BUILDING_MAP.get(activeBuildingId) : undefined
 
@@ -241,6 +246,7 @@ export default function Canvas({ onStageReady }: CanvasProps) {
 
   return (
     <main className="canvas-pane">
+      <Minimap stage={stageRef.current} />
       <div ref={containerRef} className="konva-container" style={{ cursor }}>
         <Stage
           ref={stageRef}
@@ -330,20 +336,30 @@ export default function Canvas({ onStageReady }: CanvasProps) {
                     setGhostTile(null)
                   }}
                 >
+                  {/* Base fill */}
                   <Rect
                     width={pw} height={ph}
-                    fill={building.color} opacity={0.82}
-                    stroke={isSelected ? '#ffffff' : '#00000033'}
-                    strokeWidth={isSelected ? 2 : 1}
-                    cornerRadius={2}
+                    fill={building.color} opacity={0.78}
+                    stroke={isSelected ? '#c8a96e' : 'rgba(0,0,0,0.25)'}
+                    strokeWidth={isSelected ? 2 : 0.5}
+                    cornerRadius={3}
                   />
+                  {/* Category accent band at top */}
+                  <Rect
+                    width={pw} height={Math.max(3, ph * 0.12)}
+                    fill="rgba(255,255,255,0.18)"
+                    cornerRadius={[3, 3, 0, 0]}
+                    listening={false}
+                  />
+                  {/* Building name label */}
                   <Text
                     text={building.name}
-                    fontSize={Math.max(7, Math.min(10, pw / 5))}
-                    fill="#ffffff" opacity={0.9}
+                    fontSize={Math.max(7, Math.min(9, pw / 5))}
+                    fill="#ffffff" opacity={0.92}
                     width={pw} height={ph}
                     align="center" verticalAlign="middle"
-                    wrap="none" ellipsis listening={false} padding={2}
+                    wrap="none" ellipsis listening={false} padding={3}
+                    shadowColor="rgba(0,0,0,0.6)" shadowBlur={2} shadowOffsetY={1}
                   />
                 </Group>
               )
@@ -366,8 +382,8 @@ export default function Canvas({ onStageReady }: CanvasProps) {
               <Rect
                 x={selectionRect.x} y={selectionRect.y}
                 width={selectionRect.w} height={selectionRect.h}
-                fill="rgba(80,120,255,0.08)"
-                stroke="#6688ff" strokeWidth={1}
+                fill="rgba(200,169,110,0.07)"
+                stroke="#c8a96e" strokeWidth={1}
                 dash={[4, 3]} listening={false}
               />
             )}
