@@ -6,6 +6,7 @@ import Canvas from './components/Canvas'
 import Inspector from './components/Inspector'
 import OverlayBar from './components/OverlayBar'
 import BlueprintLibrary from './components/BlueprintLibrary'
+import Onboarding, { shouldShowOnboarding } from './components/Onboarding'
 import { loadCurrentBlueprint, startAutoSave } from './state/persistence'
 import { useBlueprintStore } from './state/blueprintStore'
 import { BUILDING_MAP } from './data/catalog'
@@ -13,9 +14,10 @@ import { exportJSON, exportPNG, openFile, saveFile } from './lib/exportImport'
 import { encodeShareURL, decodeShareURL } from './lib/share'
 
 export default function App() {
-  const [showLibrary, setShowLibrary] = useState(false)
-  const [toast, setToast]             = useState<string | null>(null)
-  const stageRef = useRef<Konva.Stage | null>(null)
+  const [showLibrary,    setShowLibrary]    = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false)
+  const [toast, setToast]                   = useState<string | null>(null)
+  const stageRef      = useRef<Konva.Stage | null>(null)
   const blueprintName = useBlueprintStore(s => s.blueprintName)
 
   // ── Bootstrap ────────────────────────────────────────────
@@ -31,6 +33,11 @@ export default function App() {
     } else {
       loadCurrentBlueprint().then(() => {
         unsub = startAutoSave()
+        // Show onboarding only if no saved placements exist
+        if (shouldShowOnboarding()) {
+          const { placements } = useBlueprintStore.getState()
+          if (placements.length === 0) setShowOnboarding(true)
+        }
       })
     }
     return () => unsub?.()
@@ -122,7 +129,8 @@ export default function App() {
       </div>
       <Inspector />
 
-      {showLibrary && <BlueprintLibrary onClose={() => setShowLibrary(false)} />}
+      {showLibrary    && <BlueprintLibrary onClose={() => setShowLibrary(false)} />}
+      {showOnboarding && <Onboarding onDismiss={() => setShowOnboarding(false)} />}
 
       {toast && <div className="toast">{toast}</div>}
     </div>

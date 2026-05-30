@@ -137,7 +137,7 @@
 
 <header>
   <h1>Anno Planner</h1>
-  <span class="subtitle">Dev Dashboard — updated 2026-05-30 (M3 complete)</span>
+  <span class="subtitle">Dev Dashboard — updated 2026-05-30 (M4 complete)</span>
   <a href="../docs/ROADMAP.html">Full Roadmap →</a>
 </header>
 
@@ -205,22 +205,22 @@
     <span class="badge done">Done</span>
   </div>
 
-  <div class="milestone active">
+  <div class="milestone done">
     <div>
       <div class="label">M4 · PWA Polish</div>
       <div class="desc">2–3 days · Both</div>
     </div>
     <div>
-      <div class="name">Offline install · onboarding · dark mode · sprite pass</div>
+      <div class="name">Offline install · onboarding · Anno theme · minimap · sprite pass</div>
       <div class="progress-wrap">
-        <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
-        <div class="progress-label">0 / 6 tasks</div>
+        <div class="progress-bar"><div class="fill done" style="width:100%"></div></div>
+        <div class="progress-label">6 / 6 tasks</div>
       </div>
     </div>
-    <span class="badge active">Up Next</span>
+    <span class="badge done">Done</span>
   </div>
 
-  <div class="milestone">
+  <div class="milestone active">
     <div>
       <div class="label">M5 · Release</div>
       <div class="desc">0.5–1 day · Both</div>
@@ -232,7 +232,7 @@
         <div class="progress-label">0 / 4 tasks</div>
       </div>
     </div>
-    <span class="badge pending">Pending</span>
+    <span class="badge active">Up Next</span>
   </div>
 
 </div>
@@ -241,24 +241,21 @@
 <div class="grid-2">
 
   <div class="card">
-    <h3>M3 Math &amp; Export — Complete</h3>
+    <h3>M4 PWA Polish — Complete</h3>
     <ul class="task-list">
-      <li class="done">Production math engine — 32 buildings, 47 goods, 13 Vitest tests passing (incl. Furnace ratio)</li>
-      <li class="done">Live t/min tallies in Inspector — green surplus / red deficit, memoized</li>
-      <li class="done">Blueprint library — save, load, rename (double-click), duplicate, delete via Dexie</li>
-      <li class="done">JSON export / import with unknown-building skip</li>
-      <li class="done">PNG export at 2× pixel ratio via Konva stage.toDataURL</li>
-      <li class="done">Compressed URL share — LZ-string → #bp= fragment, clipboard copy + toast</li>
-      <li class="done">File System Access API (showSaveFilePicker / showOpenFilePicker) with blob fallback</li>
+      <li class="done">Workbox SW via vite-plugin-pwa (autoUpdate, caches all static assets)</li>
+      <li class="done">PWA manifest — installable, SVG icons 192+512, standalone display</li>
+      <li class="done">Anno golden theme — CSS custom properties (--accent: #c8a96e) replaces all blue/purple</li>
+      <li class="done">First-run onboarding modal — tips + "Load tutorial layout" (Farmers chain, 9 buildings)</li>
+      <li class="done">Minimap — 160×100 canvas overlay, placements + viewport rect indicator</li>
+      <li class="done">Sprite pass — category accent band, shadow labels, gold selection; /public/icons/ ready</li>
     </ul>
-    <h3 style="margin-top:1rem">Current Focus — M4 PWA Polish</h3>
+    <h3 style="margin-top:1rem">Current Focus — M5 Personal Release</h3>
     <ul class="task-list">
-      <li class="todo">Workbox service worker (offline asset caching)</li>
-      <li class="todo">Installable PWA manifest</li>
-      <li class="todo">Dark mode + Anno-themed palette</li>
-      <li class="todo">First-run onboarding tutorial blueprint</li>
-      <li class="todo">Minimap for large islands</li>
-      <li class="todo">Top-down sprite pass (replace placeholder icons)</li>
+      <li class="todo">Production build (vite build)</li>
+      <li class="todo">Deploy to static host (GitHub Pages / Cloudflare / Netlify)</li>
+      <li class="todo">Smoke-test all golden paths</li>
+      <li class="todo">Tag v1.0.0</li>
     </ul>
   </div>
 

@@ -1,3 +1,38 @@
+/* ── Anno 1800 Design Tokens ───────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:         #0a0a16;
+  --surface:    #13131f;
+  --surface2:   #1a1a2e;
+
+  /* Borders */
+  --border:     #252538;
+  --border2:    #2e2e48;
+
+  /* Anno golden accent */
+  --accent:     #c8a96e;
+  --accent-dim: #8a6e3a;
+  --accent-bg:  #1e1808;
+
+  /* Text */
+  --text:       #d8d4c8;
+  --text-muted: #7a7060;
+  --text-faint: #3a3428;
+
+  /* Status */
+  --green:      #4caf7d;
+  --red:        #e05c5c;
+  --blue:       #5b8dd9;
+
+  /* Tier colors */
+  --tier-farmers:   #8B6330;
+  --tier-workers:   #2E6040;
+  --tier-artisans:  #A05A20;
+  --tier-engineers: #2A4A7A;
+  --tier-investors: #7A3A6A;
+  --tier-harbor:    #1A5A6A;
+}
+
 *,
 *::before,
 *::after {
