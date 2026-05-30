@@ -12,9 +12,9 @@ Brainstorm doc: `docs/Anno_1800_Offline_Blueprint_Builder.md`
 
 | Layer | Candidates | Status |
 |---|---|---|
-| Frontend | React+Vite **or** Svelte/SvelteKit | **Undecided — M0 spike** |
-| Canvas/render | PixiJS (2D WebGL) **or** Konva | **Undecided — M0 spike** |
-| State | Zustand/Jotai (React) or Svelte stores; Immer for undo/redo | Follows framework choice |
+| Frontend | React + Vite + TypeScript | **Decided (M0, 2026-05-29)** |
+| Canvas/render | Konva via react-konva | **Decided (M0, 2026-05-29)** |
+| State | Zustand + Immer | **Decided (M0, 2026-05-29)** |
 | Persistence | IndexedDB via Dexie; File System Access API for power users | Decided |
 | PWA | Workbox | Decided |
 | Sharing | LZ-string → URL fragment, no server | Decided |
@@ -55,7 +55,7 @@ Three-pane layout: **palette (left) · canvas (center) · inspector/stats (right
 
 ## Open Decisions (blockers before M0)
 
-- [ ] Framework: React+Pixi vs Svelte+Konva
+- [x] Framework: React + Vite + TypeScript; Canvas: Konva via react-konva (2026-05-29)
 - [ ] Canonical building data source (Anno wiki, community dataset, manual)
 - [ ] Three-pane wireframe sketch
 
