@@ -137,7 +137,7 @@
 
 <header>
   <h1>Anno Planner</h1>
-  <span class="subtitle">Dev Dashboard — updated 2026-05-30</span>
+  <span class="subtitle">Dev Dashboard — updated 2026-05-30 (M3 complete)</span>
   <a href="../docs/ROADMAP.html">Full Roadmap →</a>
 </header>
 
@@ -190,22 +190,22 @@
     <span class="badge done">Done</span>
   </div>
 
-  <div class="milestone active">
+  <div class="milestone done">
     <div>
       <div class="label">M3 · Math &amp; Export</div>
       <div class="desc">3–5 days · Ian</div>
     </div>
     <div>
-      <div class="name">Production tallies · blueprint library · PNG + URL share</div>
+      <div class="name">Production tallies · blueprint library · JSON/PNG/URL share · FSAA</div>
       <div class="progress-wrap">
-        <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
-        <div class="progress-label">0 / 7 tasks</div>
+        <div class="progress-bar"><div class="fill done" style="width:100%"></div></div>
+        <div class="progress-label">7 / 7 tasks</div>
       </div>
     </div>
-    <span class="badge active">Up Next</span>
+    <span class="badge done">Done</span>
   </div>
 
-  <div class="milestone">
+  <div class="milestone active">
     <div>
       <div class="label">M4 · PWA Polish</div>
       <div class="desc">2–3 days · Both</div>
@@ -217,7 +217,7 @@
         <div class="progress-label">0 / 6 tasks</div>
       </div>
     </div>
-    <span class="badge pending">Pending</span>
+    <span class="badge active">Up Next</span>
   </div>
 
   <div class="milestone">
@@ -241,24 +241,24 @@
 <div class="grid-2">
 
   <div class="card">
-    <h3>M2 Building Catalog — Complete</h3>
+    <h3>M3 Math &amp; Export — Complete</h3>
     <ul class="task-list">
-      <li class="done">Building JSON schema finalized (iconFile, workRadius, overlayType, group)</li>
-      <li class="done">156 Old World buildings ingested from presets.json (farmers → investors + harbor)</li>
-      <li class="done">Categorized, searchable palette — tier tabs + live search + grouped display</li>
-      <li class="done">DLC badges (Seat of Power, Docklands, Empire of the Skies, Seeds of Change)</li>
-      <li class="done">Influence overlay system — 13 service buildings, 10 overlay types</li>
-      <li class="done">Overlay toggle bar above canvas with color-coded toggles</li>
+      <li class="done">Production math engine — 32 buildings, 47 goods, 13 Vitest tests passing (incl. Furnace ratio)</li>
+      <li class="done">Live t/min tallies in Inspector — green surplus / red deficit, memoized</li>
+      <li class="done">Blueprint library — save, load, rename (double-click), duplicate, delete via Dexie</li>
+      <li class="done">JSON export / import with unknown-building skip</li>
+      <li class="done">PNG export at 2× pixel ratio via Konva stage.toDataURL</li>
+      <li class="done">Compressed URL share — LZ-string → #bp= fragment, clipboard copy + toast</li>
+      <li class="done">File System Access API (showSaveFilePicker / showOpenFilePicker) with blob fallback</li>
     </ul>
-    <h3 style="margin-top:1rem">Current Focus — M3 Math &amp; Export</h3>
+    <h3 style="margin-top:1rem">Current Focus — M4 PWA Polish</h3>
     <ul class="task-list">
-      <li class="todo">Production math engine (pure functions, unit-tested)</li>
-      <li class="todo">Live input/output tallies in inspector pane</li>
-      <li class="todo">Blueprint library (IndexedDB): save, load, rename, duplicate, delete</li>
-      <li class="todo">JSON export / import</li>
-      <li class="todo">PNG export (canvas snapshot)</li>
-      <li class="todo">Compressed URL share (LZ-string → URL fragment)</li>
-      <li class="todo">File System Access API (power users)</li>
+      <li class="todo">Workbox service worker (offline asset caching)</li>
+      <li class="todo">Installable PWA manifest</li>
+      <li class="todo">Dark mode + Anno-themed palette</li>
+      <li class="todo">First-run onboarding tutorial blueprint</li>
+      <li class="todo">Minimap for large islands</li>
+      <li class="todo">Top-down sprite pass (replace placeholder icons)</li>
     </ul>
   </div>
 
