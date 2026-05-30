@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anno Planner — Roadmap</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0c0c14;
+      --surface:  #13131f;
+      --surface2: #1a1a2e;
+      --border:   #252538;
+      --border2:  #303050;
+      --accent:   #c8a96e;
+      --blue:     #5b8dd9;
+      --text:     #d8d8e8;
+      --muted:    #6a6a90;
+      --done:     #4caf7d;
+      --done-bg:  #0d2a1a;
+      --prog:     #c8a96e;
+      --prog-bg:  #2a2010;
+      --todo-bg:  #1a1a2e;
+      --block:    #e05c5c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #0c0c14ee;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .topbar h1 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .topbar .date {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .topbar nav {
+      margin-left: auto;
+      display: flex;
+      gap: 1.25rem;
+    }
+    .topbar nav a {
+      font-size: .78rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .topbar nav a:hover { color: var(--text); }
+
+    /* ── Layout ── */
+    .page { max-width: 860px; margin: 0 auto; padding: 2rem; }
+
+    section { margin-bottom: 3rem; }
+    section > h2 {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Milestone overview cards ── */
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .75rem;
+    }
+    @media (max-width: 640px) { .overview { grid-template-columns: 1fr 1fr; } }
+
+    .m-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .m-card.done   { border-color: #1e4030; }
+    .m-card.active { border-color: var(--prog); }
+
+    .m-card .m-id {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: .25rem;
+    }
+    .m-card .m-name {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .1rem;
+    }
+    .m-card .m-est {
+      font-size: .72rem;
+      color: var(--muted);
+      margin-bottom: .65rem;
+    }
+
+    .pbar-track {
+      height: 5px;
+      border-radius: 3px;
+      background: var(--border2);
+      overflow: hidden;
+      margin-bottom: .35rem;
+    }
+    .pbar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--prog);
+      transition: width .4s ease;
+    }
+    .pbar-fill.full { background: var(--done); }
+
+    .pbar-label {
+      font-size: .68rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .15rem .5rem;
+      border-radius: 3px;
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .badge.done    { background: var(--done-bg); color: var(--done); }
+    .badge.active  { background: var(--prog-bg); color: var(--prog); }
+    .badge.pending { background: var(--todo-bg); color: var(--muted); }
+
+    /* ── Milestone detail ── */
+    .milestone-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .milestone-block.done   { border-color: #1e4030; }
+    .milestone-block.active { border-color: var(--prog); }
+
+    .milestone-header {
+      padding: 1rem 1.25rem .75rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .milestone-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .milestone-header .est {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .1rem;
+    }
+    .milestone-header .goal {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+
+    .milestone-body { padding: 1rem 1.25rem; }
+
+    .sub-label {
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: .5rem;
+      margin-top: .9rem;
+    }
+    .sub-label:first-child { margin-top: 0; }
+
+    /* ── Task / checklist items ── */
+    .tasks { list-style: none; display: flex; flex-direction: column; gap: .3rem; }
+    .tasks li {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .84rem;
+    }
+    .tasks li .icon {
+      margin-top: .18em;
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .6rem;
+      font-weight: 900;
+    }
+    .tasks li.done .icon   { background: var(--done);  color: #0d2a1a; }
+    .tasks li.prog .icon   { background: var(--prog);  color: #2a2010; }
+    .tasks li.todo .icon   { background: transparent; border: 1.5px solid var(--border2); }
+    .tasks li.block .icon  { background: var(--block); color: #fff; }
+
+    .tasks li.done > span  { color: var(--muted); text-decoration: line-through; text-decoration-color: #3a4030; }
+    .tasks li.prog > span  { color: var(--text); }
+    .tasks li.todo > span  { color: var(--muted); }
+    .tasks li.block > span { color: var(--block); }
+
+    /* ── Legend table ── */
+    .legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ── Gate / annotation rows ── */
+    .gate {
+      margin-top: .75rem;
+      padding: .5rem .75rem;
+      background: var(--surface2);
+      border-left: 2px solid var(--border2);
+      border-radius: 0 4px 4px 0;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .gate strong { color: var(--text); }
+
+    /* ── Phase 2 ── */
+    .phase2-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+    .phase2-list li {
+      font-size: .84rem;
+      color: var(--muted);
+      padding-left: .9rem;
+      position: relative;
+    }
+    .phase2-list li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      color: var(--border2);
+      font-size: .65rem;
+      top: .2em;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Anno Planner — Roadmap</h1>
+  <span class="date">Updated 2026-05-29</span>
+  <nav>
+    <a href="#overview">Overview</a>
+    <a href="#m0">M0</a>
+    <a href="#m1">M1</a>
+    <a href="#m2">M2</a>
+    <a href="#m3">M3</a>
+    <a href="#m4">M4</a>
+    <a href="#m5">M5</a>
+    <a href="#phase2">Phase 2</a>
+  </nav>
+</div>
+
+<div class="page">
+
+  <!-- ── Status legend ── -->
+  <section>
+    <h2>Legend</h2>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--done)"></div> Done</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--prog)"></div> In progress</div>
+      <div class="legend-item"><div class="legend-dot" style="background:transparent;border:1.5px solid #303050"></div> Not started</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--block)"></div> Blocked</div>
+    </div>
+  </section>
+
+  <!-- ── Overview cards ── -->
+  <section id="overview">
+    <h2>Milestone Overview</h2>
+    <div class="overview">
+
+      <div class="m-card done">
+        <div class="m-id">M0</div>
+        <div class="m-name">Spike</div>
+        <div class="m-est">1–2 days · Both</div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>4 / 4 tasks</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card done">
+        <div class="m-id">M1</div>
+        <div class="m-name">Core Canvas</div>
+        <div class="m-est">4–6 days · Kaleb</div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>9 / 9 tasks</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card">
+        <div class="m-id">M2</div>
+        <div class="m-name">Building Catalog</div>
+        <div class="m-est">3–5 days · Ian</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
+        <div class="pbar-label"><span>0 / 6 tasks</span><span class="badge pending">Pending</span></div>
+      </div>
+
+      <div class="m-card">
+        <div class="m-id">M3</div>
+        <div class="m-name">Math &amp; Export</div>
+        <div class="m-est">3–5 days · Ian</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
+        <div class="pbar-label"><span>0 / 7 tasks</span><span class="badge pending">Pending</span></div>
+      </div>
+
+      <div class="m-card">
+        <div class="m-id">M4</div>
+        <div class="m-name">PWA Polish</div>
+        <div class="m-est">2–3 days · Both</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
+        <div class="pbar-label"><span>0 / 6 tasks</span><span class="badge pending">Pending</span></div>
+      </div>
+
+      <div class="m-card">
+        <div class="m-id">M5</div>
+        <div class="m-name">Personal Release</div>
+        <div class="m-est">0.5–1 day · Both</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
+        <div class="pbar-label"><span>0 / 4 tasks</span><span class="badge pending">Pending</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── M0 ── -->
+  <section id="m0">
+    <h2>Milestone Detail</h2>
+
+    <div class="milestone-block done">
+      <div class="milestone-header">
+        <div>
+          <h3>M0 — Spike</h3>
+          <div class="est">1–2 days</div>
+          <div class="goal">Pick stack, render a grid, place one building.</div>
+        </div>
+        <span class="badge done">Done</span>
+      </div>
+      <div class="milestone-body">
+
+        <div class="sub-label">Open Decisions</div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Framework: React + Vite + TypeScript (decided 2026-05-29)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Canvas renderer: Konva via react-konva (decided 2026-05-29)</span></li>
+          <li class="todo"><div class="icon"></div><span>Canonical building data source (Anno wiki / community dataset / manual)</span></li>
+          <li class="todo"><div class="icon"></div><span>Three-pane wireframe sketch</span></li>
+        </ul>
+
+        <div class="sub-label">Tasks</div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Scaffold Vite project with chosen framework</span></li>
+          <li class="done"><div class="icon">✓</div><span>Render a tile grid on screen</span></li>
+          <li class="done"><div class="icon">✓</div><span>Place one hardcoded building on the grid</span></li>
+          <li class="done"><div class="icon">✓</div><span>Record stack decision in <code>docs/</code></span></li>
+        </ul>
+
+        <div class="gate"><strong>Human gate:</strong> Kaleb + Ian evaluate feel, pick stack, update CLAUDE.md.</div>
+      </div>
+    </div>
+
+    <!-- ── M1 ── -->
+    <div class="milestone-block done" id="m1">
+      <div class="milestone-header">
+        <div>
+          <h3>M1 — Core Canvas</h3>
+          <div class="est">4–6 days</div>
+          <div class="goal">Fully interactive canvas with persistence.</div>
+        </div>
+        <span class="badge done">Done</span>
+      </div>
+      <div class="milestone-body">
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Pan and zoom (mouse wheel zoom-to-pointer + space / middle-drag pan)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Place building (click from palette)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Rotate building (R key)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Delete building (Del key)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Multi-select (shift-click + drag box-select)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Snap-to-grid</span></li>
+          <li class="done"><div class="icon">✓</div><span>Undo / redo (Ctrl+Z / Ctrl+Y) via Immer history</span></li>
+          <li class="done"><div class="icon">✓</div><span>IndexedDB persistence (auto-save on change)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Basic keyboard shortcut set (R, Del, Esc, Ctrl+Z/Y)</span></li>
+        </ul>
+        <div class="gate"><strong>Human gate:</strong> Kaleb reviews canvas feel and snap accuracy before merge to <code>dev</code>.</div>
+      </div>
+    </div>
+
+    <!-- ── M2 ── -->
+    <div class="milestone-block" id="m2">
+      <div class="milestone-header">
+        <div>
+          <h3>M2 — Building Catalog</h3>
+          <div class="est">3–5 days</div>
+          <div class="goal">Full Old World building set with palette and overlays.</div>
+        </div>
+        <span class="badge pending">Pending</span>
+      </div>
+      <div class="milestone-body">
+        <ul class="tasks">
+          <li class="todo"><div class="icon"></div><span>Finalize building JSON schema</span></li>
+          <li class="todo"><div class="icon"></div><span>Ingest Old World buildings (residential, production, public)</span></li>
+          <li class="todo"><div class="icon"></div><span>Categorized, searchable building palette (left pane)</span></li>
+          <li class="todo"><div class="icon"></div><span>DLC badges on buildings</span></li>
+          <li class="todo"><div class="icon"></div><span>Influence overlay system (toggleable radii per type)</span></li>
+          <li class="todo"><div class="icon"></div><span>Overlay toggle bar at top of canvas</span></li>
+        </ul>
+        <div class="gate"><strong>Human gate:</strong> Ian spot-checks 10% of building stats against the Anno 1800 wiki; Kaleb reviews palette UX.</div>
+      </div>
+    </div>
+
+    <!-- ── M3 ── -->
+    <div class="milestone-block" id="m3">
+      <div class="milestone-header">
+        <div>
+          <h3>M3 — Math, Library &amp; Export</h3>
+          <div class="est">3–5 days</div>
+          <div class="goal">Production math, blueprint library, and sharing.</div>
+        </div>
+        <span class="badge pending">Pending</span>
+      </div>
+      <div class="milestone-body">
+        <ul class="tasks">
+          <li class="todo"><div class="icon"></div><span>Production math engine (pure functions, unit-tested)</span></li>
+          <li class="todo"><div class="icon"></div><span>Live input/output tallies in inspector pane (right)</span></li>
+          <li class="todo"><div class="icon"></div><span>Blueprint library (IndexedDB): save, load, rename, duplicate, delete</span></li>
+          <li class="todo"><div class="icon"></div><span>JSON export / import</span></li>
+          <li class="todo"><div class="icon"></div><span>PNG export (canvas snapshot)</span></li>
+          <li class="todo"><div class="icon"></div><span>Compressed URL share (LZ-string → URL fragment)</span></li>
+          <li class="todo"><div class="icon"></div><span>File System Access API (power users)</span></li>
+        </ul>
+        <div class="gate"><strong>Human gate:</strong> Ian verifies math ratios against known Anno 1800 values before merge.</div>
+      </div>
+    </div>
+
+    <!-- ── M4 ── -->
+    <div class="milestone-block" id="m4">
+      <div class="milestone-header">
+        <div>
+          <h3>M4 — PWA Polish</h3>
+          <div class="est">2–3 days</div>
+          <div class="goal">Offline-capable, installable, polished.</div>
+        </div>
+        <span class="badge pending">Pending</span>
+      </div>
+      <div class="milestone-body">
+        <ul class="tasks">
+          <li class="todo"><div class="icon"></div><span>Workbox service worker (offline asset caching)</span></li>
+          <li class="todo"><div class="icon"></div><span>Installable PWA manifest</span></li>
+          <li class="todo"><div class="icon"></div><span>Dark mode + Anno-themed palette</span></li>
+          <li class="todo"><div class="icon"></div><span>First-run onboarding tutorial blueprint</span></li>
+          <li class="todo"><div class="icon"></div><span>Minimap for large islands</span></li>
+          <li class="todo"><div class="icon"></div><span>Top-down sprite pass (replace placeholder icons)</span></li>
+        </ul>
+        <div class="gate"><strong>Human gate:</strong> Kaleb reviews visual polish and sprite quality; both test offline install flow.</div>
+      </div>
+    </div>
+
+    <!-- ── M5 ── -->
+    <div class="milestone-block" id="m5">
+      <div class="milestone-header">
+        <div>
+          <h3>M5 — Personal Release</h3>
+          <div class="est">0.5–1 day</div>
+          <div class="goal">Ship to static host, self-dogfood.</div>
+        </div>
+        <span class="badge pending">Pending</span>
+      </div>
+      <div class="milestone-body">
+        <ul class="tasks">
+          <li class="todo"><div class="icon"></div><span>Production build (<code>vite build</code>)</span></li>
+          <li class="todo"><div class="icon"></div><span>Deploy to chosen static host (GitHub Pages / Cloudflare Pages / Netlify)</span></li>
+          <li class="todo"><div class="icon"></div><span>Smoke-test all golden paths</span></li>
+          <li class="todo"><div class="icon"></div><span>Tag <code>v1.0.0</code></span></li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── Phase 2 ── -->
+  <section id="phase2">
+    <h2>Phase 2 — Post-MVP (not in scope)</h2>
+    <ul class="phase2-list">
+      <li>Optimizer mode</li>
+      <li>Diff view (compare two blueprints)</li>
+      <li>Collaborative editing (WebRTC / Yjs CRDT)</li>
+      <li>Mod support (community building packs via JSON manifest)</li>
+      <li>Island templates</li>
+      <li>Timeline mode (plan build order across eras)</li>
+    </ul>
+  </section>
+
+  <footer>Anno Planner · Personal use only · Keep in sync with <code>docs/ROADMAP.md</code></footer>
+
+</div>
+</body>
+</html>
