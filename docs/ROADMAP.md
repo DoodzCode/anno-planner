@@ -1,6 +1,6 @@
 # Anno Planner — Development Roadmap
 
-> Status updated: 2026-05-15
+> Status updated: 2026-05-30
 
 ## Status legend
 
@@ -19,7 +19,7 @@
 |---|---|---|---|---|
 | M0 | Spike | 1–2 | `[x]` | Both |
 | M1 | Core canvas | 4–6 | `[x]` | Kaleb (lead) |
-| M2 | Building catalog | 3–5 | `[ ]` | Ian (lead) |
+| M2 | Building catalog | 3–5 | `[x]` | Ian (lead) |
 | M3 | Math, library & export | 3–5 | `[ ]` | Ian (lead) |
 | M4 | PWA polish | 2–3 | `[ ]` | Both |
 | M5 | Personal release | 0.5–1 | `[ ]` | Both |
@@ -34,7 +34,7 @@
 
 - [x] Framework: React + Vite + TypeScript (decided 2026-05-29)
 - [x] Canvas renderer: Konva via react-konva (decided 2026-05-29)
-- [ ] Canonical building data source (Anno wiki / community dataset / manual)
+- [x] Canonical building data source — `resources/presets.json` (community layout tool dataset, v5.1, 2026-05-30)
 - [ ] Three-pane wireframe sketch
 
 **Tasks**
@@ -72,20 +72,20 @@
 
 ---
 
-## M2 — Building Catalog *(3–5 days)*
+## M2 — Building Catalog *(3–5 days)* `[x]` *(completed 2026-05-30)*
 
 **Goal:** Full Old World building set with palette and overlays.
 
 **Tasks**
 
-- [ ] Finalize building JSON schema
-- [ ] Ingest Old World buildings (residential, production, public)
-- [ ] Categorized, searchable building palette (left pane)
-- [ ] DLC badges on buildings
-- [ ] Influence overlay system (toggleable radii per type)
-- [ ] Overlay toggle bar at top of canvas
+- [x] Finalize building JSON schema (`src/types/domain.ts` — added `iconFile`, `workRadius`, `overlayType`, `group`)
+- [x] Ingest Old World buildings — 156 buildings (farmers → investors + harbor + all-worlds) extracted from `resources/presets.json` into `src/data/buildings-1800.json`
+- [x] Categorized, searchable building palette — tier filter tabs + live search + grouped by category
+- [x] DLC badges on buildings (Seat of Power, Docklands, Empire of the Skies, Seeds of Change)
+- [x] Influence overlay system — `src/state/overlayStore.ts`; 13 service buildings with overlay types (market, pub, church, fire, police, education, health, bank, culture, power)
+- [x] Overlay toggle bar at top of canvas — `src/components/OverlayBar.tsx`
 
-**Agent work:** bulk JSON catalog ingestion, icon wiring, palette component, overlay render logic.
+**Agent work:** bulk JSON catalog ingestion, palette component, overlay render logic.
 
 **Human gate:** Ian spot-checks 10% of building stats against the Anno 1800 wiki; Kaleb reviews palette UX.
 
