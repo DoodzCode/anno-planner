@@ -17,8 +17,8 @@
 
 | Milestone | Name | Est. days | Status | Owner |
 |---|---|---|---|---|
-| M0 | Spike | 1–2 | `[~]` | Both |
-| M1 | Core canvas | 4–6 | `[ ]` | Kaleb (lead) |
+| M0 | Spike | 1–2 | `[x]` | Both |
+| M1 | Core canvas | 4–6 | `[x]` | Kaleb (lead) |
 | M2 | Building catalog | 3–5 | `[ ]` | Ian (lead) |
 | M3 | Math, library & export | 3–5 | `[ ]` | Ian (lead) |
 | M4 | PWA polish | 2–3 | `[ ]` | Both |
@@ -41,7 +41,7 @@
 
 - [x] Scaffold Vite project with chosen framework
 - [x] Render a tile grid on screen
-- [ ] Place one hardcoded building on the grid
+- [x] Place one hardcoded building on the grid
 - [x] Record stack decision in `docs/`
 
 **Agent work:** scaffold the Vite skeleton; generate both React and Svelte prototypes for comparison if needed.
@@ -56,15 +56,15 @@
 
 **Tasks**
 
-- [ ] Pan and zoom (mouse wheel + drag)
-- [ ] Place building (click from palette)
-- [ ] Rotate building (R key)
-- [ ] Delete building (Del key)
-- [ ] Multi-select (shift-click, drag-box)
-- [ ] Snap-to-grid
-- [ ] Undo / redo (Ctrl+Z / Ctrl+Y) via Immer history
-- [ ] IndexedDB persistence (auto-save on change)
-- [ ] Basic keyboard shortcut set
+- [x] Pan and zoom (mouse wheel zoom-to-pointer + space/middle-drag pan)
+- [x] Place building (click from palette)
+- [x] Rotate building (R key)
+- [x] Delete building (Del key)
+- [x] Multi-select (shift-click + drag box-select)
+- [x] Snap-to-grid
+- [x] Undo / redo (Ctrl+Z / Ctrl+Y) via Immer history
+- [x] IndexedDB persistence (auto-save on change)
+- [x] Basic keyboard shortcut set (R, Del, Esc, Ctrl+Z/Y)
 
 **Agent work:** boilerplate stores, hotkey wiring, undo/redo middleware, Vitest unit tests for state mutations.
 
