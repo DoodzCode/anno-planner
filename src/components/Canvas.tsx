@@ -30,7 +30,11 @@ function boxesOverlap(a: Box, b: Box) {
   return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y
 }
 
-export default function Canvas() {
+interface CanvasProps {
+  onStageReady?: (stage: Konva.Stage) => void
+}
+
+export default function Canvas({ onStageReady }: CanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<Konva.Stage>(null)
   const [size, setSize] = useState({ w: 800, h: 600 })
@@ -74,6 +78,11 @@ export default function Canvas() {
     ro.observe(el)
     return () => ro.disconnect()
   }, [])
+
+  // Expose stage to parent for PNG export
+  useEffect(() => {
+    if (stageRef.current && onStageReady) onStageReady(stageRef.current)
+  })
 
   // Keyboard: all actions read from store via getState() to avoid stale closures
   useEffect(() => {

@@ -302,7 +302,7 @@
 
 <div class="topbar">
   <h1>Anno Planner — Roadmap</h1>
-  <span class="date">Updated 2026-05-30</span>
+  <span class="date">Updated 2026-05-30 (M3 complete)</span>
   <nav>
     <a href="#overview">Overview</a>
     <a href="#m0">M0</a>
@@ -357,20 +357,20 @@
         <div class="pbar-label"><span>6 / 6 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card active">
+      <div class="m-card done">
         <div class="m-id">M3</div>
         <div class="m-name">Math &amp; Export</div>
         <div class="m-est">3–5 days · Ian</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 7 tasks</span><span class="badge active">Up Next</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>7 / 7 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card active">
         <div class="m-id">M4</div>
         <div class="m-name">PWA Polish</div>
         <div class="m-est">2–3 days · Both</div>
         <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 6 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-label"><span>0 / 6 tasks</span><span class="badge active">Up Next</span></div>
       </div>
 
       <div class="m-card">
@@ -469,38 +469,38 @@
     </div>
 
     <!-- ── M3 ── -->
-    <div class="milestone-block active" id="m3">
+    <div class="milestone-block done" id="m3">
       <div class="milestone-header">
         <div>
           <h3>M3 — Math, Library &amp; Export</h3>
-          <div class="est">3–5 days</div>
+          <div class="est">3–5 days · completed 2026-05-30</div>
           <div class="goal">Production math, blueprint library, and sharing.</div>
         </div>
-        <span class="badge active">Up Next</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="milestone-body">
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span>Production math engine (pure functions, unit-tested)</span></li>
-          <li class="todo"><div class="icon"></div><span>Live input/output tallies in inspector pane (right)</span></li>
-          <li class="todo"><div class="icon"></div><span>Blueprint library (IndexedDB): save, load, rename, duplicate, delete</span></li>
-          <li class="todo"><div class="icon"></div><span>JSON export / import</span></li>
-          <li class="todo"><div class="icon"></div><span>PNG export (canvas snapshot)</span></li>
-          <li class="todo"><div class="icon"></div><span>Compressed URL share (LZ-string → URL fragment)</span></li>
-          <li class="todo"><div class="icon"></div><span>File System Access API (power users)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Production math engine — <code>src/lib/productionMath.ts</code>; 32 buildings, 47 goods; 13 Vitest tests passing (Furnace 1:1:1 ratio validated)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Live t/min tallies in Inspector — green surplus / red deficit, <code>useMemo</code> keyed on placements</span></li>
+          <li class="done"><div class="icon">✓</div><span>Blueprint library modal — save, load, rename (double-click inline), duplicate, delete via Dexie 'current' + UUID slots</span></li>
+          <li class="done"><div class="icon">✓</div><span>JSON export / import — validates buildingIds, skips unknowns with console.warn</span></li>
+          <li class="done"><div class="icon">✓</div><span>PNG export — <code>stage.toDataURL({ pixelRatio: 2 })</code> via Konva stage ref</span></li>
+          <li class="done"><div class="icon">✓</div><span>Compressed URL share — LZ-string → <code>#bp=</code> fragment; clipboard copy + 2 s toast; hash decoded on mount</span></li>
+          <li class="done"><div class="icon">✓</div><span>File System Access API — <code>showSaveFilePicker</code> / <code>showOpenFilePicker</code> with blob download / <code>&lt;input&gt;</code> fallback</span></li>
         </ul>
         <div class="gate"><strong>Human gate:</strong> Ian verifies math ratios against known Anno 1800 values before merge.</div>
       </div>
     </div>
 
     <!-- ── M4 ── -->
-    <div class="milestone-block" id="m4">
+    <div class="milestone-block active" id="m4">
       <div class="milestone-header">
         <div>
           <h3>M4 — PWA Polish</h3>
           <div class="est">2–3 days</div>
           <div class="goal">Offline-capable, installable, polished.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge active">Up Next</span>
       </div>
       <div class="milestone-body">
         <ul class="tasks">

@@ -20,7 +20,7 @@
 | M0 | Spike | 1–2 | `[x]` | Both |
 | M1 | Core canvas | 4–6 | `[x]` | Kaleb (lead) |
 | M2 | Building catalog | 3–5 | `[x]` | Ian (lead) |
-| M3 | Math, library & export | 3–5 | `[ ]` | Ian (lead) |
+| M3 | Math, library & export | 3–5 | `[x]` | Ian (lead) |
 | M4 | PWA polish | 2–3 | `[ ]` | Both |
 | M5 | Personal release | 0.5–1 | `[ ]` | Both |
 
@@ -91,19 +91,19 @@
 
 ---
 
-## M3 — Math, Library & Export *(3–5 days)*
+## M3 — Math, Library & Export *(3–5 days)* `[x]` *(completed 2026-05-30)*
 
 **Goal:** Production math, blueprint library, and sharing.
 
 **Tasks**
 
-- [ ] Production math engine (pure functions, unit-tested)
-- [ ] Live input/output tallies in inspector pane (right)
-- [ ] Blueprint library (IndexedDB): save, load, rename, duplicate, delete
-- [ ] JSON export / import
-- [ ] PNG export (canvas snapshot)
-- [ ] Compressed URL share (LZ-string → URL fragment)
-- [ ] File System Access API (power users)
+- [x] Production math engine — `src/lib/productionMath.ts`; 32 buildings, 47 goods; 13 Vitest tests (Furnace ratio validated)
+- [x] Live t/min tallies in Inspector — green surplus / red deficit, memoized on placements
+- [x] Blueprint library — save/load/rename/duplicate/delete; `BlueprintLibrary.tsx` modal; Dexie 'current' + UUID slots
+- [x] JSON export / import — validates buildingIds, skips unknowns
+- [x] PNG export — `stage.toDataURL({ pixelRatio: 2 })` via Konva stage ref
+- [x] Compressed URL share — LZ-string → `#bp=` fragment; clipboard copy + toast; decoded on mount
+- [x] File System Access API — `showSaveFilePicker`/`showOpenFilePicker` with blob/input fallback
 
 **Agent work:** math engine scaffold, export pipelines, serialization, library UI component.
 

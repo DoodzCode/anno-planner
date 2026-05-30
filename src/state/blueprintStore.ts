@@ -9,6 +9,7 @@ interface BlueprintState {
   placements: Placement[]
   selectedIds: string[]
   activeBuildingId: string | null
+  blueprintName: string
   past: Placement[][]
   future: Placement[][]
 
@@ -20,7 +21,8 @@ interface BlueprintState {
   setSelectedIds: (ids: string[]) => void
   clearSelection: () => void
   setActiveBuildingId: (id: string | null) => void
-  loadPlacements: (placements: Placement[]) => void
+  setBlueprintName: (name: string) => void
+  loadPlacements: (placements: Placement[], name?: string) => void
   undo: () => void
   redo: () => void
 }
@@ -36,6 +38,7 @@ export const useBlueprintStore = create<BlueprintState>()(
     placements: [],
     selectedIds: [],
     activeBuildingId: null,
+    blueprintName: 'Untitled Blueprint',
     past: [],
     future: [],
 
@@ -97,12 +100,16 @@ export const useBlueprintStore = create<BlueprintState>()(
     setActiveBuildingId: (id) =>
       set((state) => { state.activeBuildingId = id }),
 
-    loadPlacements: (placements) =>
+    setBlueprintName: (name) =>
+      set((state) => { state.blueprintName = name }),
+
+    loadPlacements: (placements, name) =>
       set((state) => {
         state.placements.splice(0, state.placements.length, ...placements)
         state.past.splice(0)
         state.future.splice(0)
         state.selectedIds = []
+        if (name !== undefined) state.blueprintName = name
       }),
 
     undo: () => {
