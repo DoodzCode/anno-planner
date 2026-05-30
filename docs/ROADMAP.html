@@ -302,7 +302,7 @@
 
 <div class="topbar">
   <h1>Anno Planner — Roadmap</h1>
-  <span class="date">Updated 2026-05-30 (M3 complete)</span>
+  <span class="date">Updated 2026-05-30 (M4 complete)</span>
   <nav>
     <a href="#overview">Overview</a>
     <a href="#m0">M0</a>
@@ -365,20 +365,20 @@
         <div class="pbar-label"><span>7 / 7 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card active">
+      <div class="m-card done">
         <div class="m-id">M4</div>
         <div class="m-name">PWA Polish</div>
         <div class="m-est">2–3 days · Both</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 6 tasks</span><span class="badge active">Up Next</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>6 / 6 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card active">
         <div class="m-id">M5</div>
         <div class="m-name">Personal Release</div>
         <div class="m-est">0.5–1 day · Both</div>
         <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 4 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-label"><span>0 / 4 tasks</span><span class="badge active">Up Next</span></div>
       </div>
 
     </div>
@@ -493,37 +493,37 @@
     </div>
 
     <!-- ── M4 ── -->
-    <div class="milestone-block active" id="m4">
+    <div class="milestone-block done" id="m4">
       <div class="milestone-header">
         <div>
           <h3>M4 — PWA Polish</h3>
-          <div class="est">2–3 days</div>
+          <div class="est">2–3 days · completed 2026-05-30</div>
           <div class="goal">Offline-capable, installable, polished.</div>
         </div>
-        <span class="badge active">Up Next</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="milestone-body">
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span>Workbox service worker (offline asset caching)</span></li>
-          <li class="todo"><div class="icon"></div><span>Installable PWA manifest</span></li>
-          <li class="todo"><div class="icon"></div><span>Dark mode + Anno-themed palette</span></li>
-          <li class="todo"><div class="icon"></div><span>First-run onboarding tutorial blueprint</span></li>
-          <li class="todo"><div class="icon"></div><span>Minimap for large islands</span></li>
-          <li class="todo"><div class="icon"></div><span>Top-down sprite pass (replace placeholder icons)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Workbox SW via <code>vite-plugin-pwa</code> — <code>registerType: autoUpdate</code>, caches all JS/CSS/HTML/SVG/JSON</span></li>
+          <li class="done"><div class="icon">✓</div><span>PWA manifest — <code>display: standalone</code>, SVG icons 192+512, theme/bg <code>#0a0a16</code></span></li>
+          <li class="done"><div class="icon">✓</div><span>Anno golden theme — CSS custom properties in <code>index.css</code>; <code>--accent: #c8a96e</code> replaces all blue/purple accents throughout <code>App.css</code></span></li>
+          <li class="done"><div class="icon">✓</div><span>First-run onboarding — <code>Onboarding.tsx</code> modal (localStorage flag); "Load tutorial layout" places 9-building Farmers chain</span></li>
+          <li class="done"><div class="icon">✓</div><span>Minimap — <code>Minimap.tsx</code> plain-canvas overlay (160×100 px) bottom-right of canvas; placements + viewport rectangle</span></li>
+          <li class="done"><div class="icon">✓</div><span>Sprite pass — category accent band on buildings, text shadow, Anno gold selection ring; <code>/public/icons/</code> ready for real sprites</span></li>
         </ul>
         <div class="gate"><strong>Human gate:</strong> Kaleb reviews visual polish and sprite quality; both test offline install flow.</div>
       </div>
     </div>
 
     <!-- ── M5 ── -->
-    <div class="milestone-block" id="m5">
+    <div class="milestone-block active" id="m5">
       <div class="milestone-header">
         <div>
           <h3>M5 — Personal Release</h3>
           <div class="est">0.5–1 day</div>
           <div class="goal">Ship to static host, self-dogfood.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge active">Up Next</span>
       </div>
       <div class="milestone-body">
         <ul class="tasks">
