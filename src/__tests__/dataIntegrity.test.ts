@@ -26,9 +26,11 @@ const catalogBuildings = buildings as { id: string; name: string }[]
 // ── Catalog integrity ──────────────────────────────────────
 
 describe('catalog buildings-1800.json', () => {
-  it.todo(
-    'has no duplicate building ids — known bug: logistic-02-warehouse-i-1010371 × 4 (Workers/Artisans/Engineers/Investors); fixed in Phase 4 consolidation',
-  )
+  it('has no duplicate building ids', () => {
+    const ids = catalogBuildings.map(b => b.id)
+    const dupes = ids.filter((id, i) => ids.indexOf(id) !== i)
+    expect(dupes).toHaveLength(0)
+  })
 
   it('has no buildings with missing required fields', () => {
     const missing = catalogBuildings.filter(

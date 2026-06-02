@@ -1,5 +1,6 @@
 import type Konva from 'konva'
 import type { Blueprint, Building } from '../types/domain'
+import { migratePlacements } from './migration'
 
 // ── Helpers ────────────────────────────────────────────────
 
@@ -43,9 +44,10 @@ export async function importJSON(
   }
 
   const raw = data as Blueprint
-  // Filter out placements that reference unknown buildings (forward-compatibility)
-  const validPlacements = (raw.placements ?? []).filter(p => buildingMap.has(p.buildingId))
-  const skipped = (raw.placements?.length ?? 0) - validPlacements.length
+  // Migrate legacy building ids before validating against current catalog
+  const migrated = migratePlacements(raw.placements ?? [])
+  const validPlacements = migrated.filter(p => buildingMap.has(p.buildingId))
+  const skipped = migrated.length - validPlacements.length
   if (skipped > 0) {
     console.warn(`importJSON: skipped ${skipped} placement(s) with unknown buildingId`)
   }

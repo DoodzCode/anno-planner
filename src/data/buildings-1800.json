@@ -1552,8 +1552,8 @@
     "overlayType": "market"
   },
   {
-    "id": "logistic-02-warehouse-i",
-    "name": "Small Warehouse",
+    "id": "logistic-02-warehouse-farmers",
+    "name": "Small Warehouse (Farmers)",
     "tier": "farmers",
     "footprint": {
       "w": 5,
@@ -1934,8 +1934,8 @@
     "group": "Military"
   },
   {
-    "id": "logistic-02-warehouse-i-1010371",
-    "name": "Small Warehouse",
+    "id": "logistic-02-warehouse-workers",
+    "name": "Small Warehouse (Workers)",
     "tier": "workers",
     "footprint": {
       "w": 5,
@@ -1947,8 +1947,8 @@
     "group": "General"
   },
   {
-    "id": "logistic-02-warehouse-i-1010371",
-    "name": "Small Warehouse",
+    "id": "logistic-02-warehouse-artisans",
+    "name": "Small Warehouse (Artisans)",
     "tier": "artisans",
     "footprint": {
       "w": 5,
@@ -1960,8 +1960,8 @@
     "group": "General"
   },
   {
-    "id": "logistic-02-warehouse-i-1010371",
-    "name": "Small Warehouse",
+    "id": "logistic-02-warehouse-engineers",
+    "name": "Small Warehouse (Engineers)",
     "tier": "engineers",
     "footprint": {
       "w": 5,
@@ -1973,8 +1973,8 @@
     "group": "General"
   },
   {
-    "id": "logistic-02-warehouse-i-1010371",
-    "name": "Small Warehouse",
+    "id": "logistic-02-warehouse-investors",
+    "name": "Small Warehouse (Investors)",
     "tier": "investors",
     "footprint": {
       "w": 5,
