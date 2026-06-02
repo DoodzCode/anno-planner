@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useBlueprintStore } from '../state/blueprintStore'
 import { BUILDING_MAP } from '../data/catalog'
 import { CHAIN_NAME_MAP, CHAIN_BUILDING_MAP, GOODS_MAP } from '../data/chainNameMap'
-import { aggregateFlows, goodsTallies } from '../lib/productionMath'
+import { aggregateFlows, goodsTallies, workforceTotals } from '../lib/productionMath'
 import { effectiveFootprint } from '../lib/grid'
 
 export default function Inspector() {
@@ -31,6 +31,12 @@ export default function Inspector() {
     return aggregateFlows(placements, resolve)
   }, [placements])
 
+  const TIER_LABELS: Record<string, string> = {
+    farmers: 'Farmers', workers: 'Workers', artisans: 'Artisans',
+    engineers: 'Engineers', investors: 'Investors',
+    jornaleros: 'Jornaleros', obreros: 'Obreros',
+  }
+
   const tallyEntries = useMemo(() => {
     const goods = goodsTallies(allFlows)
     const entries: Array<{ goodId: string; name: string; produced: number; consumed: number; net: number }> = []
@@ -40,6 +46,14 @@ export default function Inspector() {
       entries.push({ goodId, name: good?.name ?? goodId, ...tally })
     }
     return entries.sort((a, b) => b.net - a.net)
+  }, [allFlows])
+
+  const workforceEntries = useMemo(() => {
+    const wf = workforceTotals(allFlows)
+    return [...wf.entries()]
+      .filter(([, t]) => t.consumed > 0)
+      .map(([tier, t]) => ({ tier, consumed: t.consumed }))
+      .sort((a, b) => a.tier.localeCompare(b.tier))
   }, [allFlows])
 
   return (
@@ -101,6 +115,19 @@ export default function Inspector() {
               >
                 {net > 0 ? '+' : ''}{net.toFixed(2)}
               </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Workforce panel */}
+      {workforceEntries.length > 0 && (
+        <div className="inspector-workforce">
+          <h2>Workforce</h2>
+          {workforceEntries.map(({ tier, consumed }) => (
+            <div key={tier} className="tally-row">
+              <span className="tally-good">{TIER_LABELS[tier] ?? tier}</span>
+              <span className="tally-col tally-col--consumed">{consumed.toFixed(0)}</span>
             </div>
           ))}
         </div>

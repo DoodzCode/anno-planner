@@ -409,7 +409,10 @@
 
 .inspector-hint { margin-top: 4px; font-size: 0.65rem; color: var(--text-muted); opacity: 0.6; }
 
-.inspector-tallies { display: flex; flex-direction: column; gap: 3px; }
+.inspector-tallies,
+.inspector-workforce { display: flex; flex-direction: column; gap: 3px; }
+
+.inspector-workforce .tally-row { grid-template-columns: 1fr 44px; }
 
 .tally-header-row,
 .tally-row {

@@ -2,8 +2,23 @@ import { describe, it, expect } from 'vitest'
 import buildings from '../data/buildings-1800.json'
 import rawChains from '../data/production-chains.json'
 import { CHAIN_NAME_MAP, CHAIN_BUILDING_MAP, GOODS_MAP } from '../data/chainNameMap'
+import type { PopulationTier } from '../types/productionChain'
 
-type ChainData = { goods: { id: string }[]; buildings: { id: string; inputs: { good: string }[]; output: { good: string } }[] }
+const VALID_TIERS = new Set<string>([
+  'farmers', 'workers', 'artisans', 'engineers', 'investors',
+  'jornaleros', 'obreros', 'scholars', 'shepherds', 'explorers', 'elders',
+] satisfies PopulationTier[])
+
+type WorkforceEntry = { tier: string; count: number }
+type ChainData = {
+  goods: { id: string }[]
+  buildings: {
+    id: string
+    inputs: { good: string }[]
+    output: { good: string }
+    workforce?: WorkforceEntry[]
+  }[]
+}
 const chains = rawChains as ChainData
 
 const catalogBuildings = buildings as { id: string; name: string }[]
@@ -55,6 +70,41 @@ describe('production-chains.json', () => {
       }
     }
     expect(missing).toHaveLength(0)
+  })
+})
+
+// ── Workforce integrity ────────────────────────────────────
+
+describe('production-chains.json workforce', () => {
+  it('every chain building has a workforce array', () => {
+    const missing = chains.buildings
+      .filter(b => !Array.isArray(b.workforce))
+      .map(b => b.id)
+    expect(missing).toHaveLength(0)
+  })
+
+  it('every workforce tier is a valid PopulationTier', () => {
+    const invalid: string[] = []
+    for (const b of chains.buildings) {
+      for (const wf of b.workforce ?? []) {
+        if (!VALID_TIERS.has(wf.tier)) {
+          invalid.push(`${b.id} → "${wf.tier}"`)
+        }
+      }
+    }
+    expect(invalid).toHaveLength(0)
+  })
+
+  it('every workforce count is a positive integer', () => {
+    const bad: string[] = []
+    for (const b of chains.buildings) {
+      for (const wf of b.workforce ?? []) {
+        if (!Number.isInteger(wf.count) || wf.count <= 0) {
+          bad.push(`${b.id} → count ${wf.count}`)
+        }
+      }
+    }
+    expect(bad).toHaveLength(0)
   })
 })
 
