@@ -1,6 +1,6 @@
 # Anno Planner — Development Roadmap
 
-> Status updated: 2026-06-02
+> Status updated: 2026-06-02 (M6 Phase 4 complete)
 
 ## Status legend
 
@@ -23,7 +23,7 @@
 | M3 | Math, library & export | 3–5 | `[x]` | Ian (lead) |
 | M4 | PWA polish | 2–3 | `[x]` | Both |
 | M5 | Personal release | 0.5–1 | `[x]` | Both |
-| M6 | Engine & hardening | Ongoing | `[~]` | frank |
+| M6 | Engine & hardening | Ongoing | `[~]` (5/7 phases) | frank |
 
 ---
 
@@ -175,16 +175,15 @@ Fixes #1 (workforce calculation).
 
 **Human gate:** Workforce numbers for artisans/engineers buildings (marked `verify: true` in `production-chains.json`) should be cross-checked against the Anno 1800 wiki before Phase 4 ships.
 
-### Phase 4 — Building consolidation `[ ]`
+### Phase 4 — Building consolidation `[x]` *(commit 668855a)*
 
-Fixes #4 (duplicate-id bug; Small Warehouse × 5 collapses to one family).
+Fixes #4 (duplicate-id bug; Small Warehouse tier variants now have unique ids).
 
-- [ ] Introduce family/variant model (`BuildingVariant`, updated `Building`, updated `Placement`) in `src/types/domain.ts`
-- [ ] Convert tier-unlock duplicates (Small Warehouse) to single families; fix the `logistic-02-warehouse-i-1010371` × 4 duplicate-id bug
-- [ ] `VARIANT_MAP` + `LEGACY_ID_MAP` for O(1) lookups and migration
-- [ ] Migration layer: `migratePlacements(placements, fromVersion)` applied at IndexedDB load (Dexie v1→v2 upgrade), JSON import, and share-URL decode
-- [ ] Palette renders families once with a variant selector; Inspector shows variant switch for selected placement
-- [ ] Bump `schemaVersion` and Dexie store version; round-trip + integrity tests; un-skip the duplicate-id `.todo` test
+- [x] Assign unique ids to all 5 Small Warehouse tier entries in `buildings-1800.json`; add tier labels to names
+- [x] `LEGACY_ID_MAP` + `migratePlacements()` in `src/lib/migration.ts` — pure, idempotent, drops nothing
+- [x] Migration wired at all three load paths: Dexie v1→v2 upgrade, `importJSON`, `decodeShareURL`
+- [x] Duplicate-id integrity test un-skipped and passing
+- [x] 9 migration tests; `migration.ts` at 100% coverage; 47 total tests green
 
 ### Phase 5 — Resizable panes `[ ]`
 

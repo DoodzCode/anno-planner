@@ -302,7 +302,7 @@
 
 <div class="topbar">
   <h1>Anno Planner — Roadmap</h1>
-  <span class="date">Updated 2026-06-02 (M6 Phase 3 complete)</span>
+  <span class="date">Updated 2026-06-02 (M6 Phase 4 complete)</span>
   <nav>
     <a href="#overview">Overview</a>
     <a href="#m0">M0</a>
@@ -386,8 +386,8 @@
         <div class="m-id">M6</div>
         <div class="m-name">Engine &amp; Hardening</div>
         <div class="m-est">Ongoing · frank</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:57%"></div></div>
-        <div class="pbar-label"><span>4 / 7 phases</span><span class="badge active">In Progress</span></div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:71%"></div></div>
+        <div class="pbar-label"><span>5 / 7 phases</span><span class="badge active">In Progress</span></div>
       </div>
 
     </div>
@@ -585,12 +585,12 @@
           <li class="done"><div class="icon">✓</div><span>Inspector Workforce panel — required headcount per tier, workforce-tier integrity tests green</span></li>
         </ul>
 
-        <div class="sub-label">Phase 4 — Building consolidation (fixes duplicate-id bug) <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>
+        <div class="sub-label">Phase 4 — Building consolidation <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span>Introduce family/variant model in <code>domain.ts</code>; convert tier-unlock duplicates (Small Warehouse)</span></li>
-          <li class="todo"><div class="icon"></div><span>Migration layer: <code>migratePlacements()</code> applied at IndexedDB load, JSON import, and share-URL decode</span></li>
-          <li class="todo"><div class="icon"></div><span>Palette renders families once with variant selector; Inspector shows variant switch</span></li>
-          <li class="todo"><div class="icon"></div><span>Round-trip + integrity tests; un-skip the duplicate-id <code>.todo</code> test</span></li>
+          <li class="done"><div class="icon">✓</div><span>Assign unique ids to all 5 Small Warehouse tier entries in <code>buildings-1800.json</code>; add tier labels to names</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>LEGACY_ID_MAP</code> + <code>migratePlacements()</code> in <code>src/lib/migration.ts</code> — pure, idempotent, drops nothing</span></li>
+          <li class="done"><div class="icon">✓</div><span>Migration wired at all three load paths: Dexie v1→v2 upgrade, <code>importJSON</code>, <code>decodeShareURL</code></span></li>
+          <li class="done"><div class="icon">✓</div><span>Duplicate-id integrity test un-skipped; 9 migration tests; <code>migration.ts</code> at 100% coverage</span></li>
         </ul>
 
         <div class="sub-label">Phase 5 — Resizable panes <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>
