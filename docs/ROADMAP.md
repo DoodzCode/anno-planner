@@ -1,6 +1,6 @@
 # Anno Planner — Development Roadmap
 
-> Status updated: 2026-06-01
+> Status updated: 2026-06-02
 
 ## Status legend
 
@@ -23,10 +23,11 @@
 | M3 | Math, library & export | 3–5 | `[x]` | Ian (lead) |
 | M4 | PWA polish | 2–3 | `[x]` | Both |
 | M5 | Personal release | 0.5–1 | `[x]` | Both |
+| M6 | Engine & hardening | Ongoing | `[~]` | frank |
 
 ---
 
-## M0 — Spike *(1–2 days)*
+## M0 — Spike *(1–2 days)* `[x]`
 
 **Goal:** Pick stack, render a grid, place one building.
 
@@ -44,13 +45,11 @@
 - [x] Place one hardcoded building on the grid
 - [x] Record stack decision in `docs/`
 
-**Agent work:** scaffold the Vite skeleton; generate both React and Svelte prototypes for comparison if needed.
-
 **Human gate:** Kaleb + Ian evaluate feel, pick stack, update CLAUDE.md.
 
 ---
 
-## M1 — Core Canvas *(4–6 days)*
+## M1 — Core Canvas *(4–6 days)* `[x]`
 
 **Goal:** Fully interactive canvas with persistence.
 
@@ -65,8 +64,6 @@
 - [x] Undo / redo (Ctrl+Z / Ctrl+Y) via Immer history
 - [x] IndexedDB persistence (auto-save on change)
 - [x] Basic keyboard shortcut set (R, Del, Esc, Ctrl+Z/Y)
-
-**Agent work:** boilerplate stores, hotkey wiring, undo/redo middleware, Vitest unit tests for state mutations.
 
 **Human gate:** Kaleb reviews canvas feel and snap accuracy before merge to `dev`.
 
@@ -84,8 +81,6 @@
 - [x] DLC badges on buildings (Seat of Power, Docklands, Empire of the Skies, Seeds of Change)
 - [x] Influence overlay system — `src/state/overlayStore.ts`; 13 service buildings with overlay types (market, pub, church, fire, police, education, health, bank, culture, power)
 - [x] Overlay toggle bar at top of canvas — `src/components/OverlayBar.tsx`
-
-**Agent work:** bulk JSON catalog ingestion, palette component, overlay render logic.
 
 **Human gate:** Ian spot-checks 10% of building stats against the Anno 1800 wiki; Kaleb reviews palette UX.
 
@@ -105,8 +100,6 @@
 - [x] Compressed URL share — LZ-string → `#bp=` fragment; clipboard copy + toast; decoded on mount
 - [x] File System Access API — `showSaveFilePicker`/`showOpenFilePicker` with blob/input fallback
 
-**Agent work:** math engine scaffold, export pipelines, serialization, library UI component.
-
 **Human gate:** Ian verifies math ratios against known Anno 1800 values before merge.
 
 ---
@@ -124,8 +117,6 @@
 - [x] Minimap — `Minimap.tsx` plain-canvas overlay (160×100) in canvas bottom-right; shows placements + viewport rect
 - [x] Sprite pass — category accent band, shadow on labels, Anno gold selection highlight; `/public/icons/` ready for real sprites
 
-**Agent work:** service worker config, manifest, tutorial blueprint scaffolding.
-
 **Human gate:** Kaleb reviews visual polish and sprite quality; both test offline install flow.
 
 ---
@@ -137,9 +128,78 @@
 **Tasks**
 
 - [x] Production build (`vite build`)
-- [x] Deploy to chosen static host — Netlify (auto-deploy on push to `main`)
-- [ ] Smoke-test all golden paths
-- [ ] Tag `v1.0.0`
+- [x] Deploy to Netlify — `netlify.toml`; auto-deploy on push to `main`
+- [x] Smoke-test all golden paths
+- [x] Personal release marked complete; `.claude/` guarded from git
+
+---
+
+## M6 — Engine & Hardening `[~]` *(started 2026-06-02)*
+
+**Goal:** Workforce calculation, data gaps, building consolidation, resizable panes, and full test coverage.
+
+**Scope:** Workforce (#1), Missing outputs — Red Pepper / Cattle (#2), Flour Mill grain display (#3), Building consolidation (#4), Unit testing (#5), Resizable panes (#6).
+
+### Phase 0 — Test & data foundation `[x]` *(commit 5480719)*
+
+- [x] Add `@vitest/coverage-v8`; wire `test:run` and `test:coverage` scripts; set coverage gate for `src/lib/**`
+- [x] Add `jsdom` + `@testing-library/react` for component tests; split Vitest config (node vs jsdom environments)
+- [x] Data-integrity test suite — no duplicate ids, every chain mapping resolves, every good and input/output exists
+- [x] CI wired: `tsc -b` → `test:run` → `build`
+
+### Phase 1 — Generalize the engine `[x]` *(commit 5480719)*
+
+- [x] Introduce `ResourceFlow` / `buildingFlows` / `aggregateFlows` — unified signed flow model (`good:` and `workforce:` namespaced ids)
+- [x] `goodsTallies` and `workforceTotals` convenience selectors
+- [x] Re-express `computeTallies` on top of `aggregateFlows`; public API backward-compatible
+- [x] `productionMath.ts` at 100% line/branch coverage
+
+### Phase 2 — Fill data gaps `[x]` *(commit 5480719)*
+
+Fixes #2 (Red Pepper / Cattle) and #3 (Flour Mill grain display).
+
+- [x] Add chain rows + id-based mappings for Red Pepper Farm and Cattle Farm (New World tier, Artisans)
+- [x] Inspector updated to show produced / consumed / net per good — Flour Mill grain consumption now visible even when net-balanced
+- [x] Data-driven tests: pepper output, cattle output, flour-mill grain consumption, mixed blueprint
+
+### Phase 3 — Workforce `[x]` *(commit 6802272)*
+
+Fixes #1 (workforce calculation).
+
+- [x] `WorkforceRequirement[]` schema added to `ChainBuilding` in `productionChain.ts`
+- [x] `buildingFlows` emits workforce flows as negative demand; `aggregateFlows` totals by tier
+- [x] All 35 production buildings populated with workforce data in `production-chains.json`
+- [x] Inspector Workforce panel — required headcount per tier, only shown when `consumed > 0`
+- [x] Data-integrity test covers workforce tier validity and positive counts
+- [x] 37 tests passing; `productionMath.ts` stays at 100% coverage
+
+**Human gate:** Workforce numbers for artisans/engineers buildings (marked `verify: true` in `production-chains.json`) should be cross-checked against the Anno 1800 wiki before Phase 4 ships.
+
+### Phase 4 — Building consolidation `[ ]`
+
+Fixes #4 (duplicate-id bug; Small Warehouse × 5 collapses to one family).
+
+- [ ] Introduce family/variant model (`BuildingVariant`, updated `Building`, updated `Placement`) in `src/types/domain.ts`
+- [ ] Convert tier-unlock duplicates (Small Warehouse) to single families; fix the `logistic-02-warehouse-i-1010371` × 4 duplicate-id bug
+- [ ] `VARIANT_MAP` + `LEGACY_ID_MAP` for O(1) lookups and migration
+- [ ] Migration layer: `migratePlacements(placements, fromVersion)` applied at IndexedDB load (Dexie v1→v2 upgrade), JSON import, and share-URL decode
+- [ ] Palette renders families once with a variant selector; Inspector shows variant switch for selected placement
+- [ ] Bump `schemaVersion` and Dexie store version; round-trip + integrity tests; un-skip the duplicate-id `.todo` test
+
+### Phase 5 — Resizable panes `[ ]`
+
+Fixes #6 (hard-coded 3-column grid in `App.css`).
+
+- [ ] State-driven CSS grid widths with draggable gutters; min/max constraints + proportional auto-adjust on window resize
+- [ ] `localStorage` persistence for `{left, right}` column widths with viewport clamping on restore
+- [ ] Konva stage re-measures on pane resize via `ResizeObserver` — canvas never clips
+- [ ] Unit tests for `redistribute()` math; Playwright drag/persist/reset E2E
+
+### Phase 6 — Hardening `[ ]`
+
+- [ ] Playwright E2E: place → compute → save → reload → migrate golden path
+- [ ] Enforce coverage gate in CI; PWA cache bump for data changes
+- [ ] Update `CLAUDE.md` / `CONTRIBUTING.md` / docs to reflect M6 completion
 
 ---
 
