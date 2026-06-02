@@ -411,13 +411,23 @@
 
 .inspector-tallies { display: flex; flex-direction: column; gap: 3px; }
 
+.tally-header-row,
 .tally-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 44px 44px 44px;
   align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
+  gap: 2px;
+  font-size: 0.68rem;
   padding: 1px 0;
+}
+
+.tally-header-row {
+  color: var(--text-muted);
+  opacity: 0.6;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
 }
 
 .tally-good {
@@ -428,7 +438,15 @@
   text-overflow: ellipsis;
 }
 
-.tally-net { font-size: 0.7rem; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.tally-col {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.tally-col--produced { color: #4caf7d; }
+.tally-col--consumed { color: #e05c5c; }
+.tally-col--net      { font-weight: 600; }
 
 .inspector-stats {
   margin-top: auto;

@@ -35,6 +35,8 @@ const NAME_TO_CHAIN_ID: Record<string, string> = {
   'Brewery':               'brewery',
   'Sailmakers':            'sailmakers',
   // Artisans tier
+  'Cattle Farm':           'cattle_farm',
+  'Red Pepper Farm':       'bell_pepper_farm',
   'Artisanal Kitchen':     'artisanal_kitchen',
   'Cannery':               'cannery',
   'Hunting Cabin':         'hunting_cabin',

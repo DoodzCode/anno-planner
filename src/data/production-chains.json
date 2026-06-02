@@ -49,7 +49,9 @@
     { "id": "light_bulbs", "name": "Light Bulbs", "category": "goods" },
     { "id": "caoutchouc", "name": "Caoutchouc", "category": "intermediate" },
     { "id": "penny_farthings", "name": "Penny Farthings", "category": "goods" },
-    { "id": "steam_motors", "name": "Steam Motors", "category": "intermediate" }
+    { "id": "steam_motors", "name": "Steam Motors", "category": "intermediate" },
+    { "id": "red_peppers", "name": "Red Peppers", "category": "crop" },
+    { "id": "cattle", "name": "Cattle", "category": "livestock" }
   ],
   "buildings": [
     {
@@ -179,6 +181,18 @@
       "id": "sailmakers", "name": "Sailmakers", "region": "Old World", "tier": "Workers", "category": "factory",
       "requiresElectricity": false, "baseCycleSeconds": 30, "verify": true,
       "inputs": [ { "good": "wool", "perMin": 2 } ], "output": { "good": "sails", "perMin": 2 }, "outputPerMin": 2
+    },
+    {
+      "id": "cattle_farm", "name": "Cattle Farm", "region": "Old World", "tier": "Artisans", "category": "farm",
+      "requiresElectricity": false, "baseCycleSeconds": 60, "verify": true,
+      "inputs": [], "output": { "good": "cattle", "perMin": 1 }, "outputPerMin": 1,
+      "note": "1 Cattle Farm per 2 Artisanal Kitchens (artisanal_kitchen consumes 0.5 cattle/min)"
+    },
+    {
+      "id": "bell_pepper_farm", "name": "Red Pepper Farm", "region": "Old World", "tier": "Artisans", "category": "farm",
+      "requiresElectricity": false, "baseCycleSeconds": 60, "verify": true,
+      "inputs": [], "output": { "good": "red_peppers", "perMin": 1 }, "outputPerMin": 1,
+      "note": "1 Red Pepper Farm per 2 Artisanal Kitchens (artisanal_kitchen consumes 0.5 red_peppers/min)"
     },
     {
       "id": "artisanal_kitchen", "name": "Artisanal Kitchen", "region": "Old World", "tier": "Artisans", "category": "factory",

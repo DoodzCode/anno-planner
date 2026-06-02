@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useBlueprintStore } from '../state/blueprintStore'
 import { BUILDING_MAP } from '../data/catalog'
 import { CHAIN_NAME_MAP, CHAIN_BUILDING_MAP, GOODS_MAP } from '../data/chainNameMap'
-import { computeTallies } from '../lib/productionMath'
+import { aggregateFlows, goodsTallies } from '../lib/productionMath'
 import { effectiveFootprint } from '../lib/grid'
 
 export default function Inspector() {
@@ -18,21 +18,29 @@ export default function Inspector() {
   const building = single ? BUILDING_MAP.get(single.buildingId) : undefined
 
   // Production tallies — recompute only when placements change
-  const tallies = useMemo(
-    () => computeTallies(placements, BUILDING_MAP, CHAIN_NAME_MAP, CHAIN_BUILDING_MAP),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [placements.length, placements.map(p => p.id).join(',')],
-  )
+  const allFlows = useMemo(() => {
+    const resolve = (p: typeof placements[number]) => {
+      const cat = BUILDING_MAP.get(p.buildingId)
+      if (!cat) return null
+      const chainId = CHAIN_NAME_MAP.get(cat.name)
+      if (!chainId) return null
+      const chain = CHAIN_BUILDING_MAP.get(chainId)
+      if (!chain) return null
+      return { chain, ctx: {} }
+    }
+    return aggregateFlows(placements, resolve)
+  }, [placements])
 
   const tallyEntries = useMemo(() => {
-    const entries: Array<{ goodId: string; name: string; net: number }> = []
-    for (const [goodId, tally] of tallies) {
+    const goods = goodsTallies(allFlows)
+    const entries: Array<{ goodId: string; name: string; produced: number; consumed: number; net: number }> = []
+    for (const [goodId, tally] of goods) {
       if (tally.produced === 0 && tally.consumed === 0) continue
       const good = GOODS_MAP.get(goodId)
-      entries.push({ goodId, name: good?.name ?? goodId, net: tally.net })
+      entries.push({ goodId, name: good?.name ?? goodId, ...tally })
     }
     return entries.sort((a, b) => b.net - a.net)
-  }, [tallies])
+  }, [allFlows])
 
   return (
     <aside className="inspector">
@@ -72,12 +80,24 @@ export default function Inspector() {
       {tallyEntries.length > 0 && (
         <div className="inspector-tallies">
           <h2>Production</h2>
-          {tallyEntries.map(({ goodId, name, net }) => (
+          <div className="tally-header-row">
+            <span className="tally-good" />
+            <span className="tally-col tally-col--produced">↑ Prod</span>
+            <span className="tally-col tally-col--consumed">↓ Cons</span>
+            <span className="tally-col tally-col--net">Net</span>
+          </div>
+          {tallyEntries.map(({ goodId, name, produced, consumed, net }) => (
             <div key={goodId} className="tally-row">
-              <span className="tally-good">{name}</span>
+              <span className="tally-good" title={goodId}>{name}</span>
+              <span className="tally-col tally-col--produced">
+                {produced > 0 ? `+${produced.toFixed(2)}` : '—'}
+              </span>
+              <span className="tally-col tally-col--consumed">
+                {consumed > 0 ? `−${consumed.toFixed(2)}` : '—'}
+              </span>
               <span
-                className="tally-net"
-                style={{ color: net > 0 ? '#4caf7d' : net < 0 ? '#e05c5c' : '#6a6a90' }}
+                className="tally-col tally-col--net"
+                style={{ color: net > 0.005 ? '#4caf7d' : net < -0.005 ? '#e05c5c' : '#6a6a90' }}
               >
                 {net > 0 ? '+' : ''}{net.toFixed(2)}
               </span>
