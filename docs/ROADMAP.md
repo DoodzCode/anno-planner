@@ -1,6 +1,6 @@
 # Anno Planner — Development Roadmap
 
-> Status updated: 2026-05-30
+> Status updated: 2026-06-01
 
 ## Status legend
 
@@ -22,7 +22,7 @@
 | M2 | Building catalog | 3–5 | `[x]` | Ian (lead) |
 | M3 | Math, library & export | 3–5 | `[x]` | Ian (lead) |
 | M4 | PWA polish | 2–3 | `[x]` | Both |
-| M5 | Personal release | 0.5–1 | `[ ]` | Both |
+| M5 | Personal release | 0.5–1 | `[x]` | Both |
 
 ---
 
@@ -130,14 +130,14 @@
 
 ---
 
-## M5 — Personal Release *(0.5–1 day)*
+## M5 — Personal Release *(0.5–1 day)* `[x]` *(completed 2026-06-01)*
 
 **Goal:** Ship to static host, self-dogfood.
 
 **Tasks**
 
-- [ ] Production build (`vite build`)
-- [ ] Deploy to chosen static host (GitHub Pages / Cloudflare Pages / Netlify)
+- [x] Production build (`vite build`)
+- [x] Deploy to chosen static host — Netlify (auto-deploy on push to `main`)
 - [ ] Smoke-test all golden paths
 - [ ] Tag `v1.0.0`
 
