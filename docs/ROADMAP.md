@@ -1,6 +1,6 @@
 # Anno Planner — Development Roadmap
 
-> Status updated: 2026-06-03 (M6 Phase 5 complete)
+> Status updated: 2026-06-03 (M6 Phase 5 complete; M4-B Phases 1+2 complete)
 
 ## Status legend
 
@@ -24,6 +24,7 @@
 | M4 | PWA polish | 2–3 | `[x]` | Both |
 | M5 | Personal release | 0.5–1 | `[x]` | Both |
 | M6 | Engine & hardening | Ongoing | `[~]` (6/7 phases) | frank |
+| M4-B | Data model & consolidation *(side quest)* | Ongoing | `[~]` (2/5 phases) | Clyde |
 
 ---
 
@@ -200,6 +201,53 @@ Fixes #6 (hard-coded 3-column grid in `App.css`).
 - [ ] Playwright E2E: place → compute → save → reload → migrate golden path
 - [ ] Enforce coverage gate in CI; PWA cache bump for data changes
 - [ ] Update `CLAUDE.md` / `CONTRIBUTING.md` / docs to reflect M6 completion
+
+---
+
+## M4-B — Data Model & Consolidation *(side quest)* `[~]` *(started 2026-06-03)*
+
+**Goal:** Replace flat `Building` catalog with `BuildingFamily` / `BuildingVariant` model. Merge production chain data into unified `building-catalog.json`. Enable variant-selector palette UX.
+
+**Branch:** `m4-b` · Full detail: `docs/M4B-PROGRESS.html`
+
+### Phase 1 — Schema redesign `[x]` *(commit c279259)*
+
+- [x] `domain.ts` — `BuildingCategory`, `Region`, `ProductionStats`, `BuildingVariant`, `BuildingFamily` types; `Building` kept as `@deprecated`
+- [x] `categoryColors.ts` — single `Record<BuildingCategory, string>` color map
+- [x] `catalog.ts` — `FAMILIES`, `FAMILY_MAP`, `VARIANT_MAP`, `FAMILY_CATEGORIES`, `getBuilding()` bridge
+- [x] `building-catalog.json` — empty stub; TypeScript build never breaks
+- [x] 7 code-review findings fixed (footprint field alignment, outputPerMin dropped, CATEGORIES deprecated)
+- [x] `tsc` clean · 47 / 47 tests green
+
+### Phase 2 — Catalog build `[x]` *(commit f4a8394)*
+
+- [x] `scripts/build-catalog.ts` — 5-phase pipeline: audit → categorise → group → merge → validate
+- [x] `building-catalog.json` — 133 families, 156 variants (all legacy ids preserved), 34 with production stats
+- [x] `goods.json` — 49 goods extracted from production-chains archive
+- [x] `productionMath.ts` — `variantToChainBuilding()` adapter; `computeTallies` checks `VARIANT_MAP` first
+- [x] `Inspector.tsx` — chain lookup repointed to `VARIANT_MAP` + `goods.json`
+- [x] `dataIntegrity.test.ts` — rewritten against `building-catalog.json` + `goods.json`
+- [x] Source files archived in `src/data/archive/`; `tsc` clean · 47 / 47 tests green
+
+### Phase 3 — Component integration `[ ]`
+
+- [ ] `Palette.tsx` — use `FAMILIES`; group by `BuildingCategory`; replace hard-coded `CATEGORY_ORDER`
+- [ ] `Canvas.tsx` + `Minimap.tsx` — switch to `getBuilding()`; replace `building.color` with `categoryColors` lookup
+- [ ] **Human gate:** Kaleb reviews canvas/palette rendering before merge to `dev`
+
+### Phase 4 — Variant selector UI `[ ]`
+
+- [ ] Palette shows one card per family; variant dropdown for families with `variants.length > 1`
+- [ ] `selectedVariantId: Record<familyId, variantId>` state; persisted to localStorage
+- [ ] Quick-select tier tabs for residences and warehouses
+- [ ] **Human gate:** Ian + Kaleb review UX before merge
+
+### Phase 5 — Finish & merge `[ ]`
+
+- [ ] Wire `categoryColors` to all render components (replace `building.color`)
+- [ ] Remove `BUILDINGS` back-compat array once all consumers use `VARIANT_MAP` / `FAMILY_MAP`
+- [ ] Update `ROADMAP.md` + `ROADMAP.html` to mark M4-B complete
+- [ ] Open PR: `m4-b` → `dev`; both humans review before merge
 
 ---
 
