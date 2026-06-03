@@ -4,7 +4,6 @@ import { useBlueprintStore } from '../state/blueprintStore'
 import { TILE_PX } from '../lib/grid'
 
 const PREVIEW_SCALE = 0.4
-const MAX_PREVIEW = 32
 const MIN_PREVIEW = 10
 
 const DLC_COLOR: Record<string, string> = {
