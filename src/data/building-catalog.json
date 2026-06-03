@@ -1,1 +1,3625 @@
-[]
+[
+  {
+    "id": "1-old-world-residence",
+    "name": "Residence",
+    "category": "residence",
+    "region": "old_world",
+    "defaultVariantId": "residence-old-world",
+    "variants": [
+      {
+        "id": "residence-old-world",
+        "name": "Farmer Residence",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_resident.png",
+        "tier": "farmers"
+      },
+      {
+        "id": "residence-tier02",
+        "name": "Worker Residence",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 1,
+        "iconFile": "A7_resident.png",
+        "tier": "workers"
+      },
+      {
+        "id": "residence-tier03",
+        "name": "Artisan Residence",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 2,
+        "iconFile": "A7_resident.png",
+        "tier": "artisans"
+      },
+      {
+        "id": "residence-tier04",
+        "name": "Engineer Residence",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 3,
+        "iconFile": "A7_resident.png",
+        "tier": "engineers"
+      },
+      {
+        "id": "residence-tier05",
+        "name": "Investor Residence",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 4,
+        "iconFile": "A7_resident.png",
+        "tier": "investors"
+      },
+      {
+        "id": "residence-tier05b",
+        "name": "Scholar Residence",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 5,
+        "iconFile": "A7_residence_scholars.png",
+        "tier": "scholars"
+      }
+    ]
+  },
+  {
+    "id": "skyscraper",
+    "name": "Skyscraper",
+    "category": "residence",
+    "region": "old_world",
+    "defaultVariantId": "a7-residence-skyscraper-4lvl1",
+    "variants": [
+      {
+        "id": "a7-residence-skyscraper-4lvl1",
+        "name": "Skyscraper (T4 I)",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_dlc_high_life_256.png",
+        "tier": "engineers",
+        "workRadius": 4
+      },
+      {
+        "id": "a7-residence-skyscraper-4lvl2",
+        "name": "Skyscraper (T4 II)",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 1,
+        "iconFile": "A7_dlc_high_life_256.png",
+        "tier": "engineers",
+        "workRadius": 4.25
+      },
+      {
+        "id": "a7-residence-skyscraper-4lvl3",
+        "name": "Skyscraper (T4 III)",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 2,
+        "iconFile": "A7_dlc_high_life_256.png",
+        "tier": "engineers",
+        "workRadius": 5
+      },
+      {
+        "id": "a7-residence-skyscraper-5lvl1",
+        "name": "Skyscraper (T5 I)",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 3,
+        "iconFile": "A7_dlc_high_life_256.png",
+        "tier": "investors",
+        "workRadius": 4
+      },
+      {
+        "id": "a7-residence-skyscraper-5lvl2",
+        "name": "Skyscraper (T5 II)",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 4,
+        "iconFile": "A7_dlc_high_life_256.png",
+        "tier": "investors",
+        "workRadius": 4.25
+      },
+      {
+        "id": "a7-residence-skyscraper-5lvl3",
+        "name": "Skyscraper (T5 III)",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 5,
+        "iconFile": "A7_dlc_high_life_256.png",
+        "tier": "investors",
+        "workRadius": 5
+      },
+      {
+        "id": "a7-residence-skyscraper-5lvl4",
+        "name": "Skyscraper (T5 IV)",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 6,
+        "iconFile": "A7_dlc_high_life_256.png",
+        "tier": "investors",
+        "workRadius": 6
+      },
+      {
+        "id": "a7-residence-skyscraper-5lvl5",
+        "name": "Skyscraper (T5 V)",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 7,
+        "iconFile": "A7_dlc_high_life_256.png",
+        "tier": "investors",
+        "workRadius": 6.75
+      }
+    ]
+  },
+  {
+    "id": "platform-module-post",
+    "name": "Airmail Sorting Office",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "platform-module-post",
+    "variants": [
+      {
+        "id": "platform-module-post",
+        "name": "Airmail Sorting Office",
+        "footprint": {
+          "w": 5,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_airship_platform_post.png",
+        "tier": "artisans"
+      }
+    ],
+    "dlc": "Empire of the Skies"
+  },
+  {
+    "id": "food-03-goulash-factory",
+    "name": "Artisanal Kitchen",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "food-03-goulash-factory",
+    "variants": [
+      {
+        "id": "food-03-goulash-factory",
+        "name": "Artisanal Kitchen",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_goulash_01.png",
+        "tier": "artisans",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 120,
+          "output": {
+            "good": "goulash",
+            "perMin": 0.5
+          },
+          "inputs": [
+            {
+              "good": "red_peppers",
+              "perMin": 0.5
+            },
+            {
+              "good": "cattle",
+              "perMin": 0.5
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "artisans",
+              "count": 40
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "food-01-bread-maker",
+    "name": "Bakery",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "food-01-bread-maker",
+    "variants": [
+      {
+        "id": "food-01-bread-maker",
+        "name": "Bakery",
+        "footprint": {
+          "w": 4,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_bread.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 60,
+          "output": {
+            "good": "bread",
+            "perMin": 1
+          },
+          "inputs": [
+            {
+              "good": "flour",
+              "perMin": 1
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "workshop-01-high-wheeler-workshop",
+    "name": "Bicycle Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "workshop-01-high-wheeler-workshop",
+    "variants": [
+      {
+        "id": "workshop-01-high-wheeler-workshop",
+        "name": "Bicycle Factory",
+        "footprint": {
+          "w": 6,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_high_wheeler.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-bombs",
+    "name": "Bomb Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "multifactory-magazin-dropgoods-moderate-bombs",
+    "variants": [
+      {
+        "id": "multifactory-magazin-dropgoods-moderate-bombs",
+        "name": "Bomb Factory",
+        "footprint": {
+          "w": 6,
+          "h": 10
+        },
+        "order": 0,
+        "iconFile": "A7_dropgood_bomb_b.png",
+        "tier": "artisans"
+      }
+    ],
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "heavy-09-brass-heavy-industry",
+    "name": "Brass Smeltery",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-09-brass-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-09-brass-heavy-industry",
+        "name": "Brass Smeltery",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_brass.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "food-02-beer-maker",
+    "name": "Brewery",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "food-02-beer-maker",
+    "variants": [
+      {
+        "id": "food-02-beer-maker",
+        "name": "Brewery",
+        "footprint": {
+          "w": 5,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_beer.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 60,
+          "output": {
+            "good": "beer",
+            "perMin": 1
+          },
+          "inputs": [
+            {
+              "good": "malt",
+              "perMin": 1
+            },
+            {
+              "good": "hops",
+              "perMin": 1
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "artisans",
+              "count": 30
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "factory-04-brick-factory",
+    "name": "Brick Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-04-brick-factory",
+    "variants": [
+      {
+        "id": "factory-04-brick-factory",
+        "name": "Brick Factory",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_bricks.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "bricks",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "clay",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "heavy-08-steam-carriages-heavy-industry",
+    "name": "Cab Assembly Line",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-08-steam-carriages-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-08-steam-carriages-heavy-industry",
+        "name": "Cab Assembly Line",
+        "footprint": {
+          "w": 12,
+          "h": 8
+        },
+        "order": 0,
+        "iconFile": "A7_steam_carriage.png",
+        "tier": "investors"
+      }
+    ]
+  },
+  {
+    "id": "food-05-canned-food-factory",
+    "name": "Cannery",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "food-05-canned-food-factory",
+    "variants": [
+      {
+        "id": "food-05-canned-food-factory",
+        "name": "Cannery",
+        "footprint": {
+          "w": 7,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_canned_goulash.png",
+        "tier": "artisans",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 90,
+          "output": {
+            "good": "canned_food",
+            "perMin": 0.67
+          },
+          "inputs": [
+            {
+              "good": "goulash",
+              "perMin": 0.67
+            },
+            {
+              "good": "iron",
+              "perMin": 0.67
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 40
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-care-packages",
+    "name": "Care Package Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "multifactory-magazin-dropgoods-moderate-care-packages",
+    "variants": [
+      {
+        "id": "multifactory-magazin-dropgoods-moderate-care-packages",
+        "name": "Care Package Factory",
+        "footprint": {
+          "w": 6,
+          "h": 10
+        },
+        "order": 0,
+        "iconFile": "A7_dropgood_care_packages.png",
+        "tier": "artisans"
+      }
+    ],
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "agriculture-02-cattle-farm",
+    "name": "Cattle Farm",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-02-cattle-farm",
+    "variants": [
+      {
+        "id": "agriculture-02-cattle-farm",
+        "name": "Cattle Farm",
+        "footprint": {
+          "w": 4,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_meat_raw.png",
+        "tier": "artisans",
+        "workRadius": 7,
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 60,
+          "output": {
+            "good": "cattle",
+            "perMin": 1
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "artisans",
+              "count": 30
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "food-08-champagne-maker",
+    "name": "Champagne Cellar",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "food-08-champagne-maker",
+    "variants": [
+      {
+        "id": "food-08-champagne-maker",
+        "name": "Champagne Cellar",
+        "footprint": {
+          "w": 6,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_champagne.png",
+        "tier": "investors"
+      }
+    ]
+  },
+  {
+    "id": "heavy-03-coal-heavy-industry",
+    "name": "Charcoal Kiln",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-03-coal-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-03-coal-heavy-industry",
+        "name": "Charcoal Kiln",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_coal_burn.png",
+        "tier": "workers",
+        "workRadius": 11,
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "coal",
+            "perMin": 2
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 40
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "factory-11-clay-pit",
+    "name": "Clay Pit",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-11-clay-pit",
+    "variants": [
+      {
+        "id": "factory-11-clay-pit",
+        "name": "Clay Pit",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_clay.png",
+        "tier": "all",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "clay",
+            "perMin": 2
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 20
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "workshop-02-pocket-watch-workshop",
+    "name": "Clockmakers",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "workshop-02-pocket-watch-workshop",
+    "variants": [
+      {
+        "id": "workshop-02-pocket-watch-workshop",
+        "name": "Clockmakers",
+        "footprint": {
+          "w": 7,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_pocket_watch.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "factory-10-chassis-factory",
+    "name": "Coachmakers",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-10-chassis-factory",
+    "variants": [
+      {
+        "id": "factory-10-chassis-factory",
+        "name": "Coachmakers",
+        "footprint": {
+          "w": 9,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_chassis.png",
+        "tier": "investors"
+      }
+    ]
+  },
+  {
+    "id": "mining-01-coal-mine",
+    "name": "Coal Mine",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "mining-01-coal-mine",
+    "variants": [
+      {
+        "id": "mining-01-coal-mine",
+        "name": "Coal Mine",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_coal_2.png",
+        "tier": "all",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 15,
+          "output": {
+            "good": "coal",
+            "perMin": 4
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "factory-01-concrete-factory",
+    "name": "Concrete Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-01-concrete-factory",
+    "variants": [
+      {
+        "id": "factory-01-concrete-factory",
+        "name": "Concrete Factory",
+        "footprint": {
+          "w": 6,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_reinforced_concrete.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "mining-05-copper-mine",
+    "name": "Copper Mine",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "mining-05-copper-mine",
+    "variants": [
+      {
+        "id": "mining-05-copper-mine",
+        "name": "Copper Mine",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_copper.png",
+        "tier": "all"
+      }
+    ]
+  },
+  {
+    "id": "processing-05-dynamite-processing",
+    "name": "Dynamite Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "processing-05-dynamite-processing",
+    "variants": [
+      {
+        "id": "processing-05-dynamite-processing",
+        "name": "Dynamite Factory",
+        "footprint": {
+          "w": 5,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_dynamite.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "farm-fertilizer-module-moderate",
+    "name": "Fertiliser Silo",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "farm-fertilizer-module-moderate",
+    "variants": [
+      {
+        "id": "farm-fertilizer-module-moderate",
+        "name": "Fertiliser Silo",
+        "footprint": {
+          "w": 3,
+          "h": 2
+        },
+        "order": 0,
+        "iconFile": "A7_silo.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "processing-08-carbon-filament-processing",
+    "name": "Filament Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "processing-08-carbon-filament-processing",
+    "variants": [
+      {
+        "id": "processing-08-carbon-filament-processing",
+        "name": "Filament Factory",
+        "footprint": {
+          "w": 7,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_carbon_filament.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "coastal-01-fish-coast-building",
+    "name": "Fishery",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "coastal-01-fish-coast-building",
+    "variants": [
+      {
+        "id": "coastal-01-fish-coast-building",
+        "name": "Fishery",
+        "footprint": {
+          "w": 11,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_fish.png",
+        "tier": "farmers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "fish",
+            "perMin": 2
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 10
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "processing-02-flour-processing",
+    "name": "Flour Mill",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "processing-02-flour-processing",
+    "variants": [
+      {
+        "id": "processing-02-flour-processing",
+        "name": "Flour Mill",
+        "footprint": {
+          "w": 4,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_flour.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "flour",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "grain",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 20
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "processing-04-weavery",
+    "name": "Framework Knitters",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "processing-04-weavery",
+    "variants": [
+      {
+        "id": "processing-04-weavery",
+        "name": "Framework Knitters",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_working_cloth.png",
+        "tier": "farmers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "work_clothes",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "wool",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 40
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "moderate-fuel-station-01-fuelstation",
+    "name": "Fuel Station",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "moderate-fuel-station-01-fuelstation",
+    "variants": [
+      {
+        "id": "moderate-fuel-station-01-fuelstation",
+        "name": "Fuel Station",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_gasoline.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "factory-05-fur-coat-workshop",
+    "name": "Fur Dealer",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-05-fur-coat-workshop",
+    "variants": [
+      {
+        "id": "factory-05-fur-coat-workshop",
+        "name": "Fur Dealer",
+        "footprint": {
+          "w": 6,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_fur_coats.png",
+        "tier": "artisans",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "fur_coats",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "furs",
+              "perMin": 2
+            },
+            {
+              "good": "cotton_fabric",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "artisans",
+              "count": 40
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "heavy-02-steel-heavy-industry",
+    "name": "Furnace",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-02-steel-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-02-steel-heavy-industry",
+        "name": "Furnace",
+        "footprint": {
+          "w": 7,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_steel.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "steel",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "iron",
+              "perMin": 2
+            },
+            {
+              "good": "coal",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 40
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "processing-06-glass-processing",
+    "name": "Glassmakers",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "processing-06-glass-processing",
+    "variants": [
+      {
+        "id": "processing-06-glass-processing",
+        "name": "Glassmakers",
+        "footprint": {
+          "w": 6,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_glass.png",
+        "tier": "artisans",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "glass",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "quartz_sand",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "artisans",
+              "count": 30
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "mining-08-gold-ore-mine",
+    "name": "Gold Mine",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "mining-08-gold-ore-mine",
+    "variants": [
+      {
+        "id": "mining-08-gold-ore-mine",
+        "name": "Gold Mine",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_gold_ore.png",
+        "tier": "all"
+      }
+    ]
+  },
+  {
+    "id": "workshop-05-gold-workshop",
+    "name": "Goldsmiths",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "workshop-05-gold-workshop",
+    "variants": [
+      {
+        "id": "workshop-05-gold-workshop",
+        "name": "Goldsmiths",
+        "footprint": {
+          "w": 5,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_gold.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-01-grain-farm",
+    "name": "Grain Farm",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-01-grain-farm",
+    "variants": [
+      {
+        "id": "agriculture-01-grain-farm",
+        "name": "Grain Farm",
+        "footprint": {
+          "w": 4,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_cereals_2.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "grain",
+            "perMin": 2
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "agriculture-01-field-grain-field",
+    "name": "Grain Field",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-01-field-grain-field",
+    "variants": [
+      {
+        "id": "agriculture-01-field-grain-field",
+        "name": "Grain Field",
+        "footprint": {
+          "w": 1,
+          "h": 1
+        },
+        "order": 0,
+        "iconFile": "A7_farmfield_module.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "workshop-04-phonographs-workshop",
+    "name": "Gramophone Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "workshop-04-phonographs-workshop",
+    "variants": [
+      {
+        "id": "workshop-04-phonographs-workshop",
+        "name": "Gramophone Factory",
+        "footprint": {
+          "w": 7,
+          "h": 7
+        },
+        "order": 0,
+        "iconFile": "A7_phonographs.png",
+        "tier": "investors"
+      }
+    ]
+  },
+  {
+    "id": "heavy-06-advanced-weapons-heavy-industry",
+    "name": "Heavy Weapons Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-06-advanced-weapons-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-06-advanced-weapons-heavy-industry",
+        "name": "Heavy Weapons Factory",
+        "footprint": {
+          "w": 10,
+          "h": 9
+        },
+        "order": 0,
+        "iconFile": "A7_advanced_weaponry.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-03-hop-farm",
+    "name": "Hop Farm",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-03-hop-farm",
+    "variants": [
+      {
+        "id": "agriculture-03-hop-farm",
+        "name": "Hop Farm",
+        "footprint": {
+          "w": 3,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_hops.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 60,
+          "output": {
+            "good": "hops",
+            "perMin": 1
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 20
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "agriculture-03-field-hop-field",
+    "name": "Hop Field",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-03-field-hop-field",
+    "variants": [
+      {
+        "id": "agriculture-03-field-hop-field",
+        "name": "Hop Field",
+        "footprint": {
+          "w": 1,
+          "h": 1
+        },
+        "order": 0,
+        "iconFile": "A7_farmfield_module.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-09-hunter-s-cabin",
+    "name": "Hunting Cabin",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-09-hunter-s-cabin",
+    "variants": [
+      {
+        "id": "agriculture-09-hunter-s-cabin",
+        "name": "Hunting Cabin",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_fur.png",
+        "tier": "artisans",
+        "workRadius": 11,
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 60,
+          "output": {
+            "good": "furs",
+            "perMin": 1
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "artisans",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mining-02-iron-mine",
+    "name": "Iron Mine",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "mining-02-iron-mine",
+    "variants": [
+      {
+        "id": "mining-02-iron-mine",
+        "name": "Iron Mine",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_iron.png",
+        "tier": "all",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 15,
+          "output": {
+            "good": "iron",
+            "perMin": 4
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "platform-module-item-storage",
+    "name": "Item Transfer Depot",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "platform-module-item-storage",
+    "variants": [
+      {
+        "id": "platform-module-item-storage",
+        "name": "Item Transfer Depot",
+        "footprint": {
+          "w": 5,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_airship_platform_items.png",
+        "tier": "artisans"
+      }
+    ],
+    "dlc": "Empire of the Skies"
+  },
+  {
+    "id": "workshop-06-jewelry-workshop",
+    "name": "Jewellers",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "workshop-06-jewelry-workshop",
+    "variants": [
+      {
+        "id": "workshop-06-jewelry-workshop",
+        "name": "Jewellers",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_jewelry.png",
+        "tier": "investors"
+      }
+    ]
+  },
+  {
+    "id": "factory-06-light-bulb-factory",
+    "name": "Light Bulb Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-06-light-bulb-factory",
+    "variants": [
+      {
+        "id": "factory-06-light-bulb-factory",
+        "name": "Light Bulb Factory",
+        "footprint": {
+          "w": 6,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_light_bulb.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "mining-06-cement-mine",
+    "name": "Limestone Quarry",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "mining-06-cement-mine",
+    "variants": [
+      {
+        "id": "mining-06-cement-mine",
+        "name": "Limestone Quarry",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_cement.png",
+        "tier": "all"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-05-timber-yard",
+    "name": "Lumberjack's Hut",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-05-timber-yard",
+    "variants": [
+      {
+        "id": "agriculture-05-timber-yard",
+        "name": "Lumberjack's Hut",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_wood_log.png",
+        "tier": "farmers",
+        "workRadius": 9,
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 15,
+          "output": {
+            "good": "timber",
+            "perMin": 4
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 10
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "processing-03-malt-processing",
+    "name": "Malthouse",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "processing-03-malt-processing",
+    "variants": [
+      {
+        "id": "processing-03-malt-processing",
+        "name": "Malthouse",
+        "footprint": {
+          "w": 5,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_malt.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "malt",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "grain",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 20
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "processing-07-inlay-processing",
+    "name": "Marquetry Workshop",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "processing-07-inlay-processing",
+    "variants": [
+      {
+        "id": "processing-07-inlay-processing",
+        "name": "Marquetry Workshop",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_inlay.png",
+        "tier": "investors"
+      }
+    ]
+  },
+  {
+    "id": "heavy-07-steam-motors-heavy-industry",
+    "name": "Motor Assembly Line",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-07-steam-motors-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-07-steam-motors-heavy-industry",
+        "name": "Motor Assembly Line",
+        "footprint": {
+          "w": 9,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_steam_machine.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "heavy-10-oil-heavy-industry",
+    "name": "Oil Refinery",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-10-oil-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-10-oil-heavy-industry",
+        "name": "Oil Refinery",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_oil.png",
+        "tier": "engineers",
+        "workRadius": 12
+      }
+    ]
+  },
+  {
+    "id": "heavy-10-field-oil-pump",
+    "name": "Oil Well",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-10-field-oil-pump",
+    "variants": [
+      {
+        "id": "heavy-10-field-oil-pump",
+        "name": "Oil Well",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_oil_rig.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-flyers",
+    "name": "Pamphlet Printer",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "multifactory-magazin-dropgoods-moderate-flyers",
+    "variants": [
+      {
+        "id": "multifactory-magazin-dropgoods-moderate-flyers",
+        "name": "Pamphlet Printer",
+        "footprint": {
+          "w": 6,
+          "h": 10
+        },
+        "order": 0,
+        "iconFile": "A7_dropgood_pamphlets.png",
+        "tier": "artisans"
+      }
+    ],
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "agriculture-02-field-pasture",
+    "name": "Pasture",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-02-field-pasture",
+    "variants": [
+      {
+        "id": "agriculture-02-field-pasture",
+        "name": "Pasture",
+        "footprint": {
+          "w": 3,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_general_module_01.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-11-field-pepper-field",
+    "name": "Pepper Crop",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-11-field-pepper-field",
+    "variants": [
+      {
+        "id": "agriculture-11-field-pepper-field",
+        "name": "Pepper Crop",
+        "footprint": {
+          "w": 1,
+          "h": 1
+        },
+        "order": 0,
+        "iconFile": "A7_farmfield_module.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-08-pig-farm",
+    "name": "Pig Farm",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-08-pig-farm",
+    "variants": [
+      {
+        "id": "agriculture-08-pig-farm",
+        "name": "Pig Farm",
+        "footprint": {
+          "w": 4,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_pigs.png",
+        "tier": "workers",
+        "workRadius": 7,
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "pigs",
+            "perMin": 2
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "agriculture-08-field-pig-sty",
+    "name": "Pig Sty",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-08-field-pig-sty",
+    "variants": [
+      {
+        "id": "agriculture-08-field-pig-sty",
+        "name": "Pig Sty",
+        "footprint": {
+          "w": 2,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_general_module_01.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-04-potato-farm",
+    "name": "Potato Farm",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-04-potato-farm",
+    "variants": [
+      {
+        "id": "agriculture-04-potato-farm",
+        "name": "Potato Farm",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_potatoes.png",
+        "tier": "farmers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "potatoes",
+            "perMin": 2
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 10
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "agriculture-04-field-potato-field",
+    "name": "Potato Field",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-04-field-potato-field",
+    "variants": [
+      {
+        "id": "agriculture-04-field-potato-field",
+        "name": "Potato Field",
+        "footprint": {
+          "w": 1,
+          "h": 1
+        },
+        "order": 0,
+        "iconFile": "A7_farmfield_module.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-11-bell-pepper-farm",
+    "name": "Red Pepper Farm",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-11-bell-pepper-farm",
+    "variants": [
+      {
+        "id": "agriculture-11-bell-pepper-farm",
+        "name": "Red Pepper Farm",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_pepper.png",
+        "tier": "artisans",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 60,
+          "output": {
+            "good": "red_peppers",
+            "perMin": 1
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "artisans",
+              "count": 30
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "processing-01-tallow-processing",
+    "name": "Rendering Works",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "processing-01-tallow-processing",
+    "variants": [
+      {
+        "id": "processing-01-tallow-processing",
+        "name": "Rendering Works",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_tallow.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 60,
+          "output": {
+            "good": "tallow",
+            "perMin": 1
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 20
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "factory-09-sailcloth-factory",
+    "name": "Sailmakers",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-09-sailcloth-factory",
+    "variants": [
+      {
+        "id": "factory-09-sailcloth-factory",
+        "name": "Sailmakers",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_sail.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "sails",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "wool",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 30
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "coastal-02-niter-coast-building",
+    "name": "Saltpetre Works",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "coastal-02-niter-coast-building",
+    "variants": [
+      {
+        "id": "coastal-02-niter-coast-building",
+        "name": "Saltpetre Works",
+        "footprint": {
+          "w": 10,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_niter.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "coastal-03-quartz-sand-coast-building",
+    "name": "Sand Mine",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "coastal-03-quartz-sand-coast-building",
+    "variants": [
+      {
+        "id": "coastal-03-quartz-sand-coast-building",
+        "name": "Sand Mine",
+        "footprint": {
+          "w": 10,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_quartz_sand.png",
+        "tier": "all"
+      }
+    ]
+  },
+  {
+    "id": "factory-03-timber-factory",
+    "name": "Sawmill",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-03-timber-factory",
+    "variants": [
+      {
+        "id": "factory-03-timber-factory",
+        "name": "Sawmill",
+        "footprint": {
+          "w": 4,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_wooden_planks.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "food-06-schnapps-maker",
+    "name": "Schnapps Distillery",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "food-06-schnapps-maker",
+    "variants": [
+      {
+        "id": "food-06-schnapps-maker",
+        "name": "Schnapps Distillery",
+        "footprint": {
+          "w": 3,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_schnapps_4.png",
+        "tier": "farmers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "schnapps",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "potatoes",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 20
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-seamines",
+    "name": "Sea Mine Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "multifactory-magazin-dropgoods-moderate-seamines",
+    "variants": [
+      {
+        "id": "multifactory-magazin-dropgoods-moderate-seamines",
+        "name": "Sea Mine Factory",
+        "footprint": {
+          "w": 6,
+          "h": 10
+        },
+        "order": 0,
+        "iconFile": "A7_dropgood_seamines.png",
+        "tier": "artisans"
+      }
+    ],
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "workshop-03-sewing-machines-factory",
+    "name": "Sewing Machine Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "workshop-03-sewing-machines-factory",
+    "variants": [
+      {
+        "id": "workshop-03-sewing-machines-factory",
+        "name": "Sewing Machine Factory",
+        "footprint": {
+          "w": 9,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_sewing_machine.png",
+        "tier": "artisans",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "sewing_machines",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "steel",
+              "perMin": 2
+            },
+            {
+              "good": "timber",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "engineers",
+              "count": 50
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "agriculture-06-sheep-farm",
+    "name": "Sheep Farm",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-06-sheep-farm",
+    "variants": [
+      {
+        "id": "agriculture-06-sheep-farm",
+        "name": "Sheep Farm",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_wool.png",
+        "tier": "farmers",
+        "workRadius": 7,
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "wool",
+            "perMin": 2
+          },
+          "inputs": [],
+          "workforce": [
+            {
+              "tier": "farmers",
+              "count": 20
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "agriculture-06-field-sheepfold",
+    "name": "Sheepfold",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-06-field-sheepfold",
+    "variants": [
+      {
+        "id": "agriculture-06-field-sheepfold",
+        "name": "Sheepfold",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_general_module_01.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "silo-grain",
+    "name": "Silo",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "silo-grain",
+    "variants": [
+      {
+        "id": "silo-grain",
+        "name": "Silo",
+        "footprint": {
+          "w": 3,
+          "h": 2
+        },
+        "order": 0,
+        "iconFile": "A7_silo.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "food-07-sausage-maker",
+    "name": "Slaughterhouse",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "food-07-sausage-maker",
+    "variants": [
+      {
+        "id": "food-07-sausage-maker",
+        "name": "Slaughterhouse",
+        "footprint": {
+          "w": 4,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_meat_sausage.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "sausages",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "pigs",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "general-small-warehouse",
+    "name": "Small Warehouse",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "logistic-02-warehouse-farmers",
+    "variants": [
+      {
+        "id": "logistic-02-warehouse-farmers",
+        "name": "Small Warehouse (Farmers)",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_warehouse.png",
+        "tier": "farmers"
+      },
+      {
+        "id": "logistic-02-warehouse-workers",
+        "name": "Small Warehouse (Workers)",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 1,
+        "iconFile": "A7_warehouse.png",
+        "tier": "workers"
+      },
+      {
+        "id": "logistic-02-warehouse-artisans",
+        "name": "Small Warehouse (Artisans)",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 2,
+        "iconFile": "A7_warehouse.png",
+        "tier": "artisans"
+      },
+      {
+        "id": "logistic-02-warehouse-engineers",
+        "name": "Small Warehouse (Engineers)",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 3,
+        "iconFile": "A7_warehouse.png",
+        "tier": "engineers"
+      },
+      {
+        "id": "logistic-02-warehouse-investors",
+        "name": "Small Warehouse (Investors)",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 4,
+        "iconFile": "A7_warehouse.png",
+        "tier": "investors"
+      }
+    ]
+  },
+  {
+    "id": "factory-02-soap-factory",
+    "name": "Soap Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-02-soap-factory",
+    "variants": [
+      {
+        "id": "factory-02-soap-factory",
+        "name": "Soap Factory",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_soap_2.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "soap",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "tallow",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "artisans",
+              "count": 30
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "workshop-07-glasses-workshop",
+    "name": "Spectacle Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "workshop-07-glasses-workshop",
+    "variants": [
+      {
+        "id": "workshop-07-glasses-workshop",
+        "name": "Spectacle Factory",
+        "footprint": {
+          "w": 6,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_glasses.png",
+        "tier": "engineers"
+      }
+    ]
+  },
+  {
+    "id": "heavy-01-beams-heavy-industry",
+    "name": "Steelworks",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-01-beams-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-01-beams-heavy-industry",
+        "name": "Steelworks",
+        "footprint": {
+          "w": 10,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_beams.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 45,
+          "output": {
+            "good": "steel_beams",
+            "perMin": 1.33
+          },
+          "inputs": [
+            {
+              "good": "steel",
+              "perMin": 1.33
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 50
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-blank",
+    "name": "Supply Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "multifactory-magazin-dropgoods-moderate-blank",
+    "variants": [
+      {
+        "id": "multifactory-magazin-dropgoods-moderate-blank",
+        "name": "Supply Factory",
+        "footprint": {
+          "w": 6,
+          "h": 10
+        },
+        "order": 0,
+        "iconFile": "A7_ship_repair_2.png",
+        "tier": "artisans"
+      }
+    ],
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "tractor-module-01-tractor",
+    "name": "Tractor Barn",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "tractor-module-01-tractor",
+    "variants": [
+      {
+        "id": "tractor-module-01-tractor",
+        "name": "Tractor Barn",
+        "footprint": {
+          "w": 2,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_tractor.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-10-field-vines",
+    "name": "Vines",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-10-field-vines",
+    "variants": [
+      {
+        "id": "agriculture-10-field-vines",
+        "name": "Vines",
+        "footprint": {
+          "w": 1,
+          "h": 1
+        },
+        "order": 0,
+        "iconFile": "A7_farmfield_module.png",
+        "tier": "farmers"
+      }
+    ]
+  },
+  {
+    "id": "agriculture-10-vineyard",
+    "name": "Vineyard",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "agriculture-10-vineyard",
+    "variants": [
+      {
+        "id": "agriculture-10-vineyard",
+        "name": "Vineyard",
+        "footprint": {
+          "w": 4,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_grapes.png",
+        "tier": "investors"
+      }
+    ]
+  },
+  {
+    "id": "multifactory-magazin-dropgoods-moderate-waterdrop",
+    "name": "Water Drop Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "multifactory-magazin-dropgoods-moderate-waterdrop",
+    "variants": [
+      {
+        "id": "multifactory-magazin-dropgoods-moderate-waterdrop",
+        "name": "Water Drop Factory",
+        "footprint": {
+          "w": 6,
+          "h": 10
+        },
+        "order": 0,
+        "iconFile": "A7_dropgood_water.png",
+        "tier": "artisans"
+      }
+    ],
+    "dlc": "Seeds of Change"
+  },
+  {
+    "id": "heavy-04-weapons-heavy-industry",
+    "name": "Weapon Factory",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "heavy-04-weapons-heavy-industry",
+    "variants": [
+      {
+        "id": "heavy-04-weapons-heavy-industry",
+        "name": "Weapon Factory",
+        "footprint": {
+          "w": 7,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_weapons.png",
+        "tier": "workers",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 90,
+          "output": {
+            "good": "weapons",
+            "perMin": 0.67
+          },
+          "inputs": [
+            {
+              "good": "steel",
+              "perMin": 0.67
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "workers",
+              "count": 50
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "factory-07-window-factory",
+    "name": "Window Makers",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "factory-07-window-factory",
+    "variants": [
+      {
+        "id": "factory-07-window-factory",
+        "name": "Window Makers",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_glass_window_3.png",
+        "tier": "artisans",
+        "production": {
+          "requiresElectricity": false,
+          "baseCycleSeconds": 30,
+          "output": {
+            "good": "windows",
+            "perMin": 2
+          },
+          "inputs": [
+            {
+              "good": "glass",
+              "perMin": 2
+            }
+          ],
+          "workforce": [
+            {
+              "tier": "engineers",
+              "count": 40
+            }
+          ],
+          "verify": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "mining-04-zinc-mine",
+    "name": "Zinc Mine",
+    "category": "production",
+    "region": "old_world",
+    "defaultVariantId": "mining-04-zinc-mine",
+    "variants": [
+      {
+        "id": "mining-04-zinc-mine",
+        "name": "Zinc Mine",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_tin_ore.png",
+        "tier": "all"
+      }
+    ]
+  },
+  {
+    "id": "airship-landing-platform",
+    "name": "Airship Platform",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "airship-landing-platform",
+    "variants": [
+      {
+        "id": "airship-landing-platform",
+        "name": "Airship Platform",
+        "footprint": {
+          "w": 10,
+          "h": 15
+        },
+        "order": 0,
+        "iconFile": "A7_airship_platform_southamerica.png",
+        "tier": "artisans"
+      }
+    ]
+  },
+  {
+    "id": "service-03-bank",
+    "name": "Bank",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "service-03-bank",
+    "variants": [
+      {
+        "id": "service-03-bank",
+        "name": "Bank",
+        "footprint": {
+          "w": 12,
+          "h": 10
+        },
+        "order": 0,
+        "iconFile": "A7_bank.png",
+        "tier": "engineers",
+        "overlayType": "bank",
+        "influenceRadius": 45
+      }
+    ]
+  },
+  {
+    "id": "service-04-church",
+    "name": "Church",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "service-04-church",
+    "variants": [
+      {
+        "id": "service-04-church",
+        "name": "Church",
+        "footprint": {
+          "w": 8,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_church.png",
+        "tier": "workers",
+        "overlayType": "religion",
+        "influenceRadius": 40
+      }
+    ]
+  },
+  {
+    "id": "institution-02-fire-department",
+    "name": "Fire Station",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "institution-02-fire-department",
+    "variants": [
+      {
+        "id": "institution-02-fire-department",
+        "name": "Fire Station",
+        "footprint": {
+          "w": 5,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_fire_house.png",
+        "tier": "farmers",
+        "overlayType": "fire",
+        "influenceRadius": 26
+      }
+    ]
+  },
+  {
+    "id": "electricity-03-gas-power-plant",
+    "name": "Gas-Fired Power Plant",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "electricity-03-gas-power-plant",
+    "variants": [
+      {
+        "id": "electricity-03-gas-power-plant",
+        "name": "Gas-Fired Power Plant",
+        "footprint": {
+          "w": 5,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_electric_works_gas.png",
+        "tier": "investors",
+        "overlayType": "power",
+        "influenceRadius": 42
+      }
+    ]
+  },
+  {
+    "id": "institution-03-hospital",
+    "name": "Hospital",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "institution-03-hospital",
+    "variants": [
+      {
+        "id": "institution-03-hospital",
+        "name": "Hospital",
+        "footprint": {
+          "w": 6,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_hospital.png",
+        "tier": "artisans",
+        "overlayType": "health",
+        "influenceRadius": 26
+      }
+    ]
+  },
+  {
+    "id": "palace-ministry",
+    "name": "Local Department",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "palace-ministry",
+    "variants": [
+      {
+        "id": "palace-ministry",
+        "name": "Local Department",
+        "footprint": {
+          "w": 8,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_local_department.png",
+        "tier": "all"
+      }
+    ]
+  },
+  {
+    "id": "logistic-01-marketplace",
+    "name": "Marketplace",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "logistic-01-marketplace",
+    "variants": [
+      {
+        "id": "logistic-01-marketplace",
+        "name": "Marketplace",
+        "footprint": {
+          "w": 5,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_market.png",
+        "tier": "farmers",
+        "overlayType": "market",
+        "influenceRadius": 35
+      }
+    ]
+  },
+  {
+    "id": "service-09-club-house",
+    "name": "Members Club",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "service-09-club-house",
+    "variants": [
+      {
+        "id": "service-09-club-house",
+        "name": "Members Club",
+        "footprint": {
+          "w": 6,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_club_house.png",
+        "tier": "investors",
+        "overlayType": "culture",
+        "influenceRadius": 35
+      }
+    ]
+  },
+  {
+    "id": "electricity-02-oil-power-plant",
+    "name": "Oil Power Plant",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "electricity-02-oil-power-plant",
+    "variants": [
+      {
+        "id": "electricity-02-oil-power-plant",
+        "name": "Oil Power Plant",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_electric_works_oil.png",
+        "tier": "engineers",
+        "overlayType": "power",
+        "influenceRadius": 35
+      }
+    ]
+  },
+  {
+    "id": "palace",
+    "name": "Palace",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "palace",
+    "variants": [
+      {
+        "id": "palace",
+        "name": "Palace",
+        "footprint": {
+          "w": 9,
+          "h": 9
+        },
+        "order": 0,
+        "iconFile": "A7_palace.png",
+        "tier": "investors"
+      }
+    ],
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-01-straight",
+    "name": "Palace Wing",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "palace-module-01-straight",
+    "variants": [
+      {
+        "id": "palace-module-01-straight",
+        "name": "Palace Wing",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_ornament_palace_hall_01.png",
+        "tier": "investors"
+      }
+    ],
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-02-angle",
+    "name": "Palace Wing - Corner",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "palace-module-02-angle",
+    "variants": [
+      {
+        "id": "palace-module-02-angle",
+        "name": "Palace Wing - Corner",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_ornament_palace_hall_02.png",
+        "tier": "investors"
+      }
+    ],
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-03-crossing",
+    "name": "Palace Wing - Cross",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "palace-module-03-crossing",
+    "variants": [
+      {
+        "id": "palace-module-03-crossing",
+        "name": "Palace Wing - Cross",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_ornament_palace_corner.png",
+        "tier": "investors"
+      }
+    ],
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-04-end",
+    "name": "Palace Wing - End",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "palace-module-04-end",
+    "variants": [
+      {
+        "id": "palace-module-04-end",
+        "name": "Palace Wing - End",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_ornament_palace_end_building.png",
+        "tier": "investors"
+      }
+    ],
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-05-gate",
+    "name": "Palace Wing - Gate",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "palace-module-05-gate",
+    "variants": [
+      {
+        "id": "palace-module-05-gate",
+        "name": "Palace Wing - Gate",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_ornament_palace_arch_gate.png",
+        "tier": "investors"
+      }
+    ],
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "palace-module-06-junction",
+    "name": "Palace Wing - Junction",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "palace-module-06-junction",
+    "variants": [
+      {
+        "id": "palace-module-06-junction",
+        "name": "Palace Wing - Junction",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_ornament_palace_tcrossing.png",
+        "tier": "investors"
+      }
+    ],
+    "dlc": "Seat of Power"
+  },
+  {
+    "id": "institution-01-police",
+    "name": "Police Station",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "institution-01-police",
+    "variants": [
+      {
+        "id": "institution-01-police",
+        "name": "Police Station",
+        "footprint": {
+          "w": 4,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_police.png",
+        "tier": "workers",
+        "overlayType": "police",
+        "influenceRadius": 26
+      }
+    ]
+  },
+  {
+    "id": "post-box",
+    "name": "Post Box",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "post-box",
+    "variants": [
+      {
+        "id": "post-box",
+        "name": "Post Box",
+        "footprint": {
+          "w": 1,
+          "h": 1
+        },
+        "order": 0,
+        "iconFile": "A7_postbox_b.png",
+        "tier": "artisans",
+        "workRadius": 12
+      }
+    ]
+  },
+  {
+    "id": "post-office",
+    "name": "Post Office",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "post-office",
+    "variants": [
+      {
+        "id": "post-office",
+        "name": "Post Office",
+        "footprint": {
+          "w": 6,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_post_office_dlc11.png",
+        "tier": "artisans",
+        "workRadius": 24
+      }
+    ]
+  },
+  {
+    "id": "service-01-pub",
+    "name": "Pub",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "service-01-pub",
+    "variants": [
+      {
+        "id": "service-01-pub",
+        "name": "Pub",
+        "footprint": {
+          "w": 6,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_pub.png",
+        "tier": "farmers",
+        "overlayType": "pub",
+        "influenceRadius": 30
+      }
+    ]
+  },
+  {
+    "id": "service-02-school",
+    "name": "School",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "service-02-school",
+    "variants": [
+      {
+        "id": "service-02-school",
+        "name": "School",
+        "footprint": {
+          "w": 5,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_school.png",
+        "tier": "workers",
+        "overlayType": "education",
+        "influenceRadius": 35
+      }
+    ]
+  },
+  {
+    "id": "town-hall",
+    "name": "Town Hall",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "town-hall",
+    "variants": [
+      {
+        "id": "town-hall",
+        "name": "Town Hall",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_townhall.png",
+        "tier": "all",
+        "workRadius": 20
+      }
+    ]
+  },
+  {
+    "id": "guild-house",
+    "name": "Trade Union",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "guild-house",
+    "variants": [
+      {
+        "id": "guild-house",
+        "name": "Trade Union",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_guildhouse.png",
+        "tier": "all",
+        "workRadius": 15
+      }
+    ]
+  },
+  {
+    "id": "service-07-university",
+    "name": "University",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "service-07-university",
+    "variants": [
+      {
+        "id": "service-07-university",
+        "name": "University",
+        "footprint": {
+          "w": 9,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_university.png",
+        "tier": "artisans",
+        "overlayType": "education",
+        "influenceRadius": 45
+      }
+    ]
+  },
+  {
+    "id": "service-05-cabaret",
+    "name": "Variety Theatre",
+    "category": "public_service",
+    "region": "old_world",
+    "defaultVariantId": "service-05-cabaret",
+    "variants": [
+      {
+        "id": "service-05-cabaret",
+        "name": "Variety Theatre",
+        "footprint": {
+          "w": 4,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_cabaret.png",
+        "tier": "artisans",
+        "overlayType": "culture",
+        "influenceRadius": 40
+      }
+    ]
+  },
+  {
+    "id": "military-anti-armour-gun",
+    "name": "Anti-Armour Gun",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-18-tower-06-armor-pierce-tower",
+    "variants": [
+      {
+        "id": "harbor-18-tower-06-armor-pierce-tower",
+        "name": "Anti-Armour Gun",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_he_guntower.png",
+        "tier": "harbor"
+      },
+      {
+        "id": "harbor-colony01-18-tower-06-armor-pierce-tower",
+        "name": "Anti-Armour Gun",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 1,
+        "iconFile": "A7_he_guntower.png",
+        "tier": "harbor"
+      },
+      {
+        "id": "harbor-arctic18-tower-06-armor-pierce-tower",
+        "name": "Anti-Armour Gun",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 2,
+        "iconFile": "A7_he_guntower.png",
+        "tier": "harbor"
+      },
+      {
+        "id": "harbor-colony02-18-tower-06-armor-pierce-tower",
+        "name": "Anti-Armour Gun",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 3,
+        "iconFile": "A7_he_guntower.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "harbor-06-tower-03-monster-gun",
+    "name": "Big Betty",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-06-tower-03-monster-gun",
+    "variants": [
+      {
+        "id": "harbor-06-tower-03-monster-gun",
+        "name": "Big Betty",
+        "footprint": {
+          "w": 6,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_defense_tower_monstergun.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "harbor-05-tower-02-cannon-tower",
+    "name": "Cannon Tower",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-05-tower-02-cannon-tower",
+    "variants": [
+      {
+        "id": "harbor-05-tower-02-cannon-tower",
+        "name": "Cannon Tower",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_defense_tower_cannon.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "harbor-16-commuter-pier",
+    "name": "Commuter Pier",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-16-commuter-pier",
+    "variants": [
+      {
+        "id": "harbor-16-commuter-pier",
+        "name": "Commuter Pier",
+        "footprint": {
+          "w": 15,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_commuter_pier.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "harbor-01-depot",
+    "name": "Depot",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-01-depot",
+    "variants": [
+      {
+        "id": "harbor-01-depot",
+        "name": "Depot",
+        "footprint": {
+          "w": 10,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_depot.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "dockland-module-storage",
+    "name": "Depot",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "dockland-module-storage",
+    "variants": [
+      {
+        "id": "dockland-module-storage",
+        "name": "Depot",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_docklands_module_depot.png",
+        "tier": "harbor"
+      }
+    ],
+    "dlc": "Docklands"
+  },
+  {
+    "id": "dockland-main",
+    "name": "Docklands Main Wharf",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "dockland-main",
+    "variants": [
+      {
+        "id": "dockland-main",
+        "name": "Docklands Main Wharf",
+        "footprint": {
+          "w": 7,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_docklands_main.png",
+        "tier": "harbor",
+        "workRadius": 30
+      }
+    ]
+  },
+  {
+    "id": "dockland-module-export",
+    "name": "Exports Office",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "dockland-module-export",
+    "variants": [
+      {
+        "id": "dockland-module-export",
+        "name": "Exports Office",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_docklands_module_export.png",
+        "tier": "harbor"
+      }
+    ],
+    "dlc": "Docklands"
+  },
+  {
+    "id": "military-flak-emplacement",
+    "name": "Flak Emplacement",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-18-tower-05-flak",
+    "variants": [
+      {
+        "id": "harbor-18-tower-05-flak",
+        "name": "Flak Emplacement",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_flack_tower.png",
+        "tier": "harbor"
+      },
+      {
+        "id": "harbor-18-colony01-tower-05-flak",
+        "name": "Flak Emplacement",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 1,
+        "iconFile": "A7_flack_tower.png",
+        "tier": "harbor"
+      },
+      {
+        "id": "harbor-03-colony02-tower-05-flak",
+        "name": "Flak Emplacement",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 2,
+        "iconFile": "A7_flack_tower.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "military-flame-tower",
+    "name": "Flame Tower",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-17-tower-04-fire-tower",
+    "variants": [
+      {
+        "id": "harbor-17-tower-04-fire-tower",
+        "name": "Flame Tower",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_flame_tower.png",
+        "tier": "harbor"
+      },
+      {
+        "id": "harbor-colony01-17-tower-03-fire-tower",
+        "name": "Flame Tower",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 1,
+        "iconFile": "A7_flame_tower.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "dockland-module-item",
+    "name": "Harbourmaster",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "dockland-module-item",
+    "variants": [
+      {
+        "id": "dockland-module-item",
+        "name": "Harbourmaster",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_docklands_module_item.png",
+        "tier": "harbor"
+      }
+    ],
+    "dlc": "Docklands"
+  },
+  {
+    "id": "harbor-office",
+    "name": "Harbourmaster's Office",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-office",
+    "variants": [
+      {
+        "id": "harbor-office",
+        "name": "Harbourmaster's Office",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_harbour_kontor.png",
+        "tier": "harbor",
+        "workRadius": 20
+      }
+    ]
+  },
+  {
+    "id": "dockland-module-speedup",
+    "name": "Loading Wharf",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "dockland-module-speedup",
+    "variants": [
+      {
+        "id": "dockland-module-speedup",
+        "name": "Loading Wharf",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_docklands_module_speed.png",
+        "tier": "harbor"
+      }
+    ],
+    "dlc": "Docklands"
+  },
+  {
+    "id": "harbor-04-tower-01-puckle-gun",
+    "name": "Mounted Guns",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-04-tower-01-puckle-gun",
+    "variants": [
+      {
+        "id": "harbor-04-tower-01-puckle-gun",
+        "name": "Mounted Guns",
+        "footprint": {
+          "w": 4,
+          "h": 4
+        },
+        "order": 0,
+        "iconFile": "A7_defense_tower_pucklegun.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "harbor-15-oil-storage",
+    "name": "Oil Store",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-15-oil-storage",
+    "variants": [
+      {
+        "id": "harbor-15-oil-storage",
+        "name": "Oil Store",
+        "footprint": {
+          "w": 4,
+          "h": 8
+        },
+        "order": 0,
+        "iconFile": "A7_oil_storage.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "harbor-08-pier",
+    "name": "Pier",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-08-pier",
+    "variants": [
+      {
+        "id": "harbor-08-pier",
+        "name": "Pier",
+        "footprint": {
+          "w": 6,
+          "h": 7
+        },
+        "order": 0,
+        "iconFile": "A7_pier.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "dockland-module-pier",
+    "name": "Pier",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "dockland-module-pier",
+    "variants": [
+      {
+        "id": "dockland-module-pier",
+        "name": "Pier",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_docklands_module_pier.png",
+        "tier": "harbor"
+      }
+    ],
+    "dlc": "Docklands"
+  },
+  {
+    "id": "harbor-09-tourism-pier-01",
+    "name": "Public Mooring",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-09-tourism-pier-01",
+    "variants": [
+      {
+        "id": "harbor-09-tourism-pier-01",
+        "name": "Public Mooring",
+        "footprint": {
+          "w": 25,
+          "h": 8
+        },
+        "order": 0,
+        "iconFile": "A7_visitor_harbour.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "harbor-07-repair-crane",
+    "name": "Repair Crane",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-07-repair-crane",
+    "variants": [
+      {
+        "id": "harbor-07-repair-crane",
+        "name": "Repair Crane",
+        "footprint": {
+          "w": 5,
+          "h": 5
+        },
+        "order": 0,
+        "iconFile": "A7_repair_crane.png",
+        "tier": "harbor",
+        "workRadius": 20
+      }
+    ]
+  },
+  {
+    "id": "dockland-module-repaircrane",
+    "name": "Repair Crane",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "dockland-module-repaircrane",
+    "variants": [
+      {
+        "id": "dockland-module-repaircrane",
+        "name": "Repair Crane",
+        "footprint": {
+          "w": 3,
+          "h": 3
+        },
+        "order": 0,
+        "iconFile": "A7_docklands_module_crane.png",
+        "tier": "harbor",
+        "workRadius": 20
+      }
+    ],
+    "dlc": "Docklands"
+  },
+  {
+    "id": "shipyards-shipyard",
+    "name": "Shipyard",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-02-sailing-shipyard",
+    "variants": [
+      {
+        "id": "harbor-02-sailing-shipyard",
+        "name": "Sailing Shipyard",
+        "footprint": {
+          "w": 17,
+          "h": 6
+        },
+        "order": 0,
+        "iconFile": "A7_sail_shipyard.png",
+        "tier": "harbor"
+      },
+      {
+        "id": "harbor-03-steam-shipyard",
+        "name": "Steam Shipyard",
+        "footprint": {
+          "w": 17,
+          "h": 7
+        },
+        "order": 1,
+        "iconFile": "A7_steam_shipyard.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "harbor-14a-oil-harbor-i",
+    "name": "Small Oil Harbour",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "harbor-14a-oil-harbor-i",
+    "variants": [
+      {
+        "id": "harbor-14a-oil-harbor-i",
+        "name": "Small Oil Harbour",
+        "footprint": {
+          "w": 10,
+          "h": 7
+        },
+        "order": 0,
+        "iconFile": "A7_oil_habour_01.png",
+        "tier": "harbor"
+      }
+    ]
+  },
+  {
+    "id": "kontor-imperial-01",
+    "name": "Small Trading Post",
+    "category": "infrastructure",
+    "region": "old_world",
+    "defaultVariantId": "kontor-imperial-01",
+    "variants": [
+      {
+        "id": "kontor-imperial-01",
+        "name": "Small Trading Post",
+        "footprint": {
+          "w": 9,
+          "h": 7
+        },
+        "order": 0,
+        "iconFile": "A7_kontor_main.png",
+        "tier": "harbor"
+      }
+    ]
+  }
+]

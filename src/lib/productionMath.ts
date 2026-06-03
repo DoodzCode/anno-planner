@@ -1,6 +1,7 @@
-import type { Placement } from '../types/domain'
+import type { Placement, BuildingVariant } from '../types/domain'
 import type { Building } from '../types/domain'
 import type { ChainBuilding, ChainGood } from '../types/productionChain'
+import { VARIANT_MAP } from '../data/catalog'
 
 // ── Resource flow types ────────────────────────────────────
 
@@ -136,10 +137,30 @@ export function workforceTotals(map: Map<ResourceId, ResourceTally>): Map<string
 
 // ── Back-compat API ────────────────────────────────────────
 
+/** Adapt a unified BuildingVariant (with production stats) to the ChainBuilding shape. */
+export function variantToChainBuilding(v: BuildingVariant): ChainBuilding | null {
+  if (!v.production) return null
+  return {
+    id:                  v.id,
+    name:                v.name,
+    region:              'old_world',
+    tier:                v.tier ?? 'all',
+    category:            'production',
+    baseCycleSeconds:    v.production.baseCycleSeconds,
+    outputPerMin:        v.production.output.perMin,
+    inputs:              v.production.inputs,
+    output:              v.production.output,
+    requiresElectricity: v.production.requiresElectricity,
+    workforce:           v.production.workforce as ChainBuilding['workforce'],
+    verify:              v.production.verify,
+  }
+}
+
 /**
  * Aggregate all production and consumption across every placed building.
  * Returns a Map keyed by good id with produced/consumed/net in t/min at 100% productivity.
  * Buildings with no chain entry are silently skipped.
+ * Checks VARIANT_MAP first (unified catalog); falls back to legacy chain maps.
  */
 export function computeTallies(
   placements: Placement[],
@@ -148,6 +169,13 @@ export function computeTallies(
   chainBuildingMap: Map<string, ChainBuilding>,
 ): Map<string, GoodTally> {
   const resolve = (p: Placement) => {
+    // New path: unified catalog via VARIANT_MAP
+    const variant = VARIANT_MAP.get(p.buildingId)
+    if (variant) {
+      const chain = variantToChainBuilding(variant)
+      if (chain) return { chain, ctx: {} as FlowContext }
+    }
+    // Legacy path: name-based chain lookup
     const catalogBuilding = catalogMap.get(p.buildingId)
     if (!catalogBuilding) return null
     const chainId = chainNameMap.get(catalogBuilding.name)

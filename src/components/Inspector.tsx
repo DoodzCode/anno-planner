@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import { useBlueprintStore } from '../state/blueprintStore'
-import { BUILDING_MAP } from '../data/catalog'
-import { CHAIN_NAME_MAP, CHAIN_BUILDING_MAP, GOODS_MAP } from '../data/chainNameMap'
-import { aggregateFlows, goodsTallies, workforceTotals } from '../lib/productionMath'
+import { BUILDING_MAP, VARIANT_MAP } from '../data/catalog'
+import rawGoods from '../data/goods.json'
+import { aggregateFlows, goodsTallies, workforceTotals, variantToChainBuilding } from '../lib/productionMath'
 import { effectiveFootprint } from '../lib/grid'
 
 export default function Inspector() {
@@ -17,16 +17,17 @@ export default function Inspector() {
   const single   = selected.length === 1 ? selected[0] : null
   const building = single ? BUILDING_MAP.get(single.buildingId) : undefined
 
+  const GOODS_MAP = new Map((rawGoods as { id: string; name: string }[]).map(g => [g.id, g]))
+
   // Production tallies — recompute only when placements change
   const allFlows = useMemo(() => {
     const resolve = (p: typeof placements[number]) => {
-      const cat = BUILDING_MAP.get(p.buildingId)
-      if (!cat) return null
-      const chainId = CHAIN_NAME_MAP.get(cat.name)
-      if (!chainId) return null
-      const chain = CHAIN_BUILDING_MAP.get(chainId)
-      if (!chain) return null
-      return { chain, ctx: {} }
+      const variant = VARIANT_MAP.get(p.buildingId)
+      if (variant) {
+        const chain = variantToChainBuilding(variant)
+        if (chain) return { chain, ctx: {} }
+      }
+      return null
     }
     return aggregateFlows(placements, resolve)
   }, [placements])
