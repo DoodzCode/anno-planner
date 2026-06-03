@@ -7,11 +7,13 @@ import Inspector from './components/Inspector'
 import OverlayBar from './components/OverlayBar'
 import BlueprintLibrary from './components/BlueprintLibrary'
 import Onboarding, { shouldShowOnboarding } from './components/Onboarding'
+import PaneGutter from './components/PaneGutter'
 import { loadCurrentBlueprint, startAutoSave } from './state/persistence'
 import { useBlueprintStore } from './state/blueprintStore'
 import { BUILDING_MAP } from './data/catalog'
 import { exportJSON, exportPNG, openFile, saveFile } from './lib/exportImport'
 import { encodeShareURL, decodeShareURL } from './lib/share'
+import { usePaneLayout } from './hooks/usePaneLayout'
 
 export default function App() {
   const [showLibrary,    setShowLibrary]    = useState(false)
@@ -19,6 +21,7 @@ export default function App() {
   const [toast, setToast]                   = useState<string | null>(null)
   const stageRef      = useRef<Konva.Stage | null>(null)
   const blueprintName = useBlueprintStore(s => s.blueprintName)
+  const { widths, adjustWidth, reset: resetPanes } = usePaneLayout()
 
   // ── Bootstrap ────────────────────────────────────────────
   useEffect(() => {
@@ -98,8 +101,15 @@ export default function App() {
   }
 
   return (
-    <div className="app-shell">
-      <Palette />
+    <div
+      className="app-shell"
+      style={{
+        '--col-left':  `${widths.left}px`,
+        '--col-right': `${widths.right}px`,
+      } as React.CSSProperties}
+    >
+      <Palette leftWidth={widths.left} />
+      <PaneGutter side="left"  onDelta={d => adjustWidth('left',  d)} onReset={resetPanes} />
       <div className="canvas-column">
         <OverlayBar />
         <div className="toolbar">
@@ -127,6 +137,7 @@ export default function App() {
         </div>
         <Canvas onStageReady={stage => { stageRef.current = stage }} />
       </div>
+      <PaneGutter side="right" onDelta={d => adjustWidth('right', d)} onReset={resetPanes} />
       <Inspector />
 
       {showLibrary    && <BlueprintLibrary onClose={() => setShowLibrary(false)} />}

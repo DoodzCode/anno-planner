@@ -302,7 +302,7 @@
 
 <div class="topbar">
   <h1>Anno Planner — Roadmap</h1>
-  <span class="date">Updated 2026-06-02 (M6 Phase 4 complete)</span>
+  <span class="date">Updated 2026-06-03 (M6 Phase 5 complete)</span>
   <nav>
     <a href="#overview">Overview</a>
     <a href="#m0">M0</a>
@@ -386,8 +386,8 @@
         <div class="m-id">M6</div>
         <div class="m-name">Engine &amp; Hardening</div>
         <div class="m-est">Ongoing · frank</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:71%"></div></div>
-        <div class="pbar-label"><span>5 / 7 phases</span><span class="badge active">In Progress</span></div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:86%"></div></div>
+        <div class="pbar-label"><span>6 / 7 phases</span><span class="badge active">In Progress</span></div>
       </div>
 
     </div>
@@ -593,11 +593,13 @@
           <li class="done"><div class="icon">✓</div><span>Duplicate-id integrity test un-skipped; 9 migration tests; <code>migration.ts</code> at 100% coverage</span></li>
         </ul>
 
-        <div class="sub-label">Phase 5 — Resizable panes <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>
+        <div class="sub-label">Phase 5 — Resizable panes <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span>State-driven CSS grid widths with draggable gutters; min/max + proportional auto-adjust; <code>localStorage</code> persist</span></li>
-          <li class="todo"><div class="icon"></div><span>Konva stage re-measures on resize via <code>ResizeObserver</code> — canvas never clips</span></li>
-          <li class="todo"><div class="icon"></div><span>Unit tests for <code>redistribute()</code> math; Playwright drag/persist/reset E2E</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>--col-left</code> / <code>--col-right</code> CSS vars drive a 5-column grid; <code>PaneGutter</code> handles pointer drag, keyboard (±8 / ±32 Shift), double-click reset, and <code>role="separator"</code> a11y</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>localStorage</code> persistence for <code>{left,right}</code> px widths; restored on mount with viewport clamping</span></li>
+          <li class="done"><div class="icon">✓</div><span>Konva stage re-measures via existing <code>ResizeObserver</code> in <code>Canvas.tsx</code> — canvas never clips</span></li>
+          <li class="done"><div class="icon">✓</div><span>16 unit tests for pure <code>redistribute()</code> and <code>clampToViewport()</code> math; 63 total tests green</span></li>
+          <li class="done"><div class="icon">✓</div><span>Palette building list reflows into 2- or 3-column card grid via CSS container queries as palette widens</span></li>
         </ul>
 
         <div class="sub-label">Phase 6 — Hardening <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>

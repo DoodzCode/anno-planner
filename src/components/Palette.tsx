@@ -30,7 +30,9 @@ const CATEGORY_LABEL: Record<string, string> = {
   harbor: 'Harbor', military: 'Military',
 }
 
-export default function Palette() {
+export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
+  const columns = leftWidth >= 390 ? 3 : leftWidth >= 280 ? 2 : 1
+  const maxPrev = columns > 1 ? 52 : 32
   const activeBuildingId = useBlueprintStore((s) => s.activeBuildingId)
   const setActiveBuildingId = useBlueprintStore((s) => s.setActiveBuildingId)
   const clearSelection = useBlueprintStore((s) => s.clearSelection)
@@ -95,8 +97,8 @@ export default function Palette() {
           <div key={cat} className="palette-group">
             <div className="palette-group-header">{CATEGORY_LABEL[cat] ?? cat}</div>
             {grouped.get(cat)!.map(b => {
-              const pw = Math.max(MIN_PREVIEW, Math.min(MAX_PREVIEW, b.footprint.w * TILE_PX * PREVIEW_SCALE))
-              const ph = Math.max(MIN_PREVIEW, Math.min(MAX_PREVIEW, b.footprint.h * TILE_PX * PREVIEW_SCALE))
+              const pw = Math.max(MIN_PREVIEW, Math.min(maxPrev, b.footprint.w * TILE_PX * PREVIEW_SCALE))
+              const ph = Math.max(MIN_PREVIEW, Math.min(maxPrev, b.footprint.h * TILE_PX * PREVIEW_SCALE))
               const isActive = activeBuildingId === b.id
               return (
                 <button

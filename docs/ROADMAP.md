@@ -1,6 +1,6 @@
 # Anno Planner — Development Roadmap
 
-> Status updated: 2026-06-02 (M6 Phase 4 complete)
+> Status updated: 2026-06-03 (M6 Phase 5 complete)
 
 ## Status legend
 
@@ -23,7 +23,7 @@
 | M3 | Math, library & export | 3–5 | `[x]` | Ian (lead) |
 | M4 | PWA polish | 2–3 | `[x]` | Both |
 | M5 | Personal release | 0.5–1 | `[x]` | Both |
-| M6 | Engine & hardening | Ongoing | `[~]` (5/7 phases) | frank |
+| M6 | Engine & hardening | Ongoing | `[~]` (6/7 phases) | frank |
 
 ---
 
@@ -185,14 +185,15 @@ Fixes #4 (duplicate-id bug; Small Warehouse tier variants now have unique ids).
 - [x] Duplicate-id integrity test un-skipped and passing
 - [x] 9 migration tests; `migration.ts` at 100% coverage; 47 total tests green
 
-### Phase 5 — Resizable panes `[ ]`
+### Phase 5 — Resizable panes `[x]`
 
 Fixes #6 (hard-coded 3-column grid in `App.css`).
 
-- [ ] State-driven CSS grid widths with draggable gutters; min/max constraints + proportional auto-adjust on window resize
-- [ ] `localStorage` persistence for `{left, right}` column widths with viewport clamping on restore
-- [ ] Konva stage re-measures on pane resize via `ResizeObserver` — canvas never clips
-- [ ] Unit tests for `redistribute()` math; Playwright drag/persist/reset E2E
+- [x] `--col-left` / `--col-right` CSS vars drive a 5-column grid; `PaneGutter` handles pointer drag, keyboard (±8px / ±32px Shift), double-click reset, and `role="separator"` a11y
+- [x] `localStorage` persistence for `{left, right}` px widths; restored on mount with viewport clamping
+- [x] Konva stage re-measures via existing `ResizeObserver` in `Canvas.tsx` — canvas never clips
+- [x] 16 unit tests for pure `redistribute()` and `clampToViewport()` math; 63 total tests green
+- [x] Palette building list reflows into 2- or 3-column card grid via CSS container queries as palette widens
 
 ### Phase 6 — Hardening `[ ]`
 
