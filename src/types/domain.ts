@@ -5,6 +5,50 @@ export interface Footprint {
   h: number
 }
 
+// ── M4-B: Family + variant model ───────────────────────────────────────────
+
+export type BuildingCategory =
+  | 'residence'
+  | 'production'
+  | 'public_service'
+  | 'infrastructure'
+
+export type Region = 'old_world' | 'new_world' | 'arctic' | 'enbesa'
+
+export interface ProductionStats {
+  requiresElectricity: boolean
+  baseCycleSeconds: number
+  output: { good: string; perMin: number }
+  inputs: { good: string; perMin: number }[]
+  workforce?: { tier: string; count: number }[]
+  verify?: boolean
+}
+
+export interface BuildingVariant {
+  id: string                   // legacy Building.id — public contract, never change
+  name: string
+  iconFile?: string
+  footprint: Footprint         // never null; matches existing call sites
+  tier?: string
+  order: number                // 0 = base/lowest = default placement
+  overlayType?: string
+  workRadius?: number
+  influenceRadius?: number
+  roadRequired?: boolean
+  production?: ProductionStats // absent on non-producing buildings
+}
+
+export interface BuildingFamily {
+  id: string                      // stable family slug derived from group
+  name: string                    // display name (lowest-tier variant name)
+  category: BuildingCategory
+  region: Region
+  dlc?: string
+  defaultVariantId: string        // variant with order === 0
+  variants: BuildingVariant[]
+}
+
+/** @deprecated use BuildingVariant */
 export interface Building {
   id: string
   name: string

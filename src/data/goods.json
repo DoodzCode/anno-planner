@@ -1,0 +1,247 @@
+[
+  {
+    "id": "timber",
+    "name": "Timber",
+    "category": "construction"
+  },
+  {
+    "id": "bricks",
+    "name": "Bricks",
+    "category": "construction"
+  },
+  {
+    "id": "clay",
+    "name": "Clay",
+    "category": "intermediate"
+  },
+  {
+    "id": "steel_beams",
+    "name": "Steel Beams",
+    "category": "construction"
+  },
+  {
+    "id": "windows",
+    "name": "Windows",
+    "category": "construction"
+  },
+  {
+    "id": "reinforced_concrete",
+    "name": "Reinforced Concrete",
+    "category": "construction"
+  },
+  {
+    "id": "weapons",
+    "name": "Weapons",
+    "category": "goods"
+  },
+  {
+    "id": "iron",
+    "name": "Iron",
+    "category": "intermediate"
+  },
+  {
+    "id": "coal",
+    "name": "Coal",
+    "category": "intermediate"
+  },
+  {
+    "id": "steel",
+    "name": "Steel",
+    "category": "intermediate"
+  },
+  {
+    "id": "quartz_sand",
+    "name": "Quartz Sand",
+    "category": "intermediate"
+  },
+  {
+    "id": "glass",
+    "name": "Glass",
+    "category": "intermediate"
+  },
+  {
+    "id": "limestone",
+    "name": "Limestone",
+    "category": "intermediate"
+  },
+  {
+    "id": "cement",
+    "name": "Cement",
+    "category": "intermediate"
+  },
+  {
+    "id": "fish",
+    "name": "Fish",
+    "category": "food"
+  },
+  {
+    "id": "potatoes",
+    "name": "Potatoes",
+    "category": "crop"
+  },
+  {
+    "id": "schnapps",
+    "name": "Schnapps",
+    "category": "food"
+  },
+  {
+    "id": "wool",
+    "name": "Wool",
+    "category": "intermediate"
+  },
+  {
+    "id": "work_clothes",
+    "name": "Work Clothes",
+    "category": "goods"
+  },
+  {
+    "id": "pigs",
+    "name": "Pigs",
+    "category": "livestock"
+  },
+  {
+    "id": "sausages",
+    "name": "Sausages",
+    "category": "food"
+  },
+  {
+    "id": "grain",
+    "name": "Grain",
+    "category": "crop"
+  },
+  {
+    "id": "flour",
+    "name": "Flour",
+    "category": "intermediate"
+  },
+  {
+    "id": "bread",
+    "name": "Bread",
+    "category": "food"
+  },
+  {
+    "id": "tallow",
+    "name": "Tallow",
+    "category": "intermediate"
+  },
+  {
+    "id": "soap",
+    "name": "Soap",
+    "category": "goods"
+  },
+  {
+    "id": "hops",
+    "name": "Hops",
+    "category": "crop"
+  },
+  {
+    "id": "malt",
+    "name": "Malt",
+    "category": "intermediate"
+  },
+  {
+    "id": "beer",
+    "name": "Beer",
+    "category": "food"
+  },
+  {
+    "id": "sails",
+    "name": "Sails",
+    "category": "goods"
+  },
+  {
+    "id": "goulash",
+    "name": "Goulash",
+    "category": "intermediate"
+  },
+  {
+    "id": "canned_food",
+    "name": "Canned Food",
+    "category": "food"
+  },
+  {
+    "id": "furs",
+    "name": "Furs",
+    "category": "intermediate"
+  },
+  {
+    "id": "cotton",
+    "name": "Cotton",
+    "category": "crop"
+  },
+  {
+    "id": "cotton_fabric",
+    "name": "Cotton Fabric",
+    "category": "intermediate"
+  },
+  {
+    "id": "fur_coats",
+    "name": "Fur Coats",
+    "category": "goods"
+  },
+  {
+    "id": "sewing_machines",
+    "name": "Sewing Machines",
+    "category": "goods"
+  },
+  {
+    "id": "glasses",
+    "name": "Glasses",
+    "category": "goods"
+  },
+  {
+    "id": "pocket_watches",
+    "name": "Pocket Watches",
+    "category": "goods"
+  },
+  {
+    "id": "brass",
+    "name": "Brass",
+    "category": "intermediate"
+  },
+  {
+    "id": "copper",
+    "name": "Copper",
+    "category": "intermediate"
+  },
+  {
+    "id": "zinc",
+    "name": "Zinc",
+    "category": "intermediate"
+  },
+  {
+    "id": "filaments",
+    "name": "Filaments",
+    "category": "intermediate"
+  },
+  {
+    "id": "light_bulbs",
+    "name": "Light Bulbs",
+    "category": "goods"
+  },
+  {
+    "id": "caoutchouc",
+    "name": "Caoutchouc",
+    "category": "intermediate"
+  },
+  {
+    "id": "penny_farthings",
+    "name": "Penny Farthings",
+    "category": "goods"
+  },
+  {
+    "id": "steam_motors",
+    "name": "Steam Motors",
+    "category": "intermediate"
+  },
+  {
+    "id": "red_peppers",
+    "name": "Red Peppers",
+    "category": "crop"
+  },
+  {
+    "id": "cattle",
+    "name": "Cattle",
+    "category": "livestock"
+  }
+]
