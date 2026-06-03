@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anno Planner — M4-B: Building Data Model &amp; Consolidation</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0c0c14;
+      --surface:  #13131f;
+      --surface2: #1a1a2e;
+      --border:   #252538;
+      --border2:  #303050;
+      --accent:   #c8a96e;
+      --blue:     #5b8dd9;
+      --green:    #5a9e6f;
+      --steel:    #5b7a99;
+      --text:     #d8d8e8;
+      --muted:    #6a6a90;
+      --done:     #4caf7d;
+      --done-bg:  #0d2a1a;
+      --prog:     #c8a96e;
+      --prog-bg:  #2a2010;
+      --todo-bg:  #1a1a2e;
+      --block:    #e05c5c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #0c0c14ee;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .topbar h1 { font-size: 1.1rem; color: var(--accent); letter-spacing: .04em; white-space: nowrap; }
+    .topbar .date { font-size: .78rem; color: var(--muted); white-space: nowrap; }
+    .topbar nav { margin-left: auto; display: flex; gap: 1.25rem; }
+    .topbar nav a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .15s; }
+    .topbar nav a:hover { color: var(--text); }
+
+    /* ── Layout ── */
+    .page { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    section { margin-bottom: 3rem; }
+    section > h2 {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Summary strip ── */
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .75rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 640px) { .summary-strip { grid-template-columns: 1fr 1fr; } }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .85rem 1rem;
+    }
+    .stat-card .stat-val {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .stat-card .stat-label { font-size: .72rem; color: var(--muted); margin-top: .2rem; }
+
+    /* ── Overview phase cards ── */
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .75rem;
+    }
+    @media (max-width: 640px) { .overview { grid-template-columns: 1fr 1fr; } }
+
+    .m-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .m-card.done   { border-color: #1e4030; }
+    .m-card.active { border-color: var(--prog); }
+
+    .m-card .m-id { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .25rem; }
+    .m-card .m-name { font-size: .9rem; font-weight: 600; color: var(--text); margin-bottom: .1rem; }
+    .m-card .m-est { font-size: .72rem; color: var(--muted); margin-bottom: .65rem; }
+
+    .pbar-track { height: 5px; border-radius: 3px; background: var(--border2); overflow: hidden; margin-bottom: .35rem; }
+    .pbar-fill  { height: 100%; border-radius: 3px; background: var(--prog); transition: width .4s ease; }
+    .pbar-fill.full { background: var(--done); }
+
+    .pbar-label { font-size: .68rem; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+
+    .badge {
+      display: inline-block;
+      padding: .15rem .5rem;
+      border-radius: 3px;
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .badge.done    { background: var(--done-bg); color: var(--done); }
+    .badge.active  { background: var(--prog-bg); color: var(--prog); }
+    .badge.pending { background: var(--todo-bg); color: var(--muted); }
+
+    /* ── Phase detail blocks ── */
+    .phase-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .phase-block.done   { border-color: #1e4030; }
+    .phase-block.active { border-color: var(--prog); }
+    .phase-block.todo   { border-color: var(--border); opacity: .85; }
+
+    .phase-header {
+      padding: 1rem 1.25rem .75rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-header h3 { font-size: 1rem; font-weight: 700; color: var(--accent); }
+    .phase-header .est { font-size: .75rem; color: var(--muted); margin-top: .1rem; }
+    .phase-header .goal { font-size: .82rem; color: var(--muted); margin-top: .3rem; }
+
+    .phase-body { padding: 1rem 1.25rem; }
+
+    .sub-label {
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: .5rem;
+      margin-top: .9rem;
+    }
+    .sub-label:first-child { margin-top: 0; }
+
+    /* ── Task lists ── */
+    .tasks { list-style: none; display: flex; flex-direction: column; gap: .3rem; }
+    .tasks li { display: flex; align-items: flex-start; gap: .6rem; font-size: .84rem; }
+    .tasks li .icon {
+      margin-top: .18em;
+      flex-shrink: 0;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .6rem; font-weight: 900;
+    }
+    .tasks li.done  .icon { background: var(--done);  color: #0d2a1a; }
+    .tasks li.prog  .icon { background: var(--prog);  color: #2a2010; }
+    .tasks li.todo  .icon { background: transparent;  border: 1.5px solid var(--border2); }
+    .tasks li.block .icon { background: var(--block); color: #fff; }
+
+    .tasks li.done  > span { color: var(--muted); text-decoration: line-through; text-decoration-color: #3a4030; }
+    .tasks li.prog  > span { color: var(--text); }
+    .tasks li.todo  > span { color: var(--muted); }
+    .tasks li.block > span { color: var(--block); }
+
+    /* ── Commit chip ── */
+    .commit-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+    .commit-chip {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: .2rem .6rem;
+      font-size: .72rem;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      color: var(--blue);
+    }
+    .commit-chip .msg { color: var(--muted); font-family: inherit; }
+
+    /* ── Findings callout ── */
+    .callout {
+      margin-top: .75rem;
+      padding: .6rem .85rem;
+      background: var(--surface2);
+      border-left: 2px solid var(--border2);
+      border-radius: 0 4px 4px 0;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .callout strong { color: var(--text); }
+    .callout.warn   { border-left-color: var(--prog); }
+    .callout.info   { border-left-color: var(--blue); }
+
+    /* ── Data stats row ── */
+    .data-stats {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem;
+    }
+    .data-pill {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: .2rem .65rem;
+      font-size: .74rem;
+      color: var(--muted);
+    }
+    .data-pill strong { color: var(--accent); }
+
+    /* ── Deferred section ── */
+    .deferred-list { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .deferred-list li {
+      font-size: .84rem;
+      color: var(--muted);
+      padding-left: .9rem;
+      position: relative;
+    }
+    .deferred-list li::before { content: '○'; position: absolute; left: 0; color: var(--border2); font-size: .65rem; top: .2em; }
+
+    /* ── Legend ── */
+    .legend { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: .45rem; font-size: .8rem; color: var(--muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Category color swatches ── */
+    .swatch-row { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .5rem; }
+    .swatch {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .78rem; color: var(--muted);
+    }
+    .swatch-dot { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Anno Planner — M4-B Progress</h1>
+  <span class="date">Updated 2026-06-03 · Branch: m4-b</span>
+  <nav>
+    <a href="#overview">Overview</a>
+    <a href="#p1">Phase 1</a>
+    <a href="#p2">Phase 2</a>
+    <a href="#p3">Phase 3</a>
+    <a href="#p4">Phase 4</a>
+    <a href="#p5">Phase 5</a>
+    <a href="#deferred">Deferred</a>
+  </nav>
+</div>
+
+<div class="page">
+
+  <!-- ── Legend ── -->
+  <section>
+    <h2>Legend</h2>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--done)"></div> Done</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--prog)"></div> In progress</div>
+      <div class="legend-item"><div class="legend-dot" style="background:transparent;border:1.5px solid #303050"></div> Not started</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--block)"></div> Blocked</div>
+    </div>
+  </section>
+
+  <!-- ── Stats strip ── -->
+  <section>
+    <h2>Catalog Snapshot</h2>
+    <div class="summary-strip">
+      <div class="stat-card">
+        <div class="stat-val">133</div>
+        <div class="stat-label">Building families</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">156</div>
+        <div class="stat-label">Variants (all legacy ids preserved)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">34</div>
+        <div class="stat-label">Variants with production stats</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">47</div>
+        <div class="stat-label">Tests passing</div>
+      </div>
+    </div>
+
+    <div class="data-stats">
+      <div class="data-pill"><strong>7</strong> multi-variant families</div>
+      <div class="data-pill">Residences (6), Small Warehouses (5), Skyscrapers (8), Shipyards (2)</div>
+      <div class="data-pill">Flame Towers (2), Anti-Armour Guns (4), Flak Emplacements (3)</div>
+      <div class="data-pill"><strong>1</strong> expected orphan (cotton_mill — New World only)</div>
+      <div class="data-pill">Furnace → Steelworks + Weapons ratio ✓</div>
+    </div>
+
+    <div style="margin-top:.85rem;">
+      <div class="sub-label">Category colors (defined, not yet wired to components)</div>
+      <div class="swatch-row">
+        <div class="swatch"><div class="swatch-dot" style="background:#c8a96e"></div> Residence <code style="font-size:.7rem;color:#6a6a90">#c8a96e</code></div>
+        <div class="swatch"><div class="swatch-dot" style="background:#5b7a99"></div> Production <code style="font-size:.7rem;color:#6a6a90">#5b7a99</code></div>
+        <div class="swatch"><div class="swatch-dot" style="background:#5a9e6f"></div> Public Service <code style="font-size:.7rem;color:#6a6a90">#5a9e6f</code></div>
+        <div class="swatch"><div class="swatch-dot" style="background:#6b7280"></div> Infrastructure <code style="font-size:.7rem;color:#6a6a90">#6b7280</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Overview cards ── -->
+  <section id="overview">
+    <h2>Phase Overview</h2>
+    <div class="overview">
+
+      <div class="m-card done">
+        <div class="m-id">Phase 1</div>
+        <div class="m-name">Schema Redesign</div>
+        <div class="m-est">Types &amp; catalog bridge</div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>commit c279259</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card done">
+        <div class="m-id">Phase 2</div>
+        <div class="m-name">Catalog Build</div>
+        <div class="m-est">Merge + data pipeline</div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>commit f4a8394</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card">
+        <div class="m-id">Phase 3</div>
+        <div class="m-name">Component Integration</div>
+        <div class="m-est">Palette, Canvas, Minimap</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
+        <div class="pbar-label"><span>0 / 5 tasks</span><span class="badge pending">Pending</span></div>
+      </div>
+
+      <div class="m-card">
+        <div class="m-id">Phase 4</div>
+        <div class="m-name">Variant Selector UI</div>
+        <div class="m-est">Palette dropdown per family</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
+        <div class="pbar-label"><span>0 / 4 tasks</span><span class="badge pending">Pending</span></div>
+      </div>
+
+      <div class="m-card">
+        <div class="m-id">Phase 5</div>
+        <div class="m-name">Finish &amp; Merge</div>
+        <div class="m-est">Color wiring, ROADMAP sync, PR</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
+        <div class="pbar-label"><span>0 / 4 tasks</span><span class="badge pending">Pending</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Phase 1 ── -->
+  <section id="p1">
+    <h2>Phase Detail</h2>
+
+    <div class="phase-block done">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 1 — Schema Redesign</h3>
+          <div class="est">Branch: m4-b · Clyde</div>
+          <div class="goal">Add BuildingFamily / BuildingVariant model; deprecate flat Building; establish category color constants and catalog bridge function.</div>
+        </div>
+        <span class="badge done">Done</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Completed tasks</div>
+        <ul class="tasks">
+          <li class="done"><span class="icon">✓</span><span><code>domain.ts</code> — BuildingCategory, Region, ProductionStats, BuildingVariant, BuildingFamily types added</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>domain.ts</code> — Building kept as <code>@deprecated</code> interface; all existing call sites compile unchanged</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>categoryColors.ts</code> — single <code>categoryColors: Record&lt;BuildingCategory, string&gt;</code> map created</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>catalog.ts</code> — FAMILIES, FAMILY_MAP, VARIANT_MAP, FAMILY_CATEGORIES, getBuilding() bridge exported</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>catalog.ts</code> — CATEGORIES marked <code>@deprecated Use FAMILY_CATEGORIES</code></span></li>
+          <li class="done"><span class="icon">✓</span><span><code>building-catalog.json</code> — empty stub added so TypeScript build never breaks</span></li>
+          <li class="done"><span class="icon">✓</span><span>Code review (7 findings fixed): footprint field name aligned with call sites, outputPerMin dropped from ProductionStats, export re-export removed</span></li>
+          <li class="done"><span class="icon">✓</span><span>tsc clean · 47 / 47 tests passing</span></li>
+        </ul>
+
+        <div class="callout info">
+          <strong>Design decision:</strong> BuildingVariant.footprint uses the existing <code>Footprint</code> type (not an inline <code>&#123;w,h&#125;</code>) so all Canvas / Minimap / Palette call sites reading <code>.footprint.w/.h</code> continue to work without change.
+        </div>
+
+        <div class="commit-row">
+          <span class="commit-chip">c279259 <span class="msg">M4-B: introduce BuildingFamily/BuildingVariant schema and catalog bridge</span></span>
+        </div>
+      </div>
+    </div>
+
+  <!-- ── Phase 2 ── -->
+    <div class="phase-block done" id="p2">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 2 — Catalog Build</h3>
+          <div class="est">Branch: m4-b · Clyde</div>
+          <div class="goal">Produce building-catalog.json by auditing, categorising, grouping, and merging the two legacy datasets. Wire productionMath and Inspector to the unified catalog. Archive source files.</div>
+        </div>
+        <span class="badge done">Done</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Build script — scripts/build-catalog.ts</div>
+        <ul class="tasks">
+          <li class="done"><span class="icon">✓</span><span>Phase A: audit — matched 34 chain buildings; 1 expected orphan (cotton_mill); 0 unexpected orphans</span></li>
+          <li class="done"><span class="icon">✓</span><span>Phase B: category assignment — residence/production/public_service/infrastructure; edge calls logged in report</span></li>
+          <li class="done"><span class="icon">✓</span><span>Phase C: family grouping — 133 families; 7 multi-variant families auto-detected via name normalisation</span></li>
+          <li class="done"><span class="icon">✓</span><span>Phase D: production merge — 34 variants populated; Furnace→Steelworks+Weapons ratio assertion passes</span></li>
+          <li class="done"><span class="icon">✓</span><span>Phase E: validate &amp; write — zero data loss (all 156 ids preserved); source files archived</span></li>
+        </ul>
+
+        <div class="sub-label">App wiring</div>
+        <ul class="tasks">
+          <li class="done"><span class="icon">✓</span><span><code>catalog.ts</code> — BUILDINGS / BUILDING_MAP rebuilt from VARIANT_MAP via back-compat adapter; legacy category strings mapped</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>productionMath.ts</code> — variantToChainBuilding() adapter; computeTallies checks VARIANT_MAP first, legacy chain maps as fallback</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>Inspector.tsx</code> — chain lookup repointed to VARIANT_MAP + variantToChainBuilding; GOODS_MAP sourced from goods.json</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>goods.json</code> — 49 goods extracted from production-chains archive; serves as sibling lookup table</span></li>
+          <li class="done"><span class="icon">✓</span><span>dataIntegrity.test.ts — rewritten against building-catalog.json + goods.json; 11 integrity tests passing</span></li>
+          <li class="done"><span class="icon">✓</span><span>Source files deleted after tests passed; archive copies in src/data/archive/</span></li>
+          <li class="done"><span class="icon">✓</span><span>tsc clean · 47 / 47 tests passing</span></li>
+        </ul>
+
+        <div class="callout warn">
+          <strong>Back-compat note:</strong> BUILDING_MAP and BUILDINGS are now derived from VARIANT_MAP. Components still receive <code>Building</code>-shaped objects with legacy category strings (<code>'public'</code>, <code>'harbor'</code>) so existing palette filters keep working without modification. Phase 3 migrates them to the new model.
+        </div>
+
+        <div class="callout info">
+          <strong>Reconciliation report:</strong> <code>docs/reconciliation-report.md</code> — matched / unmatched / orphan summary, multi-variant family table, category edge calls.
+        </div>
+
+        <div class="commit-row">
+          <span class="commit-chip">f4a8394 <span class="msg">M4-B Plan 2: merge building catalog — unified building-catalog.json</span></span>
+        </div>
+      </div>
+    </div>
+
+  <!-- ── Phase 3 ── -->
+    <div class="phase-block todo" id="p3">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 3 — Component Integration</h3>
+          <div class="est">Branch: m4-b · Clyde</div>
+          <div class="goal">Migrate Palette, Canvas, and Minimap from the legacy flat BUILDINGS/BUILDING_MAP to the family/variant model. Remove back-compat shims where safe.</div>
+        </div>
+        <span class="badge pending">Pending</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Palette.tsx</div>
+        <ul class="tasks">
+          <li class="todo"><span class="icon"></span><span>Replace BUILDINGS filter with FAMILIES; render one card per family (showing defaultVariant icon + name)</span></li>
+          <li class="todo"><span class="icon"></span><span>Replace hard-coded CATEGORY_ORDER / CATEGORY_LABEL with FAMILY_CATEGORIES from catalog</span></li>
+          <li class="todo"><span class="icon"></span><span>Group families by <code>family.category</code> (new BuildingCategory ids: public_service, infrastructure)</span></li>
+        </ul>
+
+        <div class="sub-label">Canvas.tsx + Minimap.tsx</div>
+        <ul class="tasks">
+          <li class="todo"><span class="icon"></span><span>Switch BUILDING_MAP.get() calls to getBuilding() — returns BuildingVariant when catalog is populated</span></li>
+          <li class="todo"><span class="icon"></span><span>Replace building.color reads with categoryColors lookup via family.category (requires VARIANT_MAP→FAMILY_MAP join)</span></li>
+        </ul>
+
+        <div class="callout warn">
+          <strong>Human gate:</strong> Kaleb reviews canvas/minimap rendering and palette grouping feel before merge to dev.
+        </div>
+      </div>
+    </div>
+
+  <!-- ── Phase 4 ── -->
+    <div class="phase-block todo" id="p4">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 4 — Variant Selector UI</h3>
+          <div class="est">Branch: m4-b · Clyde</div>
+          <div class="goal">Each multi-variant family gets a variant dropdown/switcher in the palette. Placement always uses the selected variant. Last-used variant remembered per family.</div>
+        </div>
+        <span class="badge pending">Pending</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Tasks</div>
+        <ul class="tasks">
+          <li class="todo"><span class="icon"></span><span>Palette: show variant switcher UI only for families with variants.length &gt; 1</span></li>
+          <li class="todo"><span class="icon"></span><span>State: <code>selectedVariantId: Record&lt;familyId, variantId&gt;</code> — default = defaultVariantId; persisted to localStorage</span></li>
+          <li class="todo"><span class="icon"></span><span>Placement: use selectedVariantId[family.id] as the buildingId on place</span></li>
+          <li class="todo"><span class="icon"></span><span>Quick-select: residences and small warehouses show inline tier tabs (not a full dropdown) for placement speed</span></li>
+        </ul>
+
+        <div class="callout info">
+          <strong>Companion proposal:</strong> Full palette UX (resizable panes + variant dropdown) specified in the Feature Proposal Notion doc. Phase 4 covers the variant selector only — resizable panes are M6 Phase 5.
+        </div>
+
+        <div class="callout warn">
+          <strong>Human gate:</strong> Ian + Kaleb review variant selector UX feel and quick-select behaviour before merge.
+        </div>
+      </div>
+    </div>
+
+  <!-- ── Phase 5 ── -->
+    <div class="phase-block todo" id="p5">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 5 — Finish &amp; Merge</h3>
+          <div class="est">Branch: m4-b · Clyde + Both</div>
+          <div class="goal">Wire category colors to render components, clean up back-compat shims, sync docs, open PR to dev.</div>
+        </div>
+        <span class="badge pending">Pending</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Tasks</div>
+        <ul class="tasks">
+          <li class="todo"><span class="icon"></span><span>Canvas + Minimap + Palette: import categoryColors; replace any remaining building.color reads</span></li>
+          <li class="todo"><span class="icon"></span><span>Remove BUILDINGS back-compat array and BUILDING_MAP adapter from catalog.ts once all consumers use VARIANT_MAP / FAMILY_MAP directly</span></li>
+          <li class="todo"><span class="icon"></span><span>Update ROADMAP.md and ROADMAP.html: mark M4-B phases complete, log under M6 or as standalone entry</span></li>
+          <li class="todo"><span class="icon"></span><span>Open PR: m4-b → dev; both humans review before merge</span></li>
+        </ul>
+
+        <div class="callout warn">
+          <strong>Human gate:</strong> Full PR review by Ian + Kaleb before merge to dev. Check: production math correctness, palette grouping accuracy, variant selector UX.
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── Deferred ── -->
+  <section id="deferred">
+    <h2>Out of Scope for M4-B</h2>
+    <ul class="deferred-list">
+      <li>Resizable panes — tracked in M6 Phase 5</li>
+      <li>Auto-upgrading already-placed buildings along a tier chain</li>
+      <li>Map-aware constraints (fertility, deposits)</li>
+      <li>Net-new building data beyond what the two source datasets contained</li>
+      <li>New World / Arctic / Enbesa catalog population (region field scaffolded, data not yet authored)</li>
+      <li>Swappable color theme system — categoryColors is the stub; full theming is Phase 2 scope</li>
+      <li>Optimizer, multiplayer, mod support — Phase 2</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  Branch m4-b · Anno Planner · Updated 2026-06-03 · Clyde (Citadel KAI)
+</footer>
+
+</body>
+</html>
