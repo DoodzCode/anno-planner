@@ -3,7 +3,7 @@ import type Konva from 'konva'
 import { useBlueprintStore } from '../state/blueprintStore'
 import { getBuilding, VARIANT_FAMILY_MAP } from '../data/catalog'
 import { categoryColors } from '../constants/categoryColors'
-import { TILE_PX, effectiveFootprint } from '../lib/grid'
+import { TILE_PX, GRID_COLS, GRID_ROWS, effectiveFootprint } from '../lib/grid'
 
 interface Props {
   stage: Konva.Stage | null
@@ -22,9 +22,8 @@ export default function Minimap({ stage }: Props) {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // World dimensions in tiles — match the dynamic canvas grid
-    const worldCols = stage ? stage.width()  / TILE_PX : MAP_W
-    const worldRows = stage ? stage.height() / TILE_PX : MAP_H
+    const worldCols = GRID_COLS
+    const worldRows = GRID_ROWS
 
     const scaleX = MAP_W / worldCols
     const scaleY = MAP_H / worldRows
