@@ -432,7 +432,7 @@
   flex: 1;
 }
 
-.konva-container { width: 100%; height: 100%; }
+.konva-container { display: block; }
 
 /* ── Inspector ──────────────────────────────────────────── */
 

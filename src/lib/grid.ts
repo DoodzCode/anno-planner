@@ -1,8 +1,8 @@
 import type { Footprint, Rotation } from '../types/domain'
 
 export const TILE_PX = 24
-export const GRID_COLS = 60
-export const GRID_ROWS = 40
+export const GRID_COLS = 107
+export const GRID_ROWS = 60
 
 export function tileToPx(tile: number): number {
   return tile * TILE_PX
