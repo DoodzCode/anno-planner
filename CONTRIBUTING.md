@@ -68,6 +68,43 @@ Both humans review all agent-generated PRs before merge. One human sign-off requ
 5. **Math correctness deferred to humans** — Agents scaffold the production math engine structure; humans verify ratio values against the Anno 1800 wiki before merge.
 6. **PR hygiene** — Agent PRs must include: what changed, why, and what a human reviewer should check.
 
+### Agent skills
+
+Agents **must** read the relevant skill file before acting:
+
+| When | Read |
+|---|---|
+| Starting any task | `agent/skills/html-tracking.md` |
+| Before editing a shared file or opening a PR | `agent/skills/tool-usage.md` |
+| Before starting a new quest / sub-milestone | Both of the above |
+
+Skill files are the source of truth for protocols. This file describes *what* is expected; the skill files describe *how*.
+
+---
+
+### Tracker Protocol (strictly enforced)
+
+Every task, phase, and milestone has a corresponding HTML tracker entry. **Tracker updates are not optional.** An agent that completes a task without updating the tracker has not finished the task.
+
+**Rules:**
+
+7. **Tracker at task start** — When claiming a task, update its HTML tracker entry from `todo` → `prog` (or create the entry if it doesn't exist). Update the topbar date.
+8. **Tracker at task end** — When completing a task, update its entry from `prog` → `done` with `✓` icon and a brief outcome note. If it's the last task in a phase, mark the phase done, add commit chips, and update the ROADMAP.html overview card.
+9. **Scope → tracker type** — Small task: update nearest existing tracker section. Quest (multi-phase named work): create `docs/<QUEST-ID>-PROGRESS.html`. New top-level milestone: add to `docs/ROADMAP.html`.
+10. **Design system** — All HTML trackers use the design system defined in `agent/skills/html-tracking.md`. No new color palettes, no markdown-converted HTML.
+11. **Blocker** — If blocked, update the task to `block` class in the tracker, add a `.callout.warn`, and file a blocker entry in `agent/state/blockers.md`.
+12. **Commit trackers separately** — Tracker HTML changes commit separately from code changes: `docs: update <TRACKER>-PROGRESS.html — <what changed>`.
+
+---
+
+### Tool Usage Protocol
+
+13. **code-review-graph** — Run `graph-impact.sh` before editing any file with >2 importers. Run `graph-update.sh` after every commit. Include CRG impact summary in PR body.
+14. **code-review skill** — Run `/code-review medium` before opening any PR. Fix all `critical`/`error` findings. Document `warning` findings in PR if not fixed.
+15. **quality-check.sh** — Must pass before any `git push`. Never bypass.
+
+Full tool documentation: `agent/skills/tool-usage.md`.
+
 ---
 
 ## Pull Request Workflow
