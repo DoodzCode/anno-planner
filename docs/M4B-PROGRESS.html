@@ -357,28 +357,28 @@
         <div class="pbar-label"><span>commit f4a8394</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card done">
         <div class="m-id">Phase 3</div>
         <div class="m-name">Component Integration</div>
         <div class="m-est">Palette, Canvas, Minimap</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 5 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>5 / 5 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card done">
         <div class="m-id">Phase 4</div>
         <div class="m-name">Variant Selector UI</div>
         <div class="m-est">Palette dropdown per family</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 4 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>4 / 4 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card done">
         <div class="m-id">Phase 5</div>
         <div class="m-name">Finish &amp; Merge</div>
         <div class="m-est">Color wiring, ROADMAP sync, PR</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 4 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>4 / 4 tasks</span><span class="badge done">Done</span></div>
       </div>
 
     </div>
@@ -468,28 +468,28 @@
     </div>
 
   <!-- ── Phase 3 ── -->
-    <div class="phase-block todo" id="p3">
+    <div class="phase-block done" id="p3">
       <div class="phase-header">
         <div>
           <h3>Phase 3 — Component Integration</h3>
           <div class="est">Branch: m4-b · Clyde</div>
           <div class="goal">Migrate Palette, Canvas, and Minimap from the legacy flat BUILDINGS/BUILDING_MAP to the family/variant model. Remove back-compat shims where safe.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="phase-body">
 
         <div class="sub-label">Palette.tsx</div>
         <ul class="tasks">
-          <li class="todo"><span class="icon"></span><span>Replace BUILDINGS filter with FAMILIES; render one card per family (showing defaultVariant icon + name)</span></li>
-          <li class="todo"><span class="icon"></span><span>Replace hard-coded CATEGORY_ORDER / CATEGORY_LABEL with FAMILY_CATEGORIES from catalog</span></li>
-          <li class="todo"><span class="icon"></span><span>Group families by <code>family.category</code> (new BuildingCategory ids: public_service, infrastructure)</span></li>
+          <li class="done"><span class="icon">✓</span><span>Replace BUILDINGS filter with FAMILIES; render one card per family (showing defaultVariant icon + name)</span></li>
+          <li class="done"><span class="icon">✓</span><span>Replace hard-coded CATEGORY_ORDER / CATEGORY_LABEL with FAMILY_CATEGORIES from catalog</span></li>
+          <li class="done"><span class="icon">✓</span><span>Group families by <code>family.category</code> (new BuildingCategory ids: public_service, infrastructure)</span></li>
         </ul>
 
         <div class="sub-label">Canvas.tsx + Minimap.tsx</div>
         <ul class="tasks">
-          <li class="todo"><span class="icon"></span><span>Switch BUILDING_MAP.get() calls to getBuilding() — returns BuildingVariant when catalog is populated</span></li>
-          <li class="todo"><span class="icon"></span><span>Replace building.color reads with categoryColors lookup via family.category (requires VARIANT_MAP→FAMILY_MAP join)</span></li>
+          <li class="done"><span class="icon">✓</span><span>Switch BUILDING_MAP.get() calls to getBuilding() — returns BuildingVariant when catalog is populated</span></li>
+          <li class="done"><span class="icon">✓</span><span>Replace building.color reads with categoryColors lookup via family.category (requires VARIANT_MAP→FAMILY_MAP join)</span></li>
         </ul>
 
         <div class="callout warn">
@@ -499,23 +499,23 @@
     </div>
 
   <!-- ── Phase 4 ── -->
-    <div class="phase-block todo" id="p4">
+    <div class="phase-block done" id="p4">
       <div class="phase-header">
         <div>
           <h3>Phase 4 — Variant Selector UI</h3>
-          <div class="est">Branch: m4-b · Clyde</div>
+          <div class="est">Branch: m4-b · Clyde + Tyr</div>
           <div class="goal">Each multi-variant family gets a variant dropdown/switcher in the palette. Placement always uses the selected variant. Last-used variant remembered per family.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="phase-body">
 
         <div class="sub-label">Tasks</div>
         <ul class="tasks">
-          <li class="todo"><span class="icon"></span><span>Palette: show variant switcher UI only for families with variants.length &gt; 1</span></li>
-          <li class="todo"><span class="icon"></span><span>State: <code>selectedVariantId: Record&lt;familyId, variantId&gt;</code> — default = defaultVariantId; persisted to localStorage</span></li>
-          <li class="todo"><span class="icon"></span><span>Placement: use selectedVariantId[family.id] as the buildingId on place</span></li>
-          <li class="todo"><span class="icon"></span><span>Quick-select: residences and small warehouses show inline tier tabs (not a full dropdown) for placement speed</span></li>
+          <li class="done"><span class="icon">✓</span><span>Palette: show variant switcher UI only for families with variants.length &gt; 1</span></li>
+          <li class="done"><span class="icon">✓</span><span>State: <code>selectedVariantId: Record&lt;familyId, variantId&gt;</code> — default = defaultVariantId; persisted to localStorage</span></li>
+          <li class="done"><span class="icon">✓</span><span>Placement: use selectedVariantId[family.id] as the buildingId on place</span></li>
+          <li class="done"><span class="icon">✓</span><span>Quick-select: residences and small warehouses show inline tier tabs (not a full dropdown) for placement speed</span></li>
         </ul>
 
         <div class="callout info">
@@ -529,23 +529,23 @@
     </div>
 
   <!-- ── Phase 5 ── -->
-    <div class="phase-block todo" id="p5">
+    <div class="phase-block done" id="p5">
       <div class="phase-header">
         <div>
           <h3>Phase 5 — Finish &amp; Merge</h3>
-          <div class="est">Branch: m4-b · Clyde + Both</div>
+          <div class="est">Branch: m4-b · Clyde + Tyr</div>
           <div class="goal">Wire category colors to render components, clean up back-compat shims, sync docs, open PR to dev.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="phase-body">
 
         <div class="sub-label">Tasks</div>
         <ul class="tasks">
-          <li class="todo"><span class="icon"></span><span>Canvas + Minimap + Palette: import categoryColors; replace any remaining building.color reads</span></li>
-          <li class="todo"><span class="icon"></span><span>Remove BUILDINGS back-compat array and BUILDING_MAP adapter from catalog.ts once all consumers use VARIANT_MAP / FAMILY_MAP directly</span></li>
-          <li class="todo"><span class="icon"></span><span>Update ROADMAP.md and ROADMAP.html: mark M4-B phases complete, log under M6 or as standalone entry</span></li>
-          <li class="todo"><span class="icon"></span><span>Open PR: m4-b → dev; both humans review before merge</span></li>
+          <li class="done"><span class="icon">✓</span><span>Canvas + Minimap + Palette: import categoryColors; replace any remaining building.color reads</span></li>
+          <li class="done"><span class="icon">✓</span><span>Remove BUILDINGS back-compat array and BUILDING_MAP adapter from catalog.ts once all consumers use VARIANT_MAP / FAMILY_MAP directly</span></li>
+          <li class="done"><span class="icon">✓</span><span>Update ROADMAP.md and ROADMAP.html: mark M4-B phases complete, log under M6 or as standalone entry</span></li>
+          <li class="done"><span class="icon">✓</span><span>Open PR: m4-b → dev; both humans review before merge</span></li>
         </ul>
 
         <div class="callout warn">

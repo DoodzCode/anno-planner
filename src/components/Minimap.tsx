@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 import type Konva from 'konva'
 import { useBlueprintStore } from '../state/blueprintStore'
-import { BUILDING_MAP } from '../data/catalog'
+import { getBuilding, VARIANT_FAMILY_MAP } from '../data/catalog'
+import { categoryColors } from '../constants/categoryColors'
 import { TILE_PX, effectiveFootprint } from '../lib/grid'
 
 interface Props {
@@ -45,10 +46,12 @@ export default function Minimap({ stage }: Props) {
 
     // Placements
     for (const p of placements) {
-      const building = BUILDING_MAP.get(p.buildingId)
+      const building = getBuilding(p.buildingId)
       if (!building) continue
       const fp = effectiveFootprint(building.footprint, p.rotation)
-      ctx.fillStyle = building.color + 'cc'
+      const family = VARIANT_FAMILY_MAP.get(p.buildingId)
+      const color = family ? categoryColors[family.category] : '#6b7280'
+      ctx.fillStyle = color + 'cc'
       ctx.fillRect(p.x * scaleX, p.y * scaleY, fp.w * scaleX, fp.h * scaleY)
     }
 

@@ -10,7 +10,6 @@ import Onboarding, { shouldShowOnboarding } from './components/Onboarding'
 import PaneGutter from './components/PaneGutter'
 import { loadCurrentBlueprint, startAutoSave } from './state/persistence'
 import { useBlueprintStore } from './state/blueprintStore'
-import { BUILDING_MAP } from './data/catalog'
 import { exportJSON, exportPNG, openFile, saveFile } from './lib/exportImport'
 import { encodeShareURL, decodeShareURL } from './lib/share'
 import { usePaneLayout } from './hooks/usePaneLayout'
@@ -79,7 +78,7 @@ export default function App() {
 
   const handleImport = async () => {
     try {
-      const bp = await openFile(BUILDING_MAP)
+      const bp = await openFile()
       if (!bp) return
       useBlueprintStore.getState().loadPlacements(bp.placements, bp.name)
       showToast(`Imported "${bp.name}"`)

@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useBlueprintStore } from '../state/blueprintStore'
-import { BUILDING_MAP, VARIANT_MAP } from '../data/catalog'
+import { VARIANT_MAP, VARIANT_FAMILY_MAP } from '../data/catalog'
+import { categoryColors } from '../constants/categoryColors'
 import rawGoods from '../data/goods.json'
 import { aggregateFlows, goodsTallies, workforceTotals, variantToChainBuilding } from '../lib/productionMath'
 import { effectiveFootprint } from '../lib/grid'
@@ -15,7 +16,8 @@ export default function Inspector() {
 
   const selected = placements.filter((p) => selectedIds.includes(p.id))
   const single   = selected.length === 1 ? selected[0] : null
-  const building = single ? BUILDING_MAP.get(single.buildingId) : undefined
+  const variant  = single ? VARIANT_MAP.get(single.buildingId) : undefined
+  const family   = variant ? VARIANT_FAMILY_MAP.get(variant.id) : undefined
 
   const GOODS_MAP = new Map((rawGoods as { id: string; name: string }[]).map(g => [g.id, g]))
 
@@ -61,28 +63,33 @@ export default function Inspector() {
     <aside className="inspector">
       <h2>Inspector</h2>
 
-      {building && single ? (
+      {variant && family && single ? (
         <div className="inspector-content">
-          <div className="inspector-swatch" style={{ background: building.color }} />
-          <div className="inspector-name">{building.name}</div>
-          <Row label="Category" value={building.category} />
-          <Row label="Tier"     value={building.tier} />
+          <div className="inspector-swatch" style={{ background: categoryColors[family.category] }} />
+          <div className="inspector-name">{variant.name}</div>
+          <Row label="Category" value={family.category.replace('_', ' ')} />
+          <Row label="Tier"     value={variant.tier || 'all'} />
           <Row
             label="Footprint"
-            value={`${effectiveFootprint(building.footprint, single.rotation).w}×${effectiveFootprint(building.footprint, single.rotation).h}`}
+            value={`${effectiveFootprint(variant.footprint, single.rotation).w}×${effectiveFootprint(variant.footprint, single.rotation).h}`}
           />
           <Row label="Rotation" value={`${single.rotation}°`} />
-          {building.influenceRadius !== undefined && (
-            <Row label="Influence" value={`${building.influenceRadius} tiles`} />
+          {variant.influenceRadius !== undefined && (
+            <Row label="Influence" value={`${variant.influenceRadius} tiles`} />
           )}
-          {building.inputs  && <Row label="Inputs"  value={building.inputs.join(', ')} />}
-          {building.outputs && <Row label="Outputs" value={building.outputs.join(', ')} />}
-          {building.productionTime !== undefined && (
-            <Row label="Cycle" value={`${building.productionTime}s`} />
+          {variant.production?.inputs && variant.production.inputs.length > 0 && (
+            <Row label="Inputs" value={variant.production.inputs.map(i => i.good).join(', ')} />
+          )}
+          {variant.production?.output && (
+            <Row label="Outputs" value={variant.production.output.good} />
+          )}
+          {variant.production?.baseCycleSeconds !== undefined && (
+            <Row label="Cycle" value={`${variant.production.baseCycleSeconds}s`} />
           )}
           <p className="inspector-hint">R — rotate · Del — delete · Shift+click — multi</p>
         </div>
       ) : selected.length > 1 ? (
+
         <div className="inspector-content">
           <div className="inspector-name">{selected.length} buildings selected</div>
           <p className="inspector-hint">R — rotate all · Del — delete all</p>

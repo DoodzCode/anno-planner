@@ -1,6 +1,6 @@
 # Anno Planner — Development Roadmap
 
-> Status updated: 2026-06-03 (M6 Phase 5 complete; M4-B Phases 1+2 complete)
+> Status updated: 2026-06-13 (M6 Phase 5 complete; M4-B Phases 1-5 complete)
 
 ## Status legend
 
@@ -24,7 +24,7 @@
 | M4 | PWA polish | 2–3 | `[x]` | Both |
 | M5 | Personal release | 0.5–1 | `[x]` | Both |
 | M6 | Engine & hardening | Ongoing | `[~]` (6/7 phases) | frank |
-| M4-B | Data model & consolidation *(side quest)* | Ongoing | `[~]` (2/5 phases) | Clyde |
+| M4-B | Data model & consolidation *(side quest)* | Completed | `[x]` (5/5 phases) | Clyde + Tyr |
 
 ---
 
@@ -204,7 +204,7 @@ Fixes #6 (hard-coded 3-column grid in `App.css`).
 
 ---
 
-## M4-B — Data Model & Consolidation *(side quest)* `[~]` *(started 2026-06-03)*
+## M4-B — Data Model & Consolidation *(side quest)* `[x]` *(started 2026-06-03, completed 2026-06-13)*
 
 **Goal:** Replace flat `Building` catalog with `BuildingFamily` / `BuildingVariant` model. Merge production chain data into unified `building-catalog.json`. Enable variant-selector palette UX.
 
@@ -229,25 +229,25 @@ Fixes #6 (hard-coded 3-column grid in `App.css`).
 - [x] `dataIntegrity.test.ts` — rewritten against `building-catalog.json` + `goods.json`
 - [x] Source files archived in `src/data/archive/`; `tsc` clean · 47 / 47 tests green
 
-### Phase 3 — Component integration `[ ]`
+### Phase 3 — Component integration `[x]`
 
-- [ ] `Palette.tsx` — use `FAMILIES`; group by `BuildingCategory`; replace hard-coded `CATEGORY_ORDER`
-- [ ] `Canvas.tsx` + `Minimap.tsx` — switch to `getBuilding()`; replace `building.color` with `categoryColors` lookup
-- [ ] **Human gate:** Kaleb reviews canvas/palette rendering before merge to `dev`
+- [x] `Palette.tsx` — use `FAMILIES`; group by `BuildingCategory`; replace hard-coded `CATEGORY_ORDER`
+- [x] `Canvas.tsx` + `Minimap.tsx` — switch to `getBuilding()`; replace `building.color` with `categoryColors` lookup
+- [x] **Human gate:** Kaleb reviews canvas/palette rendering before merge to `dev`
 
-### Phase 4 — Variant selector UI `[ ]`
+### Phase 4 — Variant selector UI `[x]`
 
-- [ ] Palette shows one card per family; variant dropdown for families with `variants.length > 1`
-- [ ] `selectedVariantId: Record<familyId, variantId>` state; persisted to localStorage
-- [ ] Quick-select tier tabs for residences and warehouses
-- [ ] **Human gate:** Ian + Kaleb review UX before merge
+- [x] Palette shows one card per family; variant dropdown for families with `variants.length > 1`
+- [x] `selectedVariantId: Record<familyId, variantId>` state; persisted to localStorage
+- [x] Quick-select tier tabs for residences and warehouses
+- [x] **Human gate:** Ian + Kaleb review UX before merge
 
-### Phase 5 — Finish & merge `[ ]`
+### Phase 5 — Finish & merge `[x]`
 
-- [ ] Wire `categoryColors` to all render components (replace `building.color`)
-- [ ] Remove `BUILDINGS` back-compat array once all consumers use `VARIANT_MAP` / `FAMILY_MAP`
-- [ ] Update `ROADMAP.md` + `ROADMAP.html` to mark M4-B complete
-- [ ] Open PR: `m4-b` → `dev`; both humans review before merge
+- [x] Wire `categoryColors` to all render components (replace `building.color`)
+- [x] Remove `BUILDINGS` back-compat array once all consumers use `VARIANT_MAP` / `FAMILY_MAP`
+- [x] Update `ROADMAP.md` + `ROADMAP.html` to mark M4-B complete
+- [x] Open PR: `m4-b` → `dev`; both humans review before merge
 
 ---
 
