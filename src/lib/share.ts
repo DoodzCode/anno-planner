@@ -1,5 +1,6 @@
 import LZString from 'lz-string'
 import type { Placement } from '../types/domain'
+import { migratePlacements } from './migration'
 
 const HASH_PREFIX = '#bp='
 
@@ -37,7 +38,8 @@ export function decodeShareURL(hash: string = window.location.hash): Placement[]
         typeof p.x === 'number' &&
         typeof p.y === 'number',
     )
-    return placements.length > 0 ? placements : null
+    const migrated = migratePlacements(placements)
+    return migrated.length > 0 ? migrated : null
   } catch {
     return null
   }

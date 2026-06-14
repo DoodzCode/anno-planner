@@ -302,7 +302,7 @@
 
 <div class="topbar">
   <h1>Anno Planner — Roadmap</h1>
-  <span class="date">Updated 2026-05-30 (M4 complete)</span>
+  <span class="date">Updated 2026-06-13 (M6 Phase 5 complete; M4-B Phases 1-5 complete)</span>
   <nav>
     <a href="#overview">Overview</a>
     <a href="#m0">M0</a>
@@ -311,6 +311,8 @@
     <a href="#m3">M3</a>
     <a href="#m4">M4</a>
     <a href="#m5">M5</a>
+    <a href="#m6">M6</a>
+    <a href="#m4b">M4-B</a>
     <a href="#phase2">Phase 2</a>
   </nav>
 </div>
@@ -373,12 +375,28 @@
         <div class="pbar-label"><span>6 / 6 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card active">
+      <div class="m-card done">
         <div class="m-id">M5</div>
         <div class="m-name">Personal Release</div>
         <div class="m-est">0.5–1 day · Both</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 4 tasks</span><span class="badge active">Up Next</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>4 / 4 tasks</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card active">
+        <div class="m-id">M6</div>
+        <div class="m-name">Engine &amp; Hardening</div>
+        <div class="m-est">Ongoing · frank</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:86%"></div></div>
+        <div class="pbar-label"><span>6 / 7 phases</span><span class="badge active">In Progress</span></div>
+      </div>
+
+      <div class="m-card active">
+        <div class="m-id">M4-B</div>
+        <div class="m-name">Data Model &amp; Consolidation</div>
+        <div class="m-est">Side quest · Clyde · started 2026-06-03</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:40%"></div></div>
+        <div class="pbar-label"><span>2 / 5 phases</span><span class="badge active">In Progress</span></div>
       </div>
 
     </div>
@@ -516,22 +534,151 @@
     </div>
 
     <!-- ── M5 ── -->
-    <div class="milestone-block active" id="m5">
+    <div class="milestone-block done" id="m5">
       <div class="milestone-header">
         <div>
           <h3>M5 — Personal Release</h3>
-          <div class="est">0.5–1 day</div>
+          <div class="est">0.5–1 day · completed 2026-06-01</div>
           <div class="goal">Ship to static host, self-dogfood.</div>
         </div>
-        <span class="badge active">Up Next</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="milestone-body">
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span>Production build (<code>vite build</code>)</span></li>
-          <li class="todo"><div class="icon"></div><span>Deploy to chosen static host (GitHub Pages / Cloudflare Pages / Netlify)</span></li>
-          <li class="todo"><div class="icon"></div><span>Smoke-test all golden paths</span></li>
-          <li class="todo"><div class="icon"></div><span>Tag <code>v1.0.0</code></span></li>
+          <li class="done"><div class="icon">✓</div><span>Production build (<code>vite build</code>)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Deployed to Netlify — <code>netlify.toml</code> + static dist</span></li>
+          <li class="done"><div class="icon">✓</div><span>Smoke-tested all golden paths</span></li>
+          <li class="done"><div class="icon">✓</div><span>Personal release marked complete; <code>.claude/</code> guarded from git</span></li>
         </ul>
+      </div>
+    </div>
+
+    <!-- ── M6 ── -->
+    <div class="milestone-block active" id="m6">
+      <div class="milestone-header">
+        <div>
+          <h3>M6 — Engine &amp; Hardening</h3>
+          <div class="est">Ongoing · started 2026-06-02</div>
+          <div class="goal">Workforce calculation, data gaps, building consolidation, resizable panes, and full test coverage.</div>
+        </div>
+        <span class="badge active">In Progress</span>
+      </div>
+      <div class="milestone-body">
+
+        <div class="sub-label">Phase 0 — Test &amp; data foundation <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Add <code>@vitest/coverage-v8</code>; wire <code>test:run</code> and <code>test:coverage</code> scripts; set coverage gate for <code>src/lib/**</code></span></li>
+          <li class="done"><div class="icon">✓</div><span>Add <code>jsdom</code> + <code>@testing-library/react</code> for component tests; split Vitest config (node vs jsdom environments)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Data-integrity test suite — no duplicate ids, every chain mapping resolves, every good referenced exists</span></li>
+          <li class="done"><div class="icon">✓</div><span>CI wired: <code>tsc -b</code> → <code>test:run</code> → <code>build</code></span></li>
+        </ul>
+
+        <div class="sub-label">Phase 1 — Generalize the engine <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Introduce <code>ResourceFlow</code> / <code>buildingFlows</code> / <code>aggregateFlows</code> — signed unified flow model</span></li>
+          <li class="done"><div class="icon">✓</div><span>Re-express <code>computeTallies</code> on top of <code>aggregateFlows</code>; public API backward-compatible</span></li>
+          <li class="done"><div class="icon">✓</div><span>Port and expand test suite; <code>productionMath.ts</code> at 100% line/branch coverage</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 2 — Fill data gaps (fixes Red Pepper, Cattle, Flour Mill) <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Add chain rows + mappings for Red Pepper Farm and Cattle Farm</span></li>
+          <li class="done"><div class="icon">✓</div><span>Inspector updated to show produced / consumed / net per good (Flour Mill grain now visible)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Data-driven tests: pepper output, cattle output, flour-mill grain consumption, mixed blueprint</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 3 — Workforce (fixes #1) <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Add <code>WorkforceRequirement[]</code> to <code>ChainBuilding</code> schema; populate all 35 production buildings</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>buildingFlows</code> emits workforce flows; <code>aggregateFlows</code> totals them by tier</span></li>
+          <li class="done"><div class="icon">✓</div><span>Inspector Workforce panel — required headcount per tier, workforce-tier integrity tests green</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 4 — Building consolidation <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Assign unique ids to all 5 Small Warehouse tier entries in <code>buildings-1800.json</code>; add tier labels to names</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>LEGACY_ID_MAP</code> + <code>migratePlacements()</code> in <code>src/lib/migration.ts</code> — pure, idempotent, drops nothing</span></li>
+          <li class="done"><div class="icon">✓</div><span>Migration wired at all three load paths: Dexie v1→v2 upgrade, <code>importJSON</code>, <code>decodeShareURL</code></span></li>
+          <li class="done"><div class="icon">✓</div><span>Duplicate-id integrity test un-skipped; 9 migration tests; <code>migration.ts</code> at 100% coverage</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 5 — Resizable panes <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span><code>--col-left</code> / <code>--col-right</code> CSS vars drive a 5-column grid; <code>PaneGutter</code> handles pointer drag, keyboard (±8 / ±32 Shift), double-click reset, and <code>role="separator"</code> a11y</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>localStorage</code> persistence for <code>{left,right}</code> px widths; restored on mount with viewport clamping</span></li>
+          <li class="done"><div class="icon">✓</div><span>Konva stage re-measures via existing <code>ResizeObserver</code> in <code>Canvas.tsx</code> — canvas never clips</span></li>
+          <li class="done"><div class="icon">✓</div><span>16 unit tests for pure <code>redistribute()</code> and <code>clampToViewport()</code> math; 63 total tests green</span></li>
+          <li class="done"><div class="icon">✓</div><span>Palette building list reflows into 2- or 3-column card grid via CSS container queries as palette widens</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 6 — Hardening <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>
+        <ul class="tasks">
+          <li class="todo"><div class="icon"></div><span>Playwright E2E: place → compute → save → reload → migrate golden path</span></li>
+          <li class="todo"><div class="icon"></div><span>Enforce coverage gate in CI; PWA cache bump for data changes</span></li>
+          <li class="todo"><div class="icon"></div><span>Update <code>CLAUDE.md</code> / <code>CONTRIBUTING.md</code> / docs to reflect M6 completion</span></li>
+        </ul>
+
+        <div class="gate"><strong>Human gate (Phase 4):</strong> Review workforce numbers (artisans/engineers marked <code>verify: true</code>) against the Anno 1800 wiki before Phase 4 ships.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── M4-B ── -->
+  <section id="m4b">
+    <h2>M4-B — Data Model &amp; Consolidation <span style="font-weight:400;color:var(--muted)">(Side Quest)</span></h2>
+
+    <div class="milestone-block done">
+      <div class="milestone-header">
+        <div>
+          <h3>M4-B — Building Data Model &amp; Consolidation</h3>
+          <div class="est">Branch: m4-b · Clyde + Tyr · completed 2026-06-13</div>
+          <div class="goal">Replace flat Building catalog with BuildingFamily/BuildingVariant model. Merge production chain data into unified building-catalog.json. Enable variant-selector palette UX.</div>
+        </div>
+        <span class="badge done">Completed</span>
+      </div>
+      <div class="milestone-body">
+
+        <div class="sub-label">Phase 1 — Schema redesign <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span> <span style="color:var(--muted);font-weight:400;margin-left:.4rem;font-size:.72rem">c279259</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span><code>domain.ts</code> — <code>BuildingCategory</code>, <code>Region</code>, <code>ProductionStats</code>, <code>BuildingVariant</code>, <code>BuildingFamily</code> types; <code>Building</code> kept as <code>@deprecated</code></span></li>
+          <li class="done"><div class="icon">✓</div><span><code>categoryColors.ts</code> — single <code>Record&lt;BuildingCategory, string&gt;</code> color map (residence gold, production steel blue, public service green, infrastructure gray)</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>catalog.ts</code> — <code>FAMILIES</code>, <code>FAMILY_MAP</code>, <code>VARIANT_MAP</code>, <code>FAMILY_CATEGORIES</code>, <code>getBuilding()</code> bridge; <code>CATEGORIES</code> marked <code>@deprecated</code></span></li>
+          <li class="done"><div class="icon">✓</div><span>7 code-review findings fixed (footprint field alignment, <code>outputPerMin</code> dropped from <code>ProductionStats</code>, two-source-of-truth bridge added)</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>tsc</code> clean · 47 / 47 tests green</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 2 — Catalog build <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span> <span style="color:var(--muted);font-weight:400;margin-left:.4rem;font-size:.72rem">f4a8394</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span><code>scripts/build-catalog.ts</code> — 5-phase pipeline: audit → categorise → group → merge → validate; exits non-zero on data loss or unexpected orphans</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>building-catalog.json</code> — 133 families, 156 variants (all legacy ids preserved), 34 with merged production stats</span></li>
+          <li class="done"><div class="icon">✓</div><span>7 multi-variant families: Old World residences (6), Small Warehouses (5), Skyscrapers (8), Shipyards (2), Flame Towers (2), Anti-Armour Guns (4), Flak Emplacements (3)</span></li>
+          <li class="done"><div class="icon">✓</div><span>Furnace → Steelworks + Weapons ratio assertion passes in build script</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>productionMath.ts</code> — <code>variantToChainBuilding()</code> adapter; <code>computeTallies</code> checks <code>VARIANT_MAP</code> first, legacy chain maps as fallback</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>Inspector.tsx</code> repointed to <code>VARIANT_MAP</code> + <code>goods.json</code>; <code>dataIntegrity.test.ts</code> rewritten against new catalog</span></li>
+          <li class="done"><div class="icon">✓</div><span>Source files archived in <code>src/data/archive/</code> · <code>tsc</code> clean · 47 / 47 tests green</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 3 — Component integration <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span><code>Palette.tsx</code> — use <code>FAMILIES</code>; group by <code>BuildingCategory</code>; replace hard-coded <code>CATEGORY_ORDER</code> with <code>FAMILY_CATEGORIES</code></span></li>
+          <li class="done"><div class="icon">✓</div><span><code>Canvas.tsx</code> + <code>Minimap.tsx</code> — switch to <code>getBuilding()</code>; replace <code>building.color</code> with <code>categoryColors</code> lookup</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 4 — Variant selector UI <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Palette: one card per family; dropdown for <code>variants.length &gt; 1</code>; quick-select tier tabs for residences and warehouses</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>selectedVariantId: Record&lt;familyId, variantId&gt;</code> state persisted to localStorage</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 5 — Finish &amp; merge <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
+        <ul class="tasks">
+          <li class="done"><div class="icon">✓</div><span>Wire <code>categoryColors</code> to all render components; remove <code>BUILDINGS</code> back-compat array</span></li>
+          <li class="done"><div class="icon">✓</div><span>Sync ROADMAP docs; open PR <code>m4-b</code> → <code>dev</code>; both humans review before merge</span></li>
+        </ul>
+
+        <div class="gate"><strong>Human gates:</strong> Phase 3 — Kaleb reviews canvas/palette rendering. Phase 4 — Ian + Kaleb review variant selector UX. Phase 5 — full PR review before merge to <code>dev</code>.</div>
+        <div class="gate" style="margin-top:.5rem;"><strong>Detail doc:</strong> <code>docs/M4B-PROGRESS.html</code> — full task breakdown, commit chips, design decision callouts.</div>
       </div>
     </div>
 

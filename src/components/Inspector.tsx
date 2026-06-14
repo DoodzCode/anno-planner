@@ -1,8 +1,9 @@
 import { useMemo } from 'react'
 import { useBlueprintStore } from '../state/blueprintStore'
-import { BUILDING_MAP } from '../data/catalog'
-import { CHAIN_NAME_MAP, CHAIN_BUILDING_MAP, GOODS_MAP } from '../data/chainNameMap'
-import { computeTallies } from '../lib/productionMath'
+import { VARIANT_MAP, VARIANT_FAMILY_MAP } from '../data/catalog'
+import { categoryColors } from '../constants/categoryColors'
+import rawGoods from '../data/goods.json'
+import { aggregateFlows, goodsTallies, workforceTotals, variantToChainBuilding } from '../lib/productionMath'
 import { effectiveFootprint } from '../lib/grid'
 
 export default function Inspector() {
@@ -15,51 +16,80 @@ export default function Inspector() {
 
   const selected = placements.filter((p) => selectedIds.includes(p.id))
   const single   = selected.length === 1 ? selected[0] : null
-  const building = single ? BUILDING_MAP.get(single.buildingId) : undefined
+  const variant  = single ? VARIANT_MAP.get(single.buildingId) : undefined
+  const family   = variant ? VARIANT_FAMILY_MAP.get(variant.id) : undefined
+
+  const GOODS_MAP = new Map((rawGoods as { id: string; name: string }[]).map(g => [g.id, g]))
 
   // Production tallies — recompute only when placements change
-  const tallies = useMemo(
-    () => computeTallies(placements, BUILDING_MAP, CHAIN_NAME_MAP, CHAIN_BUILDING_MAP),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [placements.length, placements.map(p => p.id).join(',')],
-  )
+  const allFlows = useMemo(() => {
+    const resolve = (p: typeof placements[number]) => {
+      const variant = VARIANT_MAP.get(p.buildingId)
+      if (variant) {
+        const chain = variantToChainBuilding(variant)
+        if (chain) return { chain, ctx: {} }
+      }
+      return null
+    }
+    return aggregateFlows(placements, resolve)
+  }, [placements])
+
+  const TIER_LABELS: Record<string, string> = {
+    farmers: 'Farmers', workers: 'Workers', artisans: 'Artisans',
+    engineers: 'Engineers', investors: 'Investors',
+    jornaleros: 'Jornaleros', obreros: 'Obreros',
+  }
 
   const tallyEntries = useMemo(() => {
-    const entries: Array<{ goodId: string; name: string; net: number }> = []
-    for (const [goodId, tally] of tallies) {
+    const goods = goodsTallies(allFlows)
+    const entries: Array<{ goodId: string; name: string; produced: number; consumed: number; net: number }> = []
+    for (const [goodId, tally] of goods) {
       if (tally.produced === 0 && tally.consumed === 0) continue
       const good = GOODS_MAP.get(goodId)
-      entries.push({ goodId, name: good?.name ?? goodId, net: tally.net })
+      entries.push({ goodId, name: good?.name ?? goodId, ...tally })
     }
     return entries.sort((a, b) => b.net - a.net)
-  }, [tallies])
+  }, [allFlows])
+
+  const workforceEntries = useMemo(() => {
+    const wf = workforceTotals(allFlows)
+    return [...wf.entries()]
+      .filter(([, t]) => t.consumed > 0)
+      .map(([tier, t]) => ({ tier, consumed: t.consumed }))
+      .sort((a, b) => a.tier.localeCompare(b.tier))
+  }, [allFlows])
 
   return (
     <aside className="inspector">
       <h2>Inspector</h2>
 
-      {building && single ? (
+      {variant && family && single ? (
         <div className="inspector-content">
-          <div className="inspector-swatch" style={{ background: building.color }} />
-          <div className="inspector-name">{building.name}</div>
-          <Row label="Category" value={building.category} />
-          <Row label="Tier"     value={building.tier} />
+          <div className="inspector-swatch" style={{ background: categoryColors[family.category] }} />
+          <div className="inspector-name">{variant.name}</div>
+          <Row label="Category" value={family.category.replace('_', ' ')} />
+          <Row label="Tier"     value={variant.tier || 'all'} />
           <Row
             label="Footprint"
-            value={`${effectiveFootprint(building.footprint, single.rotation).w}×${effectiveFootprint(building.footprint, single.rotation).h}`}
+            value={`${effectiveFootprint(variant.footprint, single.rotation).w}×${effectiveFootprint(variant.footprint, single.rotation).h}`}
           />
           <Row label="Rotation" value={`${single.rotation}°`} />
-          {building.influenceRadius !== undefined && (
-            <Row label="Influence" value={`${building.influenceRadius} tiles`} />
+          {variant.influenceRadius !== undefined && (
+            <Row label="Influence" value={`${variant.influenceRadius} tiles`} />
           )}
-          {building.inputs  && <Row label="Inputs"  value={building.inputs.join(', ')} />}
-          {building.outputs && <Row label="Outputs" value={building.outputs.join(', ')} />}
-          {building.productionTime !== undefined && (
-            <Row label="Cycle" value={`${building.productionTime}s`} />
+          {variant.production?.inputs && variant.production.inputs.length > 0 && (
+            <Row label="Inputs" value={variant.production.inputs.map(i => i.good).join(', ')} />
+          )}
+          {variant.production?.output && (
+            <Row label="Outputs" value={variant.production.output.good} />
+          )}
+          {variant.production?.baseCycleSeconds !== undefined && (
+            <Row label="Cycle" value={`${variant.production.baseCycleSeconds}s`} />
           )}
           <p className="inspector-hint">R — rotate · Del — delete · Shift+click — multi</p>
         </div>
       ) : selected.length > 1 ? (
+
         <div className="inspector-content">
           <div className="inspector-name">{selected.length} buildings selected</div>
           <p className="inspector-hint">R — rotate all · Del — delete all</p>
@@ -72,15 +102,40 @@ export default function Inspector() {
       {tallyEntries.length > 0 && (
         <div className="inspector-tallies">
           <h2>Production</h2>
-          {tallyEntries.map(({ goodId, name, net }) => (
+          <div className="tally-header-row">
+            <span className="tally-good" />
+            <span className="tally-col tally-col--produced">↑ Prod</span>
+            <span className="tally-col tally-col--consumed">↓ Cons</span>
+            <span className="tally-col tally-col--net">Net</span>
+          </div>
+          {tallyEntries.map(({ goodId, name, produced, consumed, net }) => (
             <div key={goodId} className="tally-row">
-              <span className="tally-good">{name}</span>
+              <span className="tally-good" title={goodId}>{name}</span>
+              <span className="tally-col tally-col--produced">
+                {produced > 0 ? `+${produced.toFixed(2)}` : '—'}
+              </span>
+              <span className="tally-col tally-col--consumed">
+                {consumed > 0 ? `−${consumed.toFixed(2)}` : '—'}
+              </span>
               <span
-                className="tally-net"
-                style={{ color: net > 0 ? '#4caf7d' : net < 0 ? '#e05c5c' : '#6a6a90' }}
+                className="tally-col tally-col--net"
+                style={{ color: net > 0.005 ? '#4caf7d' : net < -0.005 ? '#e05c5c' : '#6a6a90' }}
               >
                 {net > 0 ? '+' : ''}{net.toFixed(2)}
               </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Workforce panel */}
+      {workforceEntries.length > 0 && (
+        <div className="inspector-workforce">
+          <h2>Workforce</h2>
+          {workforceEntries.map(({ tier, consumed }) => (
+            <div key={tier} className="tally-row">
+              <span className="tally-good">{TIER_LABELS[tier] ?? tier}</span>
+              <span className="tally-col tally-col--consumed">{consumed.toFixed(0)}</span>
             </div>
           ))}
         </div>

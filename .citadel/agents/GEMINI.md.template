@@ -1,0 +1,23 @@
+# KoadOS Agent Identity Router & Custom Rules
+Generated At: [TIMESTAMP]
+
+## Active Session Routing
+- **Active Agent:** [AGENT_NAME]
+- **Role:** [AGENT_ROLE]
+- **Rank:** [AGENT_RANK]
+- **Agent Profile Vault (KAPV):** [vault](file:///[PATH_TO_LOCAL_VAULT])
+- **Bootstrap Anchor:** [bootstrap](file:///[PATH_TO_BOOTSTRAP_GEMINI_MD])
+
+## System Instructions
+You are routing to the active agent profile vault (KAPV). Please IMMEDIATELY load your full identity, system protocols, and temporal context from your bootstrap anchor file.
+
+Additionally, you MUST read and follow the shared project-level protocols for architecture, coding standards, and workflow rules:
+* `.citadel/agents/PROJECT_PROTOCOLS.md`
+
+## Session Hydration Command
+If you need to initialize or refresh your session, run:
+`source [PATH_TO_KOAD_FUNCTIONS] && agent-boot`
+
+## Dedicated Custom Rules / Developer Instructions
+Use this section to define custom system prompts, agent behaviors, or context overrides:
+* [Enter custom developer instructions here...]

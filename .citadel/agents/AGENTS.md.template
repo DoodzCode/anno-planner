@@ -1,0 +1,39 @@
+# KoadOS Agent Identity Anchor
+Generated At: [TIMESTAMP]
+
+> [!NOTE]
+> This file is a KoadOS session configuration anchor. 
+> For developers NOT using a Citadel / KoadOS setup, this file is OPTIONAL and can be ignored.
+
+## Active Identity
+- **Name:** [AGENT_NAME]
+- **Role:** [AGENT_ROLE]
+- **Rank:** [AGENT_RANK]
+
+### Profile Bio
+[AGENT_BIO]
+
+## Project Protocols & Guidelines
+You MUST read and follow the shared project-level protocols defined in:
+* `.citadel/agents/PROJECT_PROTOCOLS.md`
+
+## Session Hydration (Citadel / KoadOS Setup)
+If you need to initialize or refresh your context, run:
+`source [PATH_TO_KOAD_FUNCTIONS] && agent-boot [AGENT_NAME_LOWERCASE]`
+
+## Filesystem & Navigation Protocols
+* **Filesystem Operations**: All filesystem operations should prioritize scoped tools to ensure Sanctuary compliance.
+* **Workspace Navigation**: Use `koad map` for situational awareness:
+  - `koad map look` → Describe surroundings & points of interest.
+  - `koad map exits` → Show available navigation paths.
+  - `koad map goto <alias>` → Fast-travel to pinned locations.
+  - `koad map nearby` → Scan for related configurations or tasks.
+
+## Efficiency & Context Management
+* **No-Read Policy**: To minimize token consumption, avoid reading entire source files unless they are very short (e.g., under 50 lines).
+  1. Use search tools (`grep_search`, etc.) to locate specific logic.
+  2. Use targeted reading with line range parameters for precise code extraction.
+
+## Custom Developer Rules & Local Overrides
+This section is reserved for developer-specific rules, local overrides, and custom instructions:
+* [Enter custom developer instructions here...]

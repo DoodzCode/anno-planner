@@ -2,9 +2,15 @@ import { useRef, useEffect, useState, useMemo } from 'react'
 import { Stage, Layer, Line, Rect, Group, Text, Circle } from 'react-konva'
 import type Konva from 'konva'
 import { useBlueprintStore } from '../state/blueprintStore'
-import { BUILDING_MAP } from '../data/catalog'
+import { getBuilding, VARIANT_FAMILY_MAP } from '../data/catalog'
+import { categoryColors } from '../constants/categoryColors'
 import { useOverlayStore, OVERLAY_DEFS } from '../state/overlayStore'
 import Minimap from './Minimap'
+
+function getBuildingColor(buildingId: string): string {
+  const family = VARIANT_FAMILY_MAP.get(buildingId)
+  return family ? categoryColors[family.category] : '#6b7280'
+}
 import {
   TILE_PX,
   GRID_COLS,
@@ -50,6 +56,12 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   // Pan mode
   const isSpaceDown = useRef(false)
   const [isPanning, setIsPanning] = useState(false)
+
+  // Tracks the snapped tile position for each building during drag.
+  // onDragEnd reads from this ref instead of e.target.position() to avoid
+  // the react-konva stale-position issue when a mid-drag re-render resets
+  // the Konva node's local coords back to the React prop values.
+  const dragTileRef = useRef<Map<string, { x: number; y: number }>>(new Map())
 
   const activeOverlays = useOverlayStore((s) => s.active)
   const overlayColorMap = useMemo(
@@ -148,7 +160,7 @@ export default function Canvas({ onStageReady }: CanvasProps) {
     return lines
   }, [size.w, size.h])
 
-  const activeBuilding = activeBuildingId ? BUILDING_MAP.get(activeBuildingId) : undefined
+  const activeBuilding = activeBuildingId ? getBuilding(activeBuildingId) : undefined
 
   // Zoom-to-pointer on wheel (imperative — avoids 60fps React re-renders)
   const handleWheel = (e: Konva.KonvaEventObject<WheelEvent>) => {
@@ -216,7 +228,7 @@ export default function Canvas({ onStageReady }: CanvasProps) {
 
     const ids = useBlueprintStore.getState().placements
       .filter((p) => {
-        const b = BUILDING_MAP.get(p.buildingId)
+        const b = getBuilding(p.buildingId)
         if (!b) return false
         const fp = effectiveFootprint(b.footprint, p.rotation)
         return boxesOverlap(box, {
@@ -266,7 +278,7 @@ export default function Canvas({ onStageReady }: CanvasProps) {
           {activeOverlays.size > 0 && (
             <Layer listening={false}>
               {placements.map((p) => {
-                const building = BUILDING_MAP.get(p.buildingId)
+                const building = getBuilding(p.buildingId)
                 if (!building?.overlayType) return null
                 if (!activeOverlays.has(building.overlayType)) return null
                 const color = overlayColorMap.get(building.overlayType) ?? '#ffffff'
@@ -292,7 +304,7 @@ export default function Canvas({ onStageReady }: CanvasProps) {
 
           <Layer>
             {placements.map((p) => {
-              const building = BUILDING_MAP.get(p.buildingId)
+              const building = getBuilding(p.buildingId)
               if (!building) return null
               const fp = effectiveFootprint(building.footprint, p.rotation)
               const pw = tileToPx(fp.w)
@@ -312,21 +324,35 @@ export default function Canvas({ onStageReady }: CanvasProps) {
                     const sp = stage.position()
                     const cx = (pos.x - sp.x) / sc
                     const cy = (pos.y - sp.y) / sc
-                    const maxX = tileToPx(GRID_COLS - fp.w)
-                    const maxY = tileToPx(GRID_ROWS - fp.h)
+                    // Allow dragging across the full visible canvas, not just the
+                    // fixed GRID_COLS/GRID_ROWS which predates the resizable panes.
+                    const visibleCols = Math.ceil(stage.width() / sc / TILE_PX)
+                    const visibleRows = Math.ceil(stage.height() / sc / TILE_PX)
+                    const maxX = tileToPx(Math.max(GRID_COLS, visibleCols) - fp.w)
+                    const maxY = tileToPx(Math.max(GRID_ROWS, visibleRows) - fp.h)
                     const sx = Math.max(0, Math.min(maxX, snapToGrid(cx)))
                     const sy = Math.max(0, Math.min(maxY, snapToGrid(cy)))
+                    dragTileRef.current.set(p.id, { x: pxToTile(sx), y: pxToTile(sy) })
                     return { x: sp.x + sx * sc, y: sp.y + sy * sc }
                   }}
                   onDragStart={(e) => {
                     e.cancelBubble = true
-                    if (!selectedIds.includes(p.id)) {
-                      setSelectedIds([p.id])
-                    }
                   }}
                   onDragEnd={(e) => {
-                    const pos = e.target.position()
-                    movePlacement(p.id, pxToTile(pos.x), pxToTile(pos.y))
+                    e.cancelBubble = true
+                    // Prefer the tile tracked during dragBoundFunc; fall back to
+                    // converting the node's final local position directly.
+                    const tracked = dragTileRef.current.get(p.id)
+                    dragTileRef.current.delete(p.id)
+                    if (tracked) {
+                      movePlacement(p.id, tracked.x, tracked.y)
+                    } else {
+                      const pos = e.target.position()
+                      movePlacement(p.id, pxToTile(pos.x), pxToTile(pos.y))
+                    }
+                    if (!useBlueprintStore.getState().selectedIds.includes(p.id)) {
+                      setSelectedIds([p.id])
+                    }
                   }}
                   onMouseDown={(e) => { e.cancelBubble = true }}
                   onClick={(e) => {
@@ -339,7 +365,7 @@ export default function Canvas({ onStageReady }: CanvasProps) {
                   {/* Base fill */}
                   <Rect
                     width={pw} height={ph}
-                    fill={building.color} opacity={0.78}
+                    fill={getBuildingColor(p.buildingId)} opacity={0.78}
                     stroke={isSelected ? '#c8a96e' : 'rgba(0,0,0,0.25)'}
                     strokeWidth={isSelected ? 2 : 0.5}
                     cornerRadius={3}
@@ -371,8 +397,8 @@ export default function Canvas({ onStageReady }: CanvasProps) {
                 x={tileToPx(ghostTile.x)} y={tileToPx(ghostTile.y)}
                 width={tileToPx(activeBuilding.footprint.w)}
                 height={tileToPx(activeBuilding.footprint.h)}
-                fill={activeBuilding.color} opacity={0.35}
-                stroke={activeBuilding.color} strokeWidth={1}
+                fill={getBuildingColor(activeBuilding.id)} opacity={0.35}
+                stroke={getBuildingColor(activeBuilding.id)} strokeWidth={1}
                 dash={[4, 2]} listening={false}
               />
             )}

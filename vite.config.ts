@@ -39,5 +39,17 @@ export default defineConfig({
   ],
   test: {
     environment: 'node',
+    environmentMatchGlobs: [
+      ['src/__tests__/components/**', 'jsdom'],
+    ],
+    coverage: {
+      provider: 'v8',
+      include: ['src/lib/**'],
+      // exportImport.ts and share.ts use browser APIs (File System Access, clipboard)
+      // and cannot be meaningfully unit-tested; exclude them from threshold enforcement.
+      thresholds: {
+        'src/lib/productionMath.ts': { lines: 100, branches: 100 },
+      },
+    },
   },
 } as any)

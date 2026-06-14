@@ -1,5 +1,7 @@
 import type Konva from 'konva'
-import type { Blueprint, Building } from '../types/domain'
+import type { Blueprint } from '../types/domain'
+import { migratePlacements } from './migration'
+import { VARIANT_MAP } from '../data/catalog'
 
 // ── Helpers ────────────────────────────────────────────────
 
@@ -27,8 +29,7 @@ export function exportJSON(blueprint: Blueprint): void {
 // ── JSON Import ────────────────────────────────────────────
 
 export async function importJSON(
-  file: File,
-  buildingMap: Map<string, Building>,
+  file: File
 ): Promise<Blueprint> {
   const text = await file.text()
   let data: unknown
@@ -43,9 +44,10 @@ export async function importJSON(
   }
 
   const raw = data as Blueprint
-  // Filter out placements that reference unknown buildings (forward-compatibility)
-  const validPlacements = (raw.placements ?? []).filter(p => buildingMap.has(p.buildingId))
-  const skipped = (raw.placements?.length ?? 0) - validPlacements.length
+  // Migrate legacy building ids before validating against current catalog
+  const migrated = migratePlacements(raw.placements ?? [])
+  const validPlacements = migrated.filter(p => VARIANT_MAP.has(p.buildingId))
+  const skipped = migrated.length - validPlacements.length
   if (skipped > 0) {
     console.warn(`importJSON: skipped ${skipped} placement(s) with unknown buildingId`)
   }
@@ -97,9 +99,7 @@ export async function saveFile(blueprint: Blueprint): Promise<void> {
   downloadBlob(new Blob([json], { type: 'application/json' }), `${safeName(blueprint.name)}.json`)
 }
 
-export async function openFile(
-  buildingMap: Map<string, Building>,
-): Promise<Blueprint | null> {
+export async function openFile(): Promise<Blueprint | null> {
   if (hasFSAA) {
     try {
       const [handle] = await (window as Window & typeof globalThis & {
@@ -108,7 +108,7 @@ export async function openFile(
         types: [{ description: 'Anno Blueprint', accept: { 'application/json': ['.json'] } }],
       })
       const file = await handle.getFile()
-      return await importJSON(file, buildingMap)
+      return await importJSON(file)
     } catch (e) {
       if ((e as DOMException).name === 'AbortError') return null
       throw e
@@ -122,7 +122,7 @@ export async function openFile(
     input.onchange = async () => {
       const file = input.files?.[0]
       if (!file) { resolve(null); return }
-      try { resolve(await importJSON(file, buildingMap)) }
+      try { resolve(await importJSON(file)) }
       catch (err) { reject(err) }
     }
     input.oncancel = () => resolve(null)

@@ -5,3 +5,9 @@ dist-ssr
 .env
 .env.*
 .claude/
+
+# Local Agent Configs (env-like templates)
+/GEMINI.md
+/AGENTS.md
+/CLAUDE.md
+
