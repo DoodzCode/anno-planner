@@ -1,8 +1,10 @@
 import { OVERLAY_DEFS, useOverlayStore } from '../state/overlayStore'
-import { BUILDINGS } from '../data/catalog'
+import { FAMILIES } from '../data/catalog'
 
 const AVAILABLE_OVERLAYS = new Set(
-  BUILDINGS.filter(b => b.overlayType).map(b => b.overlayType as string)
+  FAMILIES.flatMap(f => f.variants)
+    .filter(v => v.overlayType)
+    .map(v => v.overlayType as string)
 )
 
 export default function OverlayBar() {

@@ -302,7 +302,7 @@
 
 <div class="topbar">
   <h1>Anno Planner — Roadmap</h1>
-  <span class="date">Updated 2026-06-03 (M6 Phase 5 complete; M4-B Phases 1+2 complete)</span>
+  <span class="date">Updated 2026-06-13 (M6 Phase 5 complete; M4-B Phases 1-5 complete)</span>
   <nav>
     <a href="#overview">Overview</a>
     <a href="#m0">M0</a>
@@ -628,14 +628,14 @@
   <section id="m4b">
     <h2>M4-B — Data Model &amp; Consolidation <span style="font-weight:400;color:var(--muted)">(Side Quest)</span></h2>
 
-    <div class="milestone-block active">
+    <div class="milestone-block done">
       <div class="milestone-header">
         <div>
           <h3>M4-B — Building Data Model &amp; Consolidation</h3>
-          <div class="est">Branch: m4-b · Clyde · started 2026-06-03</div>
+          <div class="est">Branch: m4-b · Clyde + Tyr · completed 2026-06-13</div>
           <div class="goal">Replace flat Building catalog with BuildingFamily/BuildingVariant model. Merge production chain data into unified building-catalog.json. Enable variant-selector palette UX.</div>
         </div>
-        <span class="badge active">In Progress</span>
+        <span class="badge done">Completed</span>
       </div>
       <div class="milestone-body">
 
@@ -659,22 +659,22 @@
           <li class="done"><div class="icon">✓</div><span>Source files archived in <code>src/data/archive/</code> · <code>tsc</code> clean · 47 / 47 tests green</span></li>
         </ul>
 
-        <div class="sub-label">Phase 3 — Component integration <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>
+        <div class="sub-label">Phase 3 — Component integration <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span><code>Palette.tsx</code> — use <code>FAMILIES</code>; group by <code>BuildingCategory</code>; replace hard-coded <code>CATEGORY_ORDER</code> with <code>FAMILY_CATEGORIES</code></span></li>
-          <li class="todo"><div class="icon"></div><span><code>Canvas.tsx</code> + <code>Minimap.tsx</code> — switch to <code>getBuilding()</code>; replace <code>building.color</code> with <code>categoryColors</code> lookup</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>Palette.tsx</code> — use <code>FAMILIES</code>; group by <code>BuildingCategory</code>; replace hard-coded <code>CATEGORY_ORDER</code> with <code>FAMILY_CATEGORIES</code></span></li>
+          <li class="done"><div class="icon">✓</div><span><code>Canvas.tsx</code> + <code>Minimap.tsx</code> — switch to <code>getBuilding()</code>; replace <code>building.color</code> with <code>categoryColors</code> lookup</span></li>
         </ul>
 
-        <div class="sub-label">Phase 4 — Variant selector UI <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>
+        <div class="sub-label">Phase 4 — Variant selector UI <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span>Palette: one card per family; dropdown for <code>variants.length &gt; 1</code>; quick-select tier tabs for residences and warehouses</span></li>
-          <li class="todo"><div class="icon"></div><span><code>selectedVariantId: Record&lt;familyId, variantId&gt;</code> state persisted to localStorage</span></li>
+          <li class="done"><div class="icon">✓</div><span>Palette: one card per family; dropdown for <code>variants.length &gt; 1</code>; quick-select tier tabs for residences and warehouses</span></li>
+          <li class="done"><div class="icon">✓</div><span><code>selectedVariantId: Record&lt;familyId, variantId&gt;</code> state persisted to localStorage</span></li>
         </ul>
 
-        <div class="sub-label">Phase 5 — Finish &amp; merge <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>
+        <div class="sub-label">Phase 5 — Finish &amp; merge <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span>Wire <code>categoryColors</code> to all render components; remove <code>BUILDINGS</code> back-compat array</span></li>
-          <li class="todo"><div class="icon"></div><span>Sync ROADMAP docs; open PR <code>m4-b</code> → <code>dev</code>; both humans review before merge</span></li>
+          <li class="done"><div class="icon">✓</div><span>Wire <code>categoryColors</code> to all render components; remove <code>BUILDINGS</code> back-compat array</span></li>
+          <li class="done"><div class="icon">✓</div><span>Sync ROADMAP docs; open PR <code>m4-b</code> → <code>dev</code>; both humans review before merge</span></li>
         </ul>
 
         <div class="gate"><strong>Human gates:</strong> Phase 3 — Kaleb reviews canvas/palette rendering. Phase 4 — Ian + Kaleb review variant selector UX. Phase 5 — full PR review before merge to <code>dev</code>.</div>
