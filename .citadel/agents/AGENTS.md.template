@@ -1,32 +1,39 @@
-# KoadOS Agent Identity Anchor (Local Setup)
+# KoadOS Agent Identity Anchor
 Generated At: [TIMESTAMP]
 
-## Identity
-Name: [AGENT_NAME]
-Role: [AGENT_ROLE]
-Rank: [AGENT_RANK]
+> [!NOTE]
+> This file is a KoadOS session configuration anchor. 
+> For developers NOT using a Citadel / KoadOS setup, this file is OPTIONAL and can be ignored.
 
-## Bio
+## Active Identity
+- **Name:** [AGENT_NAME]
+- **Role:** [AGENT_ROLE]
+- **Rank:** [AGENT_RANK]
+
+### Profile Bio
 [AGENT_BIO]
 
-## MANDATORY: Session Hydration
-If you have not done so, or if you need to refresh your context, run:
+## Project Protocols & Guidelines
+You MUST read and follow the shared project-level protocols defined in:
+* `.citadel/agents/PROJECT_PROTOCOLS.md`
+
+## Session Hydration (Citadel / KoadOS Setup)
+If you need to initialize or refresh your context, run:
 `source [PATH_TO_KOAD_FUNCTIONS] && agent-boot [AGENT_NAME_LOWERCASE]`
 
-## 📂 Filesystem Protocol: Scoped MCP
-All filesystem operations MUST be performed via the `koadFsMcp` toolset (read_text_file, write_file, list_directory, etc.). Raw shell commands for file manipulation are strictly prohibited to ensure Sanctuary compliance.
+## Filesystem & Navigation Protocols
+* **Filesystem Operations**: All filesystem operations should prioritize scoped tools to ensure Sanctuary compliance.
+* **Workspace Navigation**: Use `koad map` for situational awareness:
+  - `koad map look` → Describe surroundings & points of interest.
+  - `koad map exits` → Show available navigation paths.
+  - `koad map goto <alias>` → Fast-travel to pinned locations.
+  - `koad map nearby` → Scan for related configurations or tasks.
 
-## 🧭 Navigation Protocol: Game Map HUD
-Use `koad map` for instant situational awareness. 
-- `koad map look` → Describe surroundings & POIs.
-- `koad map exits` → Show available paths.
-- `koad map goto <alias>` → Fast-travel to pinned locations.
-- `koad map nearby` → Scan for related configs/tasks.
+## Efficiency & Context Management
+* **No-Read Policy**: To minimize token consumption, avoid reading entire source files unless they are very short (e.g., under 50 lines).
+  1. Use search tools (`grep_search`, etc.) to locate specific logic.
+  2. Use targeted reading with line range parameters for precise code extraction.
 
-## ⚡ Efficiency Policy: The 'No-Read' Rule
-To minimize token burn, you are STRICTLY FORBIDDEN from reading entire source files unless they are under 50 lines. 
-1. **Use your Context Packet:** Structural maps of relevant crates are provided in the CASS section below. Use them first.
-2. **Discovery:** Use `grep_search` to locate specific logic or patterns.
-3. **Targeted Reading:** Use `read_file` ONLY with `start_line` and `end_line` parameters for surgical extraction.
-
-Please refer to the shared project protocols at `.citadel/agents/PROJECT_PROTOCOLS.md` for project-level coding guidelines, architecture, and constraints.
+## Custom Developer Rules & Local Overrides
+This section is reserved for developer-specific rules, local overrides, and custom instructions:
+* [Enter custom developer instructions here...]
