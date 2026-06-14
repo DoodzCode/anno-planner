@@ -57,6 +57,12 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   const isSpaceDown = useRef(false)
   const [isPanning, setIsPanning] = useState(false)
 
+  // Tracks the snapped tile position for each building during drag.
+  // onDragEnd reads from this ref instead of e.target.position() to avoid
+  // the react-konva stale-position issue when a mid-drag re-render resets
+  // the Konva node's local coords back to the React prop values.
+  const dragTileRef = useRef<Map<string, { x: number; y: number }>>(new Map())
+
   const activeOverlays = useOverlayStore((s) => s.active)
   const overlayColorMap = useMemo(
     () => new Map(OVERLAY_DEFS.map(d => [d.id, d.color])),
@@ -318,21 +324,35 @@ export default function Canvas({ onStageReady }: CanvasProps) {
                     const sp = stage.position()
                     const cx = (pos.x - sp.x) / sc
                     const cy = (pos.y - sp.y) / sc
-                    const maxX = tileToPx(GRID_COLS - fp.w)
-                    const maxY = tileToPx(GRID_ROWS - fp.h)
+                    // Allow dragging across the full visible canvas, not just the
+                    // fixed GRID_COLS/GRID_ROWS which predates the resizable panes.
+                    const visibleCols = Math.ceil(stage.width() / sc / TILE_PX)
+                    const visibleRows = Math.ceil(stage.height() / sc / TILE_PX)
+                    const maxX = tileToPx(Math.max(GRID_COLS, visibleCols) - fp.w)
+                    const maxY = tileToPx(Math.max(GRID_ROWS, visibleRows) - fp.h)
                     const sx = Math.max(0, Math.min(maxX, snapToGrid(cx)))
                     const sy = Math.max(0, Math.min(maxY, snapToGrid(cy)))
+                    dragTileRef.current.set(p.id, { x: pxToTile(sx), y: pxToTile(sy) })
                     return { x: sp.x + sx * sc, y: sp.y + sy * sc }
                   }}
                   onDragStart={(e) => {
                     e.cancelBubble = true
-                    if (!selectedIds.includes(p.id)) {
-                      setSelectedIds([p.id])
-                    }
                   }}
                   onDragEnd={(e) => {
-                    const pos = e.target.position()
-                    movePlacement(p.id, pxToTile(pos.x), pxToTile(pos.y))
+                    e.cancelBubble = true
+                    // Prefer the tile tracked during dragBoundFunc; fall back to
+                    // converting the node's final local position directly.
+                    const tracked = dragTileRef.current.get(p.id)
+                    dragTileRef.current.delete(p.id)
+                    if (tracked) {
+                      movePlacement(p.id, tracked.x, tracked.y)
+                    } else {
+                      const pos = e.target.position()
+                      movePlacement(p.id, pxToTile(pos.x), pxToTile(pos.y))
+                    }
+                    if (!useBlueprintStore.getState().selectedIds.includes(p.id)) {
+                      setSelectedIds([p.id])
+                    }
                   }}
                   onMouseDown={(e) => { e.cancelBubble = true }}
                   onClick={(e) => {
