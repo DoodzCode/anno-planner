@@ -27,6 +27,9 @@ const MIN_SCALE = 0.2
 const MAX_SCALE = 5
 const ZOOM_FACTOR = 1.12
 
+const CANVAS_W = GRID_COLS * TILE_PX
+const CANVAS_H = GRID_ROWS * TILE_PX
+
 interface Box { x: number; y: number; w: number; h: number }
 
 function toBox(ax: number, ay: number, bx: number, by: number): Box {
@@ -42,9 +45,7 @@ interface CanvasProps {
 }
 
 export default function Canvas({ onStageReady }: CanvasProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<Konva.Stage>(null)
-  const [size, setSize] = useState({ w: 800, h: 600 })
 
   // Placement ghost
   const [ghostTile, setGhostTile] = useState<{ x: number; y: number } | null>(null)
@@ -79,18 +80,6 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   const setSelectedIds = useBlueprintStore((s) => s.setSelectedIds)
   const clearSelection = useBlueprintStore((s) => s.clearSelection)
   const setActiveBuildingId = useBlueprintStore((s) => s.setActiveBuildingId)
-
-  // Resize
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    const ro = new ResizeObserver(([entry]) => {
-      const { width, height } = entry.contentRect
-      setSize({ w: Math.floor(width), h: Math.floor(height) })
-    })
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [])
 
   // Expose stage to parent for PNG export
   useEffect(() => {
@@ -132,33 +121,28 @@ export default function Canvas({ onStageReady }: CanvasProps) {
     }
   }, [])
 
-  // Grid lines sized to fill the canvas pane at current dimensions
   const gridLines = useMemo(() => {
-    const cols = Math.ceil(size.w / TILE_PX) + 1
-    const rows = Math.ceil(size.h / TILE_PX) + 1
-    const totalH = rows * TILE_PX
-    const totalW = cols * TILE_PX
     const lines = []
-    for (let c = 0; c <= cols; c++) {
+    for (let c = 0; c <= GRID_COLS; c++) {
       const accent = c % 5 === 0
       lines.push(
         <Line key={`v${c}`}
-          points={[c * TILE_PX, 0, c * TILE_PX, totalH]}
+          points={[c * TILE_PX, 0, c * TILE_PX, CANVAS_H]}
           stroke={accent ? GRID_ACCENT : GRID_LINE}
           strokeWidth={accent ? 1 : 0.5} listening={false} />,
       )
     }
-    for (let r = 0; r <= rows; r++) {
+    for (let r = 0; r <= GRID_ROWS; r++) {
       const accent = r % 5 === 0
       lines.push(
         <Line key={`h${r}`}
-          points={[0, r * TILE_PX, totalW, r * TILE_PX]}
+          points={[0, r * TILE_PX, CANVAS_W, r * TILE_PX]}
           stroke={accent ? GRID_ACCENT : GRID_LINE}
           strokeWidth={accent ? 1 : 0.5} listening={false} />,
       )
     }
     return lines
-  }, [size.w, size.h])
+  }, [])
 
   const activeBuilding = activeBuildingId ? getBuilding(activeBuildingId) : undefined
 
@@ -259,11 +243,11 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   return (
     <main className="canvas-pane">
       <Minimap stage={stageRef.current} />
-      <div ref={containerRef} className="konva-container" style={{ cursor }}>
+      <div className="konva-container" style={{ cursor }}>
         <Stage
           ref={stageRef}
-          width={size.w}
-          height={size.h}
+          width={CANVAS_W}
+          height={CANVAS_H}
           draggable={isPanning}
           onWheel={handleWheel}
           onMouseMove={handleMouseMove}
@@ -324,12 +308,8 @@ export default function Canvas({ onStageReady }: CanvasProps) {
                     const sp = stage.position()
                     const cx = (pos.x - sp.x) / sc
                     const cy = (pos.y - sp.y) / sc
-                    // Allow dragging across the full visible canvas, not just the
-                    // fixed GRID_COLS/GRID_ROWS which predates the resizable panes.
-                    const visibleCols = Math.ceil(stage.width() / sc / TILE_PX)
-                    const visibleRows = Math.ceil(stage.height() / sc / TILE_PX)
-                    const maxX = tileToPx(Math.max(GRID_COLS, visibleCols) - fp.w)
-                    const maxY = tileToPx(Math.max(GRID_ROWS, visibleRows) - fp.h)
+                    const maxX = tileToPx(GRID_COLS - fp.w)
+                    const maxY = tileToPx(GRID_ROWS - fp.h)
                     const sx = Math.max(0, Math.min(maxX, snapToGrid(cx)))
                     const sy = Math.max(0, Math.min(maxY, snapToGrid(cy)))
                     dragTileRef.current.set(p.id, { x: pxToTile(sx), y: pxToTile(sy) })
