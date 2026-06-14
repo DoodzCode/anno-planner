@@ -28,3 +28,10 @@ export function nextRotation(r: Rotation): Rotation {
   const cycle: Record<Rotation, Rotation> = { 0: 90, 90: 180, 180: 270, 270: 0 }
   return cycle[r]
 }
+
+export function footprintsOverlap(
+  ax: number, ay: number, aw: number, ah: number,
+  bx: number, by: number, bw: number, bh: number,
+): boolean {
+  return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by
+}
