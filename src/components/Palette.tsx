@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'react'
-import { BUILDINGS, TIERS } from '../data/catalog'
+import { FAMILIES, FAMILY_CATEGORIES, TIERS } from '../data/catalog'
 import { useBlueprintStore } from '../state/blueprintStore'
 import { TILE_PX } from '../lib/grid'
+import { categoryColors } from '../constants/categoryColors'
+import type { BuildingCategory } from '../types/domain'
 
 const PREVIEW_SCALE = 0.4
 const MIN_PREVIEW = 10
@@ -23,12 +25,6 @@ function dlcLabel(dlc: string) {
   return abbrevs[dlc] ?? dlc.slice(0, 4)
 }
 
-const CATEGORY_ORDER = ['residence', 'public', 'production', 'harbor', 'military']
-const CATEGORY_LABEL: Record<string, string> = {
-  residence: 'Residences', public: 'Public', production: 'Production',
-  harbor: 'Harbor', military: 'Military',
-}
-
 export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
   const columns = leftWidth >= 390 ? 3 : leftWidth >= 280 ? 2 : 1
   const maxPrev = columns > 1 ? 52 : 32
@@ -46,25 +42,36 @@ export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim()
-    return BUILDINGS.filter(b => {
-      if (tier !== 'all' && tier !== 'all-world' && b.tier !== tier) return false
-      if (tier === 'all-world' && b.tier !== 'all') return false
-      if (q && !b.name.toLowerCase().includes(q)) return false
+    return FAMILIES.filter(family => {
+      // search filter
+      if (q && !family.name.toLowerCase().includes(q)) return false
+      // tier filter
+      if (tier !== 'all') {
+        const matchesTier = family.variants.some(v => {
+          if (tier === 'all-world') {
+            return v.tier === 'all' || !v.tier
+          }
+          return v.tier === tier
+        })
+        if (!matchesTier) return false
+      }
       return true
     })
   }, [search, tier])
 
   const grouped = useMemo(() => {
-    const map = new Map<string, typeof filtered>()
-    for (const b of filtered) {
-      const key = b.category
+    const map = new Map<BuildingCategory, typeof filtered>()
+    for (const family of filtered) {
+      const key = family.category
       if (!map.has(key)) map.set(key, [])
-      map.get(key)!.push(b)
+      map.get(key)!.push(family)
     }
     return map
   }, [filtered])
 
-  const orderedKeys = CATEGORY_ORDER.filter(k => grouped.has(k))
+  const orderedKeys = FAMILY_CATEGORIES
+    .filter(c => c.id !== 'all' && grouped.has(c.id as BuildingCategory))
+    .map(c => c.id as BuildingCategory)
 
   return (
     <aside className="palette">
@@ -92,43 +99,51 @@ export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
       </div>
 
       <div className="palette-list">
-        {orderedKeys.map(cat => (
-          <div key={cat} className="palette-group">
-            <div className="palette-group-header">{CATEGORY_LABEL[cat] ?? cat}</div>
-            {grouped.get(cat)!.map(b => {
-              const pw = Math.max(MIN_PREVIEW, Math.min(maxPrev, b.footprint.w * TILE_PX * PREVIEW_SCALE))
-              const ph = Math.max(MIN_PREVIEW, Math.min(maxPrev, b.footprint.h * TILE_PX * PREVIEW_SCALE))
-              const isActive = activeBuildingId === b.id
-              return (
-                <button
-                  key={b.id}
-                  className={`palette-item${isActive ? ' palette-item--active' : ''}`}
-                  onClick={() => handleClick(b.id)}
-                  title={`${b.name} — ${b.footprint.w}×${b.footprint.h} tiles${b.dlc ? ` · ${b.dlc}` : ''}`}
-                >
-                  <div
-                    className="palette-preview"
-                    style={{ width: pw, height: ph, background: b.color }}
-                  />
-                  <div className="palette-info">
-                    <span className="palette-label">{b.name}</span>
-                    <span className="palette-size">
-                      {b.footprint.w}×{b.footprint.h}
-                      {b.dlc && (
-                        <span
-                          className="dlc-badge"
-                          style={{ background: DLC_COLOR[b.dlc] ?? '#5a5a80' }}
-                        >
-                          {dlcLabel(b.dlc)}
-                        </span>
-                      )}
-                    </span>
-                  </div>
-                </button>
-              )
-            })}
-          </div>
-        ))}
+        {orderedKeys.map(cat => {
+          const catDef = FAMILY_CATEGORIES.find(c => c.id === cat)
+          const groupLabel = catDef ? catDef.label : cat
+          return (
+            <div key={cat} className="palette-group">
+              <div className="palette-group-header">{groupLabel}</div>
+              {grouped.get(cat)!.map(family => {
+                const defaultVariant = family.variants.find(v => v.id === family.defaultVariantId) || family.variants[0]
+                const footprint = defaultVariant.footprint
+                const pw = Math.max(MIN_PREVIEW, Math.min(maxPrev, footprint.w * TILE_PX * PREVIEW_SCALE))
+                const ph = Math.max(MIN_PREVIEW, Math.min(maxPrev, footprint.h * TILE_PX * PREVIEW_SCALE))
+                const isActive = activeBuildingId !== null && family.variants.some(v => v.id === activeBuildingId)
+                const color = categoryColors[family.category]
+
+                return (
+                  <button
+                    key={family.id}
+                    className={`palette-item${isActive ? ' palette-item--active' : ''}`}
+                    onClick={() => handleClick(family.defaultVariantId)}
+                    title={`${defaultVariant.name} — ${footprint.w}×${footprint.h} tiles${family.dlc ? ` · ${family.dlc}` : ''}`}
+                  >
+                    <div
+                      className="palette-preview"
+                      style={{ width: pw, height: ph, background: color }}
+                    />
+                    <div className="palette-info">
+                      <span className="palette-label">{family.name}</span>
+                      <span className="palette-size">
+                        {footprint.w}×{footprint.h}
+                        {family.dlc && (
+                          <span
+                            className="dlc-badge"
+                            style={{ background: DLC_COLOR[family.dlc] ?? '#5a5a80' }}
+                          >
+                            {dlcLabel(family.dlc)}
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
+          )
+        })}
         {filtered.length === 0 && (
           <p className="palette-empty">No buildings match</p>
         )}
@@ -140,3 +155,4 @@ export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
     </aside>
   )
 }
+

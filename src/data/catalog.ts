@@ -7,6 +7,9 @@ export const FAMILY_MAP  = new Map(FAMILIES.map(f => [f.id, f]))
 export const VARIANT_MAP = new Map(
   FAMILIES.flatMap(f => f.variants).map(v => [v.id, v])
 )
+export const VARIANT_FAMILY_MAP = new Map(
+  FAMILIES.flatMap(f => f.variants.map(v => [v.id, f]))
+)
 
 // Maps new BuildingCategory values back to the legacy category strings that
 // components and palette filters currently expect.
