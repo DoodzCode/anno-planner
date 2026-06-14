@@ -1,11 +1,13 @@
-import { useRef, useEffect, useState, useMemo } from 'react'
+import { useRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { Stage, Layer, Line, Rect, Group, Text, Circle } from 'react-konva'
 import type Konva from 'konva'
 import { useBlueprintStore } from '../state/blueprintStore'
-import { getBuilding, VARIANT_FAMILY_MAP } from '../data/catalog'
+import { getBuilding, VARIANT_FAMILY_MAP, FARM_FIELD_MAP, PAINTABLE_IDS } from '../data/catalog'
 import { categoryColors } from '../constants/categoryColors'
 import { useOverlayStore, OVERLAY_DEFS } from '../state/overlayStore'
+import { wouldCollide } from '../lib/collide'
 import Minimap from './Minimap'
+import BuildingContextMenu from './BuildingContextMenu'
 
 function getBuildingColor(buildingId: string): string {
   const family = VARIANT_FAMILY_MAP.get(buildingId)
@@ -40,6 +42,13 @@ function boxesOverlap(a: Box, b: Box) {
   return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y
 }
 
+interface ContextMenuData {
+  buildingName: string
+  fieldIds: string[]
+  x: number
+  y: number
+}
+
 interface CanvasProps {
   onStageReady?: (stage: Konva.Stage) => void
 }
@@ -58,11 +67,16 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   const isSpaceDown = useRef(false)
   const [isPanning, setIsPanning] = useState(false)
 
+  // Paint mode (hold left mouse + drag for paintable buildings like fields)
+  const isPainting = useRef(false)
+  const lastPaintTile = useRef<{ x: number; y: number } | null>(null)
+  const didPaint = useRef(false)
+
   // Tracks the snapped tile position for each building during drag.
-  // onDragEnd reads from this ref instead of e.target.position() to avoid
-  // the react-konva stale-position issue when a mid-drag re-render resets
-  // the Konva node's local coords back to the React prop values.
   const dragTileRef = useRef<Map<string, { x: number; y: number }>>(new Map())
+
+  // Context menu for farm buildings (shows their associated field buttons)
+  const [contextMenu, setContextMenu] = useState<ContextMenuData | null>(null)
 
   const activeOverlays = useOverlayStore((s) => s.active)
   const overlayColorMap = useMemo(
@@ -85,6 +99,32 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   useEffect(() => {
     if (stageRef.current && onStageReady) onStageReady(stageRef.current)
   })
+
+  // Recompute farm context menu position from current stage transform
+  const updateContextMenu = useCallback(() => {
+    const stage = stageRef.current
+    const { placements: ps, selectedIds: ids } = useBlueprintStore.getState()
+    if (!stage || ids.length !== 1) { setContextMenu(null); return }
+    const placement = ps.find(p => p.id === ids[0])
+    if (!placement) { setContextMenu(null); return }
+    const fieldIds = FARM_FIELD_MAP.get(placement.buildingId)
+    if (!fieldIds) { setContextMenu(null); return }
+    const building = getBuilding(placement.buildingId)
+    if (!building) { setContextMenu(null); return }
+    const fp = effectiveFootprint(building.footprint, placement.rotation)
+    const sc = stage.scaleX()
+    const sp = stage.position()
+    setContextMenu({
+      buildingName: building.name,
+      fieldIds,
+      x: sp.x + (placement.x + fp.w / 2) * TILE_PX * sc,
+      y: sp.y + placement.y * TILE_PX * sc,
+    })
+  }, [])
+
+  useEffect(() => {
+    updateContextMenu()
+  }, [selectedIds, placements, updateContextMenu])
 
   // Keyboard: all actions read from store via getState() to avoid stale closures
   useEffect(() => {
@@ -146,6 +186,12 @@ export default function Canvas({ onStageReady }: CanvasProps) {
 
   const activeBuilding = activeBuildingId ? getBuilding(activeBuildingId) : undefined
 
+  // Ghost validity: red when the current hover tile would overlap an existing building
+  const ghostValid = useMemo(() => {
+    if (!ghostTile || !activeBuildingId) return true
+    return !wouldCollide(placements, activeBuildingId, ghostTile.x, ghostTile.y, 0)
+  }, [ghostTile, activeBuildingId, placements])
+
   // Zoom-to-pointer on wheel (imperative — avoids 60fps React re-renders)
   const handleWheel = (e: Konva.KonvaEventObject<WheelEvent>) => {
     e.evt.preventDefault()
@@ -161,6 +207,7 @@ export default function Canvas({ onStageReady }: CanvasProps) {
     const origin = { x: (pointer.x - stage.x()) / oldScale, y: (pointer.y - stage.y()) / oldScale }
     stage.scale({ x: newScale, y: newScale })
     stage.position({ x: pointer.x - origin.x * newScale, y: pointer.y - origin.y * newScale })
+    updateContextMenu()
   }
 
   // Canvas-space pointer position (accounts for viewport pan/zoom)
@@ -169,7 +216,21 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   const handleMouseMove = () => {
     const pos = canvasPos()
     if (!pos) return
-    if (activeBuildingId) setGhostTile({ x: pxToTile(pos.x), y: pxToTile(pos.y) })
+
+    const tx = pxToTile(pos.x)
+    const ty = pxToTile(pos.y)
+
+    if (activeBuildingId) setGhostTile({ x: tx, y: ty })
+
+    // Paint: place a tile at each new position while mouse button is held
+    if (isPainting.current && activeBuildingId) {
+      if (!lastPaintTile.current || lastPaintTile.current.x !== tx || lastPaintTile.current.y !== ty) {
+        addPlacement(activeBuildingId, tx, ty)
+        lastPaintTile.current = { x: tx, y: ty }
+      }
+      return
+    }
+
     if (isDrawingBox.current) {
       setSelBox((b) => b ? { ...b, ex: pos.x, ey: pos.y } : null)
     }
@@ -183,9 +244,26 @@ export default function Canvas({ onStageReady }: CanvasProps) {
       setIsPanning(true)
       return
     }
-    if (isSpaceDown.current || activeBuildingId) return
+    if (isSpaceDown.current) return
+
     const pos = canvasPos()
     if (!pos) return
+
+    // Paint mode: paintable building active + left mouse down = start painting
+    if (activeBuildingId && PAINTABLE_IDS.has(activeBuildingId)) {
+      const tx = pxToTile(pos.x)
+      const ty = pxToTile(pos.y)
+      isPainting.current = true
+      didPaint.current = true
+      lastPaintTile.current = null
+      addPlacement(activeBuildingId, tx, ty)
+      lastPaintTile.current = { x: tx, y: ty }
+      return
+    }
+
+    if (activeBuildingId) return  // non-paintable building: click handler places it
+
+    // Box-select
     isDrawingBox.current = true
     setSelBox({ sx: pos.x, sy: pos.y, ex: pos.x, ey: pos.y })
   }
@@ -195,6 +273,13 @@ export default function Canvas({ onStageReady }: CanvasProps) {
     if (e.evt.button === 1) {
       isSpaceDown.current = false
       setIsPanning(false)
+      return
+    }
+
+    if (isPainting.current) {
+      isPainting.current = false
+      lastPaintTile.current = null
+      return
     }
 
     if (!isDrawingBox.current) return
@@ -225,16 +310,20 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   }
 
   const handleStageClick = () => {
-    // Ignore if we just finished drawing a box (mouseup already handled it)
-    if (selBox) return
-    if (activeBuildingId && ghostTile) {
+    // Ignore if we just finished drawing a box or a paint stroke
+    if (selBox || didPaint.current) { didPaint.current = false; return }
+    if (activeBuildingId && ghostTile && ghostValid) {
       addPlacement(activeBuildingId, ghostTile.x, ghostTile.y)
     } else if (!activeBuildingId) {
       clearSelection()
     }
   }
 
-  const cursor = isPanning ? 'grab' : activeBuildingId ? 'crosshair' : selBox ? 'default' : 'default'
+  const isPaintable = activeBuildingId ? PAINTABLE_IDS.has(activeBuildingId) : false
+  const cursor = isPanning ? 'grab'
+    : activeBuildingId
+      ? (ghostValid ? (isPaintable ? 'cell' : 'crosshair') : 'not-allowed')
+      : selBox ? 'default' : 'default'
 
   const selectionRect = selBox
     ? toBox(selBox.sx, selBox.sy, selBox.ex, selBox.ey)
@@ -243,6 +332,15 @@ export default function Canvas({ onStageReady }: CanvasProps) {
   return (
     <main className="canvas-pane">
       <Minimap stage={stageRef.current} />
+      {contextMenu && (
+        <BuildingContextMenu
+          {...contextMenu}
+          onSelectField={(fieldId) => {
+            setActiveBuildingId(fieldId)
+            clearSelection()
+          }}
+        />
+      )}
       <div className="konva-container" style={{ cursor }}>
         <Stage
           ref={stageRef}
@@ -254,7 +352,16 @@ export default function Canvas({ onStageReady }: CanvasProps) {
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onClick={handleStageClick}
-          onMouseLeave={() => { setGhostTile(null); isDrawingBox.current = false; setSelBox(null) }}
+          onDragMove={updateContextMenu}
+          onMouseLeave={() => {
+            setGhostTile(null)
+            isDrawingBox.current = false
+            setSelBox(null)
+            if (isPainting.current) {
+              isPainting.current = false
+              lastPaintTile.current = null
+            }
+          }}
         >
           <Layer listening={false}>{gridLines}</Layer>
 
@@ -312,16 +419,20 @@ export default function Canvas({ onStageReady }: CanvasProps) {
                     const maxY = tileToPx(GRID_ROWS - fp.h)
                     const sx = Math.max(0, Math.min(maxX, snapToGrid(cx)))
                     const sy = Math.max(0, Math.min(maxY, snapToGrid(cy)))
-                    dragTileRef.current.set(p.id, { x: pxToTile(sx), y: pxToTile(sy) })
-                    return { x: sp.x + sx * sc, y: sp.y + sy * sc }
+                    const tx = pxToTile(sx)
+                    const ty = pxToTile(sy)
+                    const currentPlacements = useBlueprintStore.getState().placements
+                    if (!wouldCollide(currentPlacements, p.buildingId, tx, ty, p.rotation, p.id)) {
+                      dragTileRef.current.set(p.id, { x: tx, y: ty })
+                    }
+                    const tracked = dragTileRef.current.get(p.id) ?? { x: p.x, y: p.y }
+                    return { x: sp.x + tileToPx(tracked.x) * sc, y: sp.y + tileToPx(tracked.y) * sc }
                   }}
                   onDragStart={(e) => {
                     e.cancelBubble = true
                   }}
                   onDragEnd={(e) => {
                     e.cancelBubble = true
-                    // Prefer the tile tracked during dragBoundFunc; fall back to
-                    // converting the node's final local position directly.
                     const tracked = dragTileRef.current.get(p.id)
                     dragTileRef.current.delete(p.id)
                     if (tracked) {
@@ -371,14 +482,16 @@ export default function Canvas({ onStageReady }: CanvasProps) {
               )
             })}
 
-            {/* Ghost preview */}
+            {/* Ghost preview — red when position is occupied */}
             {activeBuilding && ghostTile && (
               <Rect
                 x={tileToPx(ghostTile.x)} y={tileToPx(ghostTile.y)}
                 width={tileToPx(activeBuilding.footprint.w)}
                 height={tileToPx(activeBuilding.footprint.h)}
-                fill={getBuildingColor(activeBuilding.id)} opacity={0.35}
-                stroke={getBuildingColor(activeBuilding.id)} strokeWidth={1}
+                fill={ghostValid ? getBuildingColor(activeBuilding.id) : '#ef4444'}
+                opacity={ghostValid ? 0.35 : 0.45}
+                stroke={ghostValid ? getBuildingColor(activeBuilding.id) : '#ef4444'}
+                strokeWidth={1}
                 dash={[4, 2]} listening={false}
               />
             )}

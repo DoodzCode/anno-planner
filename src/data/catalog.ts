@@ -46,3 +46,27 @@ export const FAMILY_CATEGORIES = [
   { id: 'infrastructure', label: 'Infrastructure' },
 ] as const
 
+// Farm → field dependencies. Fields are hidden from the palette and accessed
+// via a context menu on the selected parent farm.
+export const FARM_FIELD_MAP = new Map<string, string[]>([
+  ['agriculture-01-grain-farm',       ['agriculture-01-field-grain-field']],
+  ['agriculture-02-cattle-farm',      ['agriculture-02-field-pasture']],
+  ['agriculture-03-hop-farm',         ['agriculture-03-field-hop-field']],
+  ['agriculture-04-potato-farm',      ['agriculture-04-field-potato-field']],
+  ['agriculture-06-sheep-farm',       ['agriculture-06-field-sheepfold']],
+  ['agriculture-08-pig-farm',         ['agriculture-08-field-pig-sty']],
+  ['agriculture-10-vineyard',         ['agriculture-10-field-vines']],
+  ['agriculture-11-bell-pepper-farm', ['agriculture-11-field-pepper-field']],
+  ['heavy-10-oil-heavy-industry',     ['heavy-10-field-oil-pump']],
+])
+
+// Reverse: field variant id → parent farm variant id
+export const FIELD_PARENT_MAP = new Map<string, string>(
+  [...FARM_FIELD_MAP.entries()].flatMap(([parent, fields]) =>
+    fields.map(f => [f, parent] as [string, string])
+  )
+)
+
+// Building IDs that support paint-on-drag (hold left mouse + drag) placement
+export const PAINTABLE_IDS = new Set<string>(FIELD_PARENT_MAP.keys())
+

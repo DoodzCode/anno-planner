@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
-import { FAMILIES, FAMILY_CATEGORIES, TIERS } from '../data/catalog'
+import { FAMILIES, FAMILY_CATEGORIES, TIERS, FIELD_PARENT_MAP } from '../data/catalog'
 import { useBlueprintStore } from '../state/blueprintStore'
 import { TILE_PX } from '../lib/grid'
 import { categoryColors } from '../constants/categoryColors'
@@ -88,6 +88,8 @@ export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim()
     return FAMILIES.filter(family => {
+      // Hide field buildings — they are accessed via the farm's context menu
+      if (family.variants.some(v => FIELD_PARENT_MAP.has(v.id))) return false
       // search filter
       if (q && !family.name.toLowerCase().includes(q)) return false
       // tier filter
