@@ -642,3 +642,102 @@
   font-weight: 600;
 }
 .onboarding-btn-primary:hover { background: var(--accent); }
+
+/* ── Variant Selectors ────────────────────────────────────── */
+
+.palette-item-main {
+  display: flex;
+  flex-direction: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  gap: inherit;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: inherit;
+  flex: 1;
+  min-width: 0;
+  outline: none;
+}
+
+.quick-select-tabs {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+  max-width: 120px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.quick-select-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.quick-select-btn:hover {
+  border-color: var(--accent-dim);
+  color: var(--text);
+  background: var(--surface);
+}
+
+.quick-select-btn--active {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.variant-dropdown-container {
+  flex-shrink: 0;
+  max-width: 120px;
+  width: 100%;
+}
+
+.variant-dropdown {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.65rem;
+  padding: 3px 6px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.variant-dropdown:hover,
+.variant-dropdown:focus {
+  border-color: var(--accent-dim);
+}
+
+@container palette (min-width: 280px) {
+  .quick-select-tabs {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    margin-top: 4px;
+  }
+  
+  .variant-dropdown-container {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 4px;
+  }
+}
+
