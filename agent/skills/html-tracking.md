@@ -4,6 +4,16 @@ All development progress, tasks, and phases in this project are tracked via HTML
 
 ---
 
+## 0. Source of Truth
+
+**`docs/ROADMAP.html` is the single source of truth for all project-wide progress.**
+
+- `ROADMAP.md` does not exist. Do not create it, reference it, or sync to it.
+- Every milestone, quest, and sidequest has exactly one tracking artifact — an HTML file.
+- When in doubt about project status, open `docs/ROADMAP.html`.
+
+---
+
 ## 1. When to create vs. update
 
 | Scope | Action |
@@ -258,6 +268,8 @@ Always use these exact class/icon combinations. Do not use emoji or other icon s
 
 ## 5. Creating a new quest tracker
 
+> **Tracker-first rule:** The tracker file and `docs/ROADMAP.html` card **must exist and be committed** before any quest implementation code is written or modified. No exceptions.
+
 1. Decide quest ID (e.g. `AGENT-DOCS`).
 2. Create `docs/<QUEST-ID>-PROGRESS.html`.
 3. Copy the `<style>` block from §2 verbatim.
@@ -266,8 +278,9 @@ Always use these exact class/icon combinations. Do not use emoji or other icon s
 6. Add optional stat cards section for key numbers.
 7. Add an overview grid (`.overview`) with one `.m-card` per phase — all start as `pending`.
 8. Add phase detail blocks — all start as `todo`.
-9. Add a link to the new tracker from `docs/ROADMAP.html` in the relevant milestone section and from `dashboard/index.html`.
-10. Commit: `docs: create <QUEST-ID>-PROGRESS.html tracker`.
+9. Add a card to `docs/ROADMAP.html` overview grid for this quest/milestone. Add a nav link.
+10. Commit tracker + ROADMAP.html card together: `docs: create <QUEST-ID>-PROGRESS.html tracker`.
+11. **Only after this commit:** begin implementation work.
 
 ---
 
