@@ -35,8 +35,8 @@ function dlcLabel(dlc: string) {
 }
 
 export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
-  const columns = leftWidth >= 390 ? 3 : leftWidth >= 280 ? 2 : 1
-  const maxPrev = columns > 1 ? 52 : 32
+  const gridMode = leftWidth >= 280
+  const maxPrev = gridMode ? 52 : 32
   const activeBuildingId = useBlueprintStore((s) => s.activeBuildingId)
   const setActiveBuildingId = useBlueprintStore((s) => s.setActiveBuildingId)
   const clearSelection = useBlueprintStore((s) => s.clearSelection)
@@ -48,10 +48,27 @@ export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
     try {
       const saved = localStorage.getItem('anno-planner-selected-variants')
       return saved ? JSON.parse(saved) : {}
-    } catch (e) {
+    } catch {
       return {}
     }
   })
+
+  const [collapsedCats, setCollapsedCats] = useState<Record<string, boolean>>(() => {
+    try {
+      const saved = localStorage.getItem('anno-planner-collapsed-categories')
+      return saved ? JSON.parse(saved) : {}
+    } catch {
+      return {}
+    }
+  })
+
+  const toggleCategory = (cat: string) => {
+    setCollapsedCats(prev => {
+      const next = { ...prev, [cat]: !prev[cat] }
+      localStorage.setItem('anno-planner-collapsed-categories', JSON.stringify(next))
+      return next
+    })
+  }
 
   useEffect(() => {
     if (activeBuildingId) {
@@ -120,6 +137,8 @@ export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
     .filter(c => c.id !== 'all' && grouped.has(c.id as BuildingCategory))
     .map(c => c.id as BuildingCategory)
 
+  const searching = search.trim().length > 0
+
   return (
     <aside className="palette">
       <div className="palette-header">
@@ -149,88 +168,105 @@ export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
         {orderedKeys.map(cat => {
           const catDef = FAMILY_CATEGORIES.find(c => c.id === cat)
           const groupLabel = catDef ? catDef.label : cat
+          const items = grouped.get(cat)!
+          const isCollapsed = !searching && !!collapsedCats[cat]
           return (
-            <div key={cat} className="palette-group">
-              <div className="palette-group-header">{groupLabel}</div>
-              {grouped.get(cat)!.map(family => {
-                const selectedVariantId = selectedVariantIds[family.id] || family.defaultVariantId
-                const currentVariant = family.variants.find(v => v.id === selectedVariantId) || family.variants[0]
-                const footprint = currentVariant.footprint
-                const pw = Math.max(MIN_PREVIEW, Math.min(maxPrev, footprint.w * TILE_PX * PREVIEW_SCALE))
-                const ph = Math.max(MIN_PREVIEW, Math.min(maxPrev, footprint.h * TILE_PX * PREVIEW_SCALE))
-                const isActive = activeBuildingId !== null && family.variants.some(v => v.id === activeBuildingId)
-                const color = categoryColors[family.category]
+            <div key={cat} className={`palette-group${isCollapsed ? ' palette-group--collapsed' : ''}`}>
+              <button
+                type="button"
+                className="palette-group-header"
+                aria-expanded={!isCollapsed}
+                onClick={() => toggleCategory(cat)}
+                title={isCollapsed ? `Expand ${groupLabel}` : `Collapse ${groupLabel}`}
+              >
+                <span className="palette-group-chevron" aria-hidden="true">▸</span>
+                <span className="palette-group-label">{groupLabel}</span>
+                <span className="palette-group-count">{items.length}</span>
+              </button>
 
-                const hasVariants = family.variants.length > 1
-                const isSpecialQuickSelect = family.id === '1-old-world-residence' || family.id === 'general-small-warehouse'
+              {!isCollapsed && (
+                <div className="palette-group-items">
+                  {items.map(family => {
+                    const selectedVariantId = selectedVariantIds[family.id] || family.defaultVariantId
+                    const currentVariant = family.variants.find(v => v.id === selectedVariantId) || family.variants[0]
+                    const footprint = currentVariant.footprint
+                    const pw = Math.max(MIN_PREVIEW, Math.min(maxPrev, footprint.w * TILE_PX * PREVIEW_SCALE))
+                    const ph = Math.max(MIN_PREVIEW, Math.min(maxPrev, footprint.h * TILE_PX * PREVIEW_SCALE))
+                    const isActive = activeBuildingId !== null && family.variants.some(v => v.id === activeBuildingId)
+                    const color = categoryColors[family.category]
 
-                return (
-                  <div
-                    key={family.id}
-                    className={`palette-item${isActive ? ' palette-item--active' : ''}`}
-                  >
-                    <button
-                      className="palette-item-main"
-                      onClick={() => handleClick(currentVariant.id)}
-                      title={`${currentVariant.name} — ${footprint.w}×${footprint.h} tiles${family.dlc ? ` · ${family.dlc}` : ''}`}
-                    >
+                    const hasVariants = family.variants.length > 1
+                    const isSpecialQuickSelect = family.id === '1-old-world-residence' || family.id === 'general-small-warehouse'
+
+                    return (
                       <div
-                        className="palette-preview"
-                        style={{ width: pw, height: ph, background: color }}
-                      />
-                      <div className="palette-info">
-                        <span className="palette-label">{family.name}</span>
-                        <span className="palette-size">
-                          {footprint.w}×{footprint.h}
-                          {family.dlc && (
-                            <span
-                              className="dlc-badge"
-                              style={{ background: DLC_COLOR[family.dlc] ?? '#5a5a80' }}
-                            >
-                              {dlcLabel(family.dlc)}
+                        key={family.id}
+                        className={`palette-item${isActive ? ' palette-item--active' : ''}`}
+                      >
+                        <button
+                          className="palette-item-main"
+                          onClick={() => handleClick(currentVariant.id)}
+                          title={`${currentVariant.name} — ${footprint.w}×${footprint.h} tiles${family.dlc ? ` · ${family.dlc}` : ''}`}
+                        >
+                          <div
+                            className="palette-preview"
+                            style={{ width: pw, height: ph, background: color }}
+                          />
+                          <div className="palette-info">
+                            <span className="palette-label">{family.name}</span>
+                            <span className="palette-size">
+                              {footprint.w}×{footprint.h}
+                              {family.dlc && (
+                                <span
+                                  className="dlc-badge"
+                                  style={{ background: DLC_COLOR[family.dlc] ?? '#5a5a80' }}
+                                >
+                                  {dlcLabel(family.dlc)}
+                                </span>
+                              )}
                             </span>
-                          )}
-                        </span>
-                      </div>
-                    </button>
+                          </div>
+                        </button>
 
-                    {hasVariants && (
-                      isSpecialQuickSelect ? (
-                        <div className="quick-select-tabs" onClick={e => e.stopPropagation()}>
-                          {family.variants.map(v => {
-                            const label = TIER_LABELS[v.tier ?? ''] || v.name.slice(0, 1).toUpperCase()
-                            const isSelected = selectedVariantId === v.id
-                            return (
-                              <button
-                                key={v.id}
-                                className={`quick-select-btn${isSelected ? ' quick-select-btn--active' : ''}`}
-                                onClick={() => handleSelectVariant(family.id, v.id)}
-                                title={v.name}
+                        {hasVariants && (
+                          isSpecialQuickSelect ? (
+                            <div className="quick-select-tabs" onClick={e => e.stopPropagation()}>
+                              {family.variants.map(v => {
+                                const label = TIER_LABELS[v.tier ?? ''] || v.name.slice(0, 1).toUpperCase()
+                                const isSelected = selectedVariantId === v.id
+                                return (
+                                  <button
+                                    key={v.id}
+                                    className={`quick-select-btn${isSelected ? ' quick-select-btn--active' : ''}`}
+                                    onClick={() => handleSelectVariant(family.id, v.id)}
+                                    title={v.name}
+                                  >
+                                    {label}
+                                  </button>
+                                )
+                              })}
+                            </div>
+                          ) : (
+                            <div className="variant-dropdown-container" onClick={e => e.stopPropagation()}>
+                              <select
+                                className="variant-dropdown"
+                                value={selectedVariantId}
+                                onChange={e => handleSelectVariant(family.id, e.target.value)}
                               >
-                                {label}
-                              </button>
-                            )
-                          })}
-                        </div>
-                      ) : (
-                        <div className="variant-dropdown-container" onClick={e => e.stopPropagation()}>
-                          <select
-                            className="variant-dropdown"
-                            value={selectedVariantId}
-                            onChange={e => handleSelectVariant(family.id, e.target.value)}
-                          >
-                            {family.variants.map(v => (
-                              <option key={v.id} value={v.id}>
-                                {v.name} ({v.footprint.w}×{v.footprint.h})
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      )
-                    )}
-                  </div>
-                )
-              })}
+                                {family.variants.map(v => (
+                                  <option key={v.id} value={v.id}>
+                                    {v.name} ({v.footprint.w}×{v.footprint.h})
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
             </div>
           )
         })}
@@ -245,5 +281,3 @@ export default function Palette({ leftWidth = 220 }: { leftWidth?: number }) {
     </aside>
   )
 }
-
-
