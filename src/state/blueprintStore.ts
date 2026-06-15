@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import type { Placement } from '../types/domain'
 import { nextRotation } from '../lib/grid'
+import { wouldCollide } from '../lib/collide'
 
 const MAX_HISTORY = 50
 
@@ -44,6 +45,7 @@ export const useBlueprintStore = create<BlueprintState>()(
 
     addPlacement: (buildingId, x, y) => {
       const prev = get().placements
+      if (wouldCollide(prev, buildingId, x, y, 0)) return
       set((state) => {
         pushHistory(state, prev)
         state.placements.push({ id: crypto.randomUUID(), buildingId, x, y, rotation: 0 })
@@ -52,10 +54,13 @@ export const useBlueprintStore = create<BlueprintState>()(
 
     movePlacement: (id, x, y) => {
       const prev = get().placements
+      const p = prev.find(p => p.id === id)
+      if (!p) return
+      if (wouldCollide(prev, p.buildingId, x, y, p.rotation, id)) return
       set((state) => {
         pushHistory(state, prev)
-        const p = state.placements.find((p) => p.id === id)
-        if (p) { p.x = x; p.y = y }
+        const item = state.placements.find((p) => p.id === id)
+        if (item) { item.x = x; item.y = y }
       })
     },
 

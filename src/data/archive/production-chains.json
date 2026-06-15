@@ -1,0 +1,1127 @@
+{
+  "schemaVersion": "1.0.0",
+  "game": "Anno 1800",
+  "scope": "Base-game Old World core chains (raw, construction, Farmers\u2192Engineers consumer goods). New World+ stubbed for extension.",
+  "goods": [
+    {
+      "id": "timber",
+      "name": "Timber",
+      "category": "construction"
+    },
+    {
+      "id": "bricks",
+      "name": "Bricks",
+      "category": "construction"
+    },
+    {
+      "id": "clay",
+      "name": "Clay",
+      "category": "intermediate"
+    },
+    {
+      "id": "steel_beams",
+      "name": "Steel Beams",
+      "category": "construction"
+    },
+    {
+      "id": "windows",
+      "name": "Windows",
+      "category": "construction"
+    },
+    {
+      "id": "reinforced_concrete",
+      "name": "Reinforced Concrete",
+      "category": "construction"
+    },
+    {
+      "id": "weapons",
+      "name": "Weapons",
+      "category": "goods"
+    },
+    {
+      "id": "iron",
+      "name": "Iron",
+      "category": "intermediate"
+    },
+    {
+      "id": "coal",
+      "name": "Coal",
+      "category": "intermediate"
+    },
+    {
+      "id": "steel",
+      "name": "Steel",
+      "category": "intermediate"
+    },
+    {
+      "id": "quartz_sand",
+      "name": "Quartz Sand",
+      "category": "intermediate"
+    },
+    {
+      "id": "glass",
+      "name": "Glass",
+      "category": "intermediate"
+    },
+    {
+      "id": "limestone",
+      "name": "Limestone",
+      "category": "intermediate"
+    },
+    {
+      "id": "cement",
+      "name": "Cement",
+      "category": "intermediate"
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "category": "food"
+    },
+    {
+      "id": "potatoes",
+      "name": "Potatoes",
+      "category": "crop"
+    },
+    {
+      "id": "schnapps",
+      "name": "Schnapps",
+      "category": "food"
+    },
+    {
+      "id": "wool",
+      "name": "Wool",
+      "category": "intermediate"
+    },
+    {
+      "id": "work_clothes",
+      "name": "Work Clothes",
+      "category": "goods"
+    },
+    {
+      "id": "pigs",
+      "name": "Pigs",
+      "category": "livestock"
+    },
+    {
+      "id": "sausages",
+      "name": "Sausages",
+      "category": "food"
+    },
+    {
+      "id": "grain",
+      "name": "Grain",
+      "category": "crop"
+    },
+    {
+      "id": "flour",
+      "name": "Flour",
+      "category": "intermediate"
+    },
+    {
+      "id": "bread",
+      "name": "Bread",
+      "category": "food"
+    },
+    {
+      "id": "tallow",
+      "name": "Tallow",
+      "category": "intermediate"
+    },
+    {
+      "id": "soap",
+      "name": "Soap",
+      "category": "goods"
+    },
+    {
+      "id": "hops",
+      "name": "Hops",
+      "category": "crop"
+    },
+    {
+      "id": "malt",
+      "name": "Malt",
+      "category": "intermediate"
+    },
+    {
+      "id": "beer",
+      "name": "Beer",
+      "category": "food"
+    },
+    {
+      "id": "sails",
+      "name": "Sails",
+      "category": "goods"
+    },
+    {
+      "id": "goulash",
+      "name": "Goulash",
+      "category": "intermediate"
+    },
+    {
+      "id": "canned_food",
+      "name": "Canned Food",
+      "category": "food"
+    },
+    {
+      "id": "furs",
+      "name": "Furs",
+      "category": "intermediate"
+    },
+    {
+      "id": "cotton",
+      "name": "Cotton",
+      "category": "crop"
+    },
+    {
+      "id": "cotton_fabric",
+      "name": "Cotton Fabric",
+      "category": "intermediate"
+    },
+    {
+      "id": "fur_coats",
+      "name": "Fur Coats",
+      "category": "goods"
+    },
+    {
+      "id": "sewing_machines",
+      "name": "Sewing Machines",
+      "category": "goods"
+    },
+    {
+      "id": "glasses",
+      "name": "Glasses",
+      "category": "goods"
+    },
+    {
+      "id": "pocket_watches",
+      "name": "Pocket Watches",
+      "category": "goods"
+    },
+    {
+      "id": "brass",
+      "name": "Brass",
+      "category": "intermediate"
+    },
+    {
+      "id": "copper",
+      "name": "Copper",
+      "category": "intermediate"
+    },
+    {
+      "id": "zinc",
+      "name": "Zinc",
+      "category": "intermediate"
+    },
+    {
+      "id": "filaments",
+      "name": "Filaments",
+      "category": "intermediate"
+    },
+    {
+      "id": "light_bulbs",
+      "name": "Light Bulbs",
+      "category": "goods"
+    },
+    {
+      "id": "caoutchouc",
+      "name": "Caoutchouc",
+      "category": "intermediate"
+    },
+    {
+      "id": "penny_farthings",
+      "name": "Penny Farthings",
+      "category": "goods"
+    },
+    {
+      "id": "steam_motors",
+      "name": "Steam Motors",
+      "category": "intermediate"
+    },
+    {
+      "id": "red_peppers",
+      "name": "Red Peppers",
+      "category": "crop"
+    },
+    {
+      "id": "cattle",
+      "name": "Cattle",
+      "category": "livestock"
+    }
+  ],
+  "buildings": [
+    {
+      "id": "lumberjacks_hut",
+      "name": "Lumberjack's Hut",
+      "region": "Old World",
+      "tier": "Farmers",
+      "category": "forestry",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 15,
+      "inputs": [],
+      "output": {
+        "good": "timber",
+        "perMin": 4
+      },
+      "outputPerMin": 4,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "fishery",
+      "name": "Fishery",
+      "region": "Old World",
+      "tier": "Farmers",
+      "category": "food",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [],
+      "output": {
+        "good": "fish",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "potato_farm",
+      "name": "Potato Farm",
+      "region": "Old World",
+      "tier": "Farmers",
+      "category": "farm",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [],
+      "output": {
+        "good": "potatoes",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "schnapps_distillery",
+      "name": "Schnapps Distillery",
+      "region": "Old World",
+      "tier": "Farmers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "potatoes",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "schnapps",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "id": "sheep_farm",
+      "name": "Sheep Farm",
+      "region": "Old World",
+      "tier": "Farmers",
+      "category": "farm",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [],
+      "output": {
+        "good": "wool",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "id": "framework_knitters",
+      "name": "Framework Knitters",
+      "region": "Old World",
+      "tier": "Farmers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "wool",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "work_clothes",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "id": "clay_pit",
+      "name": "Clay Pit",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "extractor",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [],
+      "output": {
+        "good": "clay",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "id": "brick_factory",
+      "name": "Brick Factory",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "clay",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "bricks",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "pig_farm",
+      "name": "Pig Farm",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "farm",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [],
+      "output": {
+        "good": "pigs",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "slaughterhouse",
+      "name": "Slaughterhouse",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "pigs",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "sausages",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "grain_farm",
+      "name": "Grain Farm",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "farm",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [],
+      "output": {
+        "good": "grain",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "flour_mill",
+      "name": "Flour Mill",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "grain",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "flour",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "id": "bakery",
+      "name": "Bakery",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 60,
+      "inputs": [
+        {
+          "good": "flour",
+          "perMin": 1
+        }
+      ],
+      "output": {
+        "good": "bread",
+        "perMin": 1
+      },
+      "outputPerMin": 1,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "rendering_works",
+      "name": "Rendering Works",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 60,
+      "verify": true,
+      "inputs": [],
+      "output": {
+        "good": "tallow",
+        "perMin": 1
+      },
+      "outputPerMin": 1,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "id": "soap_factory",
+      "name": "Soap Factory",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "tallow",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "soap",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "iron_mine",
+      "name": "Iron Mine",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "mine",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 15,
+      "inputs": [],
+      "output": {
+        "good": "iron",
+        "perMin": 4
+      },
+      "outputPerMin": 4,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "coal_mine",
+      "name": "Coal Mine",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "mine",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 15,
+      "inputs": [],
+      "output": {
+        "good": "coal",
+        "perMin": 4
+      },
+      "outputPerMin": 4,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "charcoal_kiln",
+      "name": "Charcoal Kiln",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [],
+      "output": {
+        "good": "coal",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "id": "furnace",
+      "name": "Furnace",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "iron",
+          "perMin": 2
+        },
+        {
+          "good": "coal",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "steel",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "id": "steelworks",
+      "name": "Steelworks",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 45,
+      "inputs": [
+        {
+          "good": "steel",
+          "perMin": 1.33
+        }
+      ],
+      "output": {
+        "good": "steel_beams",
+        "perMin": 1.33
+      },
+      "outputPerMin": 1.33,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "id": "weapons_factory",
+      "name": "Weapons Factory",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 90,
+      "inputs": [
+        {
+          "good": "steel",
+          "perMin": 0.67
+        }
+      ],
+      "output": {
+        "good": "weapons",
+        "perMin": 0.67
+      },
+      "outputPerMin": 0.67,
+      "note": "1 Furnace (2 t/min steel) = 1 Steelworks (1.33) + 1 Weapons Factory (0.67)",
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "id": "hops_farm",
+      "name": "Hops Farm",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "farm",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 60,
+      "verify": true,
+      "inputs": [],
+      "output": {
+        "good": "hops",
+        "perMin": 1
+      },
+      "outputPerMin": 1,
+      "workforce": [
+        {
+          "tier": "farmers",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "id": "malthouse",
+      "name": "Malthouse",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "verify": true,
+      "inputs": [
+        {
+          "good": "grain",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "malt",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "id": "brewery",
+      "name": "Brewery",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 60,
+      "verify": true,
+      "inputs": [
+        {
+          "good": "malt",
+          "perMin": 1
+        },
+        {
+          "good": "hops",
+          "perMin": 1
+        }
+      ],
+      "output": {
+        "good": "beer",
+        "perMin": 1
+      },
+      "outputPerMin": 1,
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "sailmakers",
+      "name": "Sailmakers",
+      "region": "Old World",
+      "tier": "Workers",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "verify": true,
+      "inputs": [
+        {
+          "good": "wool",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "sails",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "cattle_farm",
+      "name": "Cattle Farm",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "farm",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 60,
+      "verify": true,
+      "inputs": [],
+      "output": {
+        "good": "cattle",
+        "perMin": 1
+      },
+      "outputPerMin": 1,
+      "note": "1 Cattle Farm per 2 Artisanal Kitchens (artisanal_kitchen consumes 0.5 cattle/min)",
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "bell_pepper_farm",
+      "name": "Red Pepper Farm",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "farm",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 60,
+      "verify": true,
+      "inputs": [],
+      "output": {
+        "good": "red_peppers",
+        "perMin": 1
+      },
+      "outputPerMin": 1,
+      "note": "1 Red Pepper Farm per 2 Artisanal Kitchens (artisanal_kitchen consumes 0.5 red_peppers/min)",
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "artisanal_kitchen",
+      "name": "Artisanal Kitchen",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 120,
+      "verify": true,
+      "inputs": [
+        {
+          "good": "red_peppers",
+          "perMin": 0.5
+        },
+        {
+          "good": "cattle",
+          "perMin": 0.5
+        }
+      ],
+      "output": {
+        "good": "goulash",
+        "perMin": 0.5
+      },
+      "outputPerMin": 0.5,
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "id": "cannery",
+      "name": "Cannery",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 90,
+      "inputs": [
+        {
+          "good": "goulash",
+          "perMin": 0.67
+        },
+        {
+          "good": "iron",
+          "perMin": 0.67
+        }
+      ],
+      "output": {
+        "good": "canned_food",
+        "perMin": 0.67
+      },
+      "outputPerMin": 0.67,
+      "workforce": [
+        {
+          "tier": "workers",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "id": "hunting_cabin",
+      "name": "Hunting Cabin",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "extractor",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 60,
+      "inputs": [],
+      "output": {
+        "good": "furs",
+        "perMin": 1
+      },
+      "outputPerMin": 1,
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "cotton_mill",
+      "name": "Cotton Mill",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "cotton",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "cotton_fabric",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "id": "fur_dealer",
+      "name": "Fur Dealer",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "inputs": [
+        {
+          "good": "furs",
+          "perMin": 2
+        },
+        {
+          "good": "cotton_fabric",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "fur_coats",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "id": "sewing_machine_factory",
+      "name": "Sewing Machine Factory",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "verify": true,
+      "inputs": [
+        {
+          "good": "steel",
+          "perMin": 2
+        },
+        {
+          "good": "timber",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "sewing_machines",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "engineers",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "id": "glassworks",
+      "name": "Glassmakers",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "verify": true,
+      "inputs": [
+        {
+          "good": "quartz_sand",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "glass",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "artisans",
+          "count": 30
+        }
+      ]
+    },
+    {
+      "id": "window_makers",
+      "name": "Window Makers",
+      "region": "Old World",
+      "tier": "Artisans",
+      "category": "factory",
+      "requiresElectricity": false,
+      "baseCycleSeconds": 30,
+      "verify": true,
+      "inputs": [
+        {
+          "good": "glass",
+          "perMin": 2
+        }
+      ],
+      "output": {
+        "good": "windows",
+        "perMin": 2
+      },
+      "outputPerMin": 2,
+      "workforce": [
+        {
+          "tier": "engineers",
+          "count": 40
+        }
+      ]
+    }
+  ]
+}

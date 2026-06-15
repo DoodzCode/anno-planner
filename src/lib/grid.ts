@@ -1,8 +1,8 @@
 import type { Footprint, Rotation } from '../types/domain'
 
 export const TILE_PX = 24
-export const GRID_COLS = 60
-export const GRID_ROWS = 40
+export const GRID_COLS = 107
+export const GRID_ROWS = 60
 
 export function tileToPx(tile: number): number {
   return tile * TILE_PX
@@ -27,4 +27,11 @@ export function effectiveFootprint(fp: Footprint, rotation: Rotation): Footprint
 export function nextRotation(r: Rotation): Rotation {
   const cycle: Record<Rotation, Rotation> = { 0: 90, 90: 180, 180: 270, 270: 0 }
   return cycle[r]
+}
+
+export function footprintsOverlap(
+  ax: number, ay: number, aw: number, ah: number,
+  bx: number, by: number, bw: number, bh: number,
+): boolean {
+  return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by
 }

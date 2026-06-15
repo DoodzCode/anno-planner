@@ -5,3 +5,12 @@ dist-ssr
 .env
 .env.*
 .claude/
+
+# Windows NTFS Alternate Data Streams exposed by WSL
+*:Zone.Identifier
+
+# Local Agent Configs (env-like templates)
+/GEMINI.md
+/AGENTS.md
+/CLAUDE.md
+
