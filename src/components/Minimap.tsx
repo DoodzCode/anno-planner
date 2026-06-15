@@ -1,22 +1,25 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from 'react'
 import type Konva from 'konva'
 import { useBlueprintStore } from '../state/blueprintStore'
 import { getBuilding, VARIANT_FAMILY_MAP } from '../data/catalog'
 import { categoryColors } from '../constants/categoryColors'
 import { TILE_PX, GRID_COLS, GRID_ROWS, effectiveFootprint } from '../lib/grid'
 
+export interface MinimapHandle { redraw: () => void }
+
 interface Props {
   stage: Konva.Stage | null
+  onNavigate?: (tileX: number, tileY: number) => void
 }
 
 const MAP_W = 160
 const MAP_H = 100
 
-export default function Minimap({ stage }: Props) {
+const Minimap = forwardRef<MinimapHandle, Props>(function Minimap({ stage, onNavigate }, ref) {
   const canvasRef  = useRef<HTMLCanvasElement>(null)
   const placements = useBlueprintStore(s => s.placements)
 
-  useEffect(() => {
+  const draw = useCallback(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
@@ -68,11 +71,33 @@ export default function Minimap({ stage }: Props) {
       ctx.lineWidth = 1.2
       ctx.strokeRect(vx * scaleX, vy * scaleY, vw * scaleX, vh * scaleY)
     }
-  }, [placements, stage])
+  }, [stage, placements])
+
+  useImperativeHandle(ref, () => ({ redraw: draw }), [draw])
+  useEffect(() => { draw() }, [draw])
+
+  const handleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current
+    if (!canvas || !onNavigate) return
+    const rect = canvas.getBoundingClientRect()
+    const mx = e.clientX - rect.left
+    const my = e.clientY - rect.top
+    const tileX = mx / (MAP_W / GRID_COLS)
+    const tileY = my / (MAP_H / GRID_ROWS)
+    onNavigate(tileX, tileY)
+  }
 
   return (
     <div className="minimap">
-      <canvas ref={canvasRef} width={MAP_W} height={MAP_H} />
+      <canvas
+        ref={canvasRef}
+        width={MAP_W}
+        height={MAP_H}
+        onMouseDown={handleClick}
+        style={{ cursor: 'pointer' }}
+      />
     </div>
   )
-}
+})
+
+export default Minimap
