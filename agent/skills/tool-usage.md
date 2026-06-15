@@ -79,7 +79,7 @@ All agent-owned repeatable actions have a corresponding script. Prefer running t
 | `quality-check.sh` | Run tests + lint; required to pass before PR |
 | `pr-prep.sh` | Generate PR body from session journal + task state |
 | `dashboard-refresh.sh` | Regenerate `dashboard/index.html` from state JSON |
-| `roadmap-sync.sh` | Sync ROADMAP.md changes to ROADMAP.html |
+| `roadmap-sync.sh` | Sync `agent/state/tasks.json` state to `docs/ROADMAP.html` — ROADMAP.md does not exist |
 | `graph-update.sh` | Rebuild CRG graph after commits |
 | `graph-impact.sh <file>` | Show dependents of a file |
 

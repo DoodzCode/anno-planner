@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anno Planner — PROTO-HTML: Protocol & Tracking Alignment</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0c0c14;
+      --surface:  #13131f;
+      --surface2: #1a1a2e;
+      --border:   #252538;
+      --border2:  #303050;
+      --accent:   #c8a96e;
+      --blue:     #5b8dd9;
+      --text:     #d8d8e8;
+      --muted:    #6a6a90;
+      --done:     #4caf7d;
+      --done-bg:  #0d2a1a;
+      --prog:     #c8a96e;
+      --prog-bg:  #2a2010;
+      --todo-bg:  #1a1a2e;
+      --block:    #e05c5c;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: #0c0c14ee; backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .topbar h1 { font-size: 1.1rem; color: var(--accent); letter-spacing: .04em; white-space: nowrap; }
+    .topbar .date { font-size: .78rem; color: var(--muted); white-space: nowrap; }
+    .topbar nav { margin-left: auto; display: flex; gap: 1.25rem; }
+    .topbar nav a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .15s; }
+    .topbar nav a:hover { color: var(--text); }
+
+    .page { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    section { margin-bottom: 3rem; }
+    section > h2 {
+      font-size: .7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .14em;
+      color: var(--muted); margin-bottom: 1rem;
+      padding-bottom: .4rem; border-bottom: 1px solid var(--border);
+    }
+
+    .summary-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin-bottom: 2rem; }
+    @media (max-width: 640px) { .summary-strip { grid-template-columns: 1fr 1fr; } }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: .85rem 1rem; }
+    .stat-card .stat-val { font-size: 1.5rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
+    .stat-card .stat-label { font-size: .72rem; color: var(--muted); margin-top: .2rem; }
+
+    .overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+    @media (max-width: 640px) { .overview { grid-template-columns: 1fr 1fr; } }
+    .m-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+    .m-card.done   { border-color: #1e4030; }
+    .m-card.active { border-color: var(--prog); }
+    .m-card .m-id   { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .25rem; }
+    .m-card .m-name { font-size: .9rem; font-weight: 600; color: var(--text); margin-bottom: .1rem; }
+    .m-card .m-est  { font-size: .72rem; color: var(--muted); margin-bottom: .65rem; }
+
+    .pbar-track { height: 5px; border-radius: 3px; background: var(--border2); overflow: hidden; margin-bottom: .35rem; }
+    .pbar-fill  { height: 100%; border-radius: 3px; background: var(--prog); transition: width .4s ease; }
+    .pbar-fill.full { background: var(--done); }
+    .pbar-label { font-size: .68rem; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+
+    .badge {
+      display: inline-block; padding: .15rem .5rem; border-radius: 3px;
+      font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+    }
+    .badge.done    { background: var(--done-bg); color: var(--done); }
+    .badge.active  { background: var(--prog-bg); color: var(--prog); }
+    .badge.pending { background: var(--todo-bg); color: var(--muted); }
+
+    .phase-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 1.25rem; }
+    .phase-block.done   { border-color: #1e4030; }
+    .phase-block.active { border-color: var(--prog); }
+    .phase-block.todo   { border-color: var(--border); opacity: .85; }
+    .phase-header {
+      padding: 1rem 1.25rem .75rem;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-header h3 { font-size: 1rem; font-weight: 700; color: var(--accent); }
+    .phase-header .est  { font-size: .75rem; color: var(--muted); margin-top: .1rem; }
+    .phase-header .goal { font-size: .82rem; color: var(--muted); margin-top: .3rem; }
+    .phase-body { padding: 1rem 1.25rem; }
+
+    .sub-label {
+      font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); margin-bottom: .5rem; margin-top: .9rem;
+    }
+    .sub-label:first-child { margin-top: 0; }
+
+    .tasks { list-style: none; display: flex; flex-direction: column; gap: .3rem; }
+    .tasks li { display: flex; align-items: flex-start; gap: .6rem; font-size: .84rem; }
+    .tasks li .icon {
+      margin-top: .18em; flex-shrink: 0;
+      width: 14px; height: 14px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .6rem; font-weight: 900;
+    }
+    .tasks li.done  .icon { background: var(--done);  color: #0d2a1a; }
+    .tasks li.prog  .icon { background: var(--prog);  color: #2a2010; }
+    .tasks li.todo  .icon { background: transparent;  border: 1.5px solid var(--border2); }
+    .tasks li.block .icon { background: var(--block); color: #fff; }
+    .tasks li.done  > span { color: var(--muted); text-decoration: line-through; text-decoration-color: #3a4030; }
+    .tasks li.prog  > span { color: var(--text); }
+    .tasks li.todo  > span { color: var(--muted); }
+    .tasks li.block > span { color: var(--block); }
+
+    .commit-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+    .commit-chip {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: 4px; padding: .2rem .6rem;
+      font-size: .72rem; font-family: 'Cascadia Code', 'Fira Code', monospace;
+      color: var(--blue);
+    }
+    .commit-chip .msg { color: var(--muted); font-family: inherit; }
+
+    .callout {
+      margin-top: .75rem; padding: .6rem .85rem;
+      background: var(--surface2);
+      border-left: 2px solid var(--border2);
+      border-radius: 0 4px 4px 0;
+      font-size: .78rem; color: var(--muted);
+    }
+    .callout strong { color: var(--text); }
+    .callout.warn { border-left-color: var(--prog); }
+    .callout.info { border-left-color: var(--blue); }
+
+    .legend { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: .45rem; font-size: .8rem; color: var(--muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    footer {
+      margin-top: 3rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center; font-size: .75rem; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Anno Planner — PROTO-HTML Progress</h1>
+  <span class="date">Created 2026-06-14 · Branch: clyde/proto-html · Agent: Clyde</span>
+  <nav>
+    <a href="#overview">Overview</a>
+    <a href="#p0">P0</a>
+    <a href="#p1">P1</a>
+    <a href="#p2">P2</a>
+    <a href="#p3">P3</a>
+    <a href="#p4">P4</a>
+  </nav>
+</div>
+
+<div class="page">
+
+  <!-- ── Legend ── -->
+  <section>
+    <h2>Legend</h2>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--done)"></div> Done</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--prog)"></div> In progress</div>
+      <div class="legend-item"><div class="legend-dot" style="background:transparent;border:1.5px solid #303050"></div> Not started</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--block)"></div> Blocked</div>
+    </div>
+  </section>
+
+  <!-- ── Context ── -->
+  <section>
+    <h2>Quest Context</h2>
+    <div class="callout info">
+      <strong>Why this quest exists:</strong> ROADMAP.md was deleted — <code>docs/ROADMAP.html</code> is now the single source of truth for project progress. However, several agent protocol files still reference ROADMAP.md, imply it exists, or fail to establish ROADMAP.html's authority. This quest fixes those contradictions and bakes HTML-first tracking behavior deeper into every agent entry point.
+    </div>
+    <div class="callout warn" style="margin-top:.75rem;">
+      <strong>Scope:</strong> Protocol files, skill files, and HTML artifacts only. No application code changes. No new scripts.
+    </div>
+  </section>
+
+  <!-- ── Stats ── -->
+  <section>
+    <h2>Snapshot</h2>
+    <div class="summary-strip">
+      <div class="stat-card">
+        <div class="stat-val">5</div>
+        <div class="stat-label">Files to fix</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">5</div>
+        <div class="stat-label">Phases</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">0</div>
+        <div class="stat-label">App code touched</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">P4</div>
+        <div class="stat-label">Current phase</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Overview cards ── -->
+  <section id="overview">
+    <h2>Phase Overview</h2>
+    <div class="overview">
+
+      <div class="m-card done">
+        <div class="m-id">Phase 0</div>
+        <div class="m-name">Tracker + ROADMAP.html card</div>
+        <div class="m-est">This file + ROADMAP.html entry</div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>2 / 2 tasks</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card done">
+        <div class="m-id">Phase 1</div>
+        <div class="m-name">Fix direct contradictions</div>
+        <div class="m-est">ROADMAP.html footer · tool-usage.md</div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>2 / 2 tasks</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card done">
+        <div class="m-id">Phase 2</div>
+        <div class="m-name">Establish authority</div>
+        <div class="m-est">html-tracking.md §0 · tracker-first rule</div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>2 / 2 tasks</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card done">
+        <div class="m-id">Phase 3</div>
+        <div class="m-name">Wire PROJECT_PROTOCOLS.md</div>
+        <div class="m-est">.citadel/agents entry point</div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>1 / 1 tasks</span><span class="badge done">Done</span></div>
+      </div>
+
+      <div class="m-card active">
+        <div class="m-id">Phase 4</div>
+        <div class="m-name">Finish &amp; merge</div>
+        <div class="m-est">Final review · PR · merge</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:66%"></div></div>
+        <div class="pbar-label"><span>2 / 3 tasks</span><span class="badge active">In Progress</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Phase 0 ── -->
+  <section id="p0">
+    <h2>Phase Detail</h2>
+
+    <div class="phase-block done">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 0 — Tracker Bootstrap</h3>
+          <div class="est">Branch: clyde/proto-html · Clyde</div>
+          <div class="goal">Create this tracker and add the PROTO-HTML card to ROADMAP.html before touching any protocol file — following our own tracker-first rule.</div>
+        </div>
+        <span class="badge done">Done</span>
+      </div>
+      <div class="phase-body">
+        <div class="sub-label">Tasks</div>
+        <ul class="tasks">
+          <li class="done"><span class="icon">✓</span><span>Create <code>docs/PROTO-HTML-PROGRESS.html</code> — this file</span></li>
+          <li class="done"><span class="icon">✓</span><span>Add PROTO-HTML card to <code>docs/ROADMAP.html</code> milestone overview</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── Phase 1 ── -->
+    <div class="phase-block done" id="p1">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 1 — Fix Direct Contradictions</h3>
+          <div class="est">Branch: clyde/proto-html · Clyde</div>
+          <div class="goal">Remove references to ROADMAP.md from files agents actively read. Two concrete contradictions that will mislead any agent reading them cold.</div>
+        </div>
+        <span class="badge done">Done</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Files</div>
+        <ul class="tasks">
+          <li class="done"><span class="icon">✓</span><span><code>docs/ROADMAP.html</code> footer — replaced stale ROADMAP.md ref with HTML-only authority statement</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>agent/skills/tool-usage.md</code> — <code>roadmap-sync.sh</code> row updated to tasks.json→ROADMAP.html flow</span></li>
+        </ul>
+
+        <div class="callout info">
+          <strong>Why P1 before P2:</strong> Contradictions actively mislead. Additive content (§0, new rules) can wait; stale pointers to deleted files cannot.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Phase 2 ── -->
+    <div class="phase-block done" id="p2">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 2 — Establish ROADMAP.html Authority</h3>
+          <div class="est">Branch: clyde/proto-html · Clyde</div>
+          <div class="goal">Make html-tracking.md explicitly name ROADMAP.html as the single source of truth and add a tracker-first rule so agents cannot start code before a tracker exists.</div>
+        </div>
+        <span class="badge done">Done</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Files</div>
+        <ul class="tasks">
+          <li class="done"><span class="icon">✓</span><span><code>agent/skills/html-tracking.md</code> — §0 "Source of Truth" block prepended; ROADMAP.html declared canonical; ROADMAP.md declared non-existent</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>agent/skills/html-tracking.md</code> — tracker-first rule added to §5; steps 9-11 updated; blockquote mandate added</span></li>
+        </ul>
+
+        <div class="callout info">
+          <strong>§0 draft:</strong> "docs/ROADMAP.html is the single source of truth for project-wide progress. ROADMAP.md does not exist and must not be created. No markdown file is authoritative for task or milestone tracking. All development state lives in HTML artifacts."
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Phase 3 ── -->
+    <div class="phase-block done" id="p3">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 3 — Wire PROJECT_PROTOCOLS.md</h3>
+          <div class="est">Branch: clyde/proto-html · Clyde</div>
+          <div class="goal">Add a Progress Tracking section to .citadel/agents/PROJECT_PROTOCOLS.md so agents loading that file cold know about ROADMAP.html and the html-tracking skill before they do anything else.</div>
+        </div>
+        <span class="badge done">Done</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Files</div>
+        <ul class="tasks">
+          <li class="done"><span class="icon">✓</span><span><code>.citadel/agents/PROJECT_PROTOCOLS.md</code> — §9 Progress Tracking added; ROADMAP.html named as source of truth; tracker-first rule and skill pointer included</span></li>
+        </ul>
+
+        <div class="callout warn">
+          <strong>Note:</strong> <code>PROJECT_PROTOCOLS.md</code> is committed to <code>.citadel/</code> and loaded by agent template anchors. Changes here propagate to all agents that use the template — highest leverage file in this quest.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Phase 4 ── -->
+    <div class="phase-block active" id="p4">
+      <div class="phase-header">
+        <div>
+          <h3>Phase 4 — Finish &amp; Merge</h3>
+          <div class="est">Branch: clyde/proto-html · Clyde + Human</div>
+          <div class="goal">Verify no remaining ROADMAP.md references in agent-readable files, run code-review, open PR to dev.</div>
+        </div>
+        <span class="badge active">In Progress</span>
+      </div>
+      <div class="phase-body">
+
+        <div class="sub-label">Tasks</div>
+        <ul class="tasks">
+          <li class="done"><span class="icon">✓</span><span>Grep all agent-readable files for remaining <code>ROADMAP.md</code> references — zero misleading hits; all 4 matches are negation statements</span></li>
+          <li class="done"><span class="icon">✓</span><span>Run <code>/code-review medium</code> — one issue found (phase count) and fixed before PR</span></li>
+          <li class="block"><span class="icon">✕</span><span>Open PR: <code>clyde/proto-html</code> → <code>dev</code> — branch pushed, awaiting human (ian-skylinks lacks collaborator access)</span></li>
+        </ul>
+
+        <div class="callout warn">
+          <strong>Human action needed:</strong> Create PR from <code>clyde/proto-html</code> → <code>dev</code>. Branch is pushed to origin. <code>gh pr create</code> fails with "must be a collaborator" from ian-skylinks account.
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<footer>Anno Planner · PROTO-HTML sidequest · Track in <code>docs/PROTO-HTML-PROGRESS.html</code></footer>
+
+</body>
+</html>
