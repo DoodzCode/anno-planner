@@ -113,3 +113,30 @@ Optimizer, multiplayer (WebRTC/Yjs), mod support, and island templates are **Pha
 
 1.  Decisions land in `docs/Anno_1800_Offline_Blueprint_Builder.md` before they harden into code.
 2.  PRs: one human reviews before merge. Agent-generated PRs require human sign-off on UX and math correctness.
+
+---
+
+## 9. Progress Tracking
+
+All project progress is tracked via **HTML artifacts only**. There is no `ROADMAP.md`.
+
+### Source of Truth
+- **`docs/ROADMAP.html`** — single source of truth for all milestones, quests, and sidequests
+- Each quest has its own tracker: `docs/<QUEST-ID>-PROGRESS.html`
+- Dashboard summary: `dashboard/index.html`
+
+### Tracker-First Rule
+Before writing any implementation code for a quest or milestone:
+1. Create `docs/<QUEST-ID>-PROGRESS.html` (use design system from `agent/skills/html-tracking.md`)
+2. Add a card to `docs/ROADMAP.html` overview grid
+3. Commit both files
+4. Only then begin implementation
+
+### Agent Skill Reference
+- **`agent/skills/html-tracking.md`** — full design system, HTML patterns, and update protocol
+- **`agent/skills/tool-usage.md`** — CRG, quality-check, and script reference
+
+### Update Protocol
+- Mark tasks `prog` when started, `done` when complete
+- Commit tracker updates separately from implementation commits
+- At phase completion: update ROADMAP.html milestone card progress bar
