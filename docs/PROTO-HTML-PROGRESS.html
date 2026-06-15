@@ -209,7 +209,7 @@
         <div class="stat-label">App code touched</div>
       </div>
       <div class="stat-card">
-        <div class="stat-val">P0</div>
+        <div class="stat-val">P2</div>
         <div class="stat-label">Current phase</div>
       </div>
     </div>
@@ -220,28 +220,28 @@
     <h2>Phase Overview</h2>
     <div class="overview">
 
-      <div class="m-card active">
+      <div class="m-card done">
         <div class="m-id">Phase 0</div>
         <div class="m-name">Tracker + ROADMAP.html card</div>
         <div class="m-est">This file + ROADMAP.html entry</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:50%"></div></div>
-        <div class="pbar-label"><span>1 / 2 tasks</span><span class="badge active">In Progress</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>2 / 2 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card done">
         <div class="m-id">Phase 1</div>
         <div class="m-name">Fix direct contradictions</div>
         <div class="m-est">ROADMAP.html footer · tool-usage.md</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 2 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>2 / 2 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card active">
         <div class="m-id">Phase 2</div>
         <div class="m-name">Establish authority</div>
         <div class="m-est">html-tracking.md §0 · tracker-first rule</div>
         <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 2 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-label"><span>0 / 2 tasks</span><span class="badge active">In Progress</span></div>
       </div>
 
       <div class="m-card">
@@ -267,40 +267,40 @@
   <section id="p0">
     <h2>Phase Detail</h2>
 
-    <div class="phase-block active">
+    <div class="phase-block done">
       <div class="phase-header">
         <div>
           <h3>Phase 0 — Tracker Bootstrap</h3>
           <div class="est">Branch: clyde/proto-html · Clyde</div>
           <div class="goal">Create this tracker and add the PROTO-HTML card to ROADMAP.html before touching any protocol file — following our own tracker-first rule.</div>
         </div>
-        <span class="badge active">In Progress</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="phase-body">
         <div class="sub-label">Tasks</div>
         <ul class="tasks">
           <li class="done"><span class="icon">✓</span><span>Create <code>docs/PROTO-HTML-PROGRESS.html</code> — this file</span></li>
-          <li class="todo"><span class="icon"></span><span>Add PROTO-HTML card to <code>docs/ROADMAP.html</code> milestone overview</span></li>
+          <li class="done"><span class="icon">✓</span><span>Add PROTO-HTML card to <code>docs/ROADMAP.html</code> milestone overview</span></li>
         </ul>
       </div>
     </div>
 
     <!-- ── Phase 1 ── -->
-    <div class="phase-block todo" id="p1">
+    <div class="phase-block done" id="p1">
       <div class="phase-header">
         <div>
           <h3>Phase 1 — Fix Direct Contradictions</h3>
           <div class="est">Branch: clyde/proto-html · Clyde</div>
           <div class="goal">Remove references to ROADMAP.md from files agents actively read. Two concrete contradictions that will mislead any agent reading them cold.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="phase-body">
 
         <div class="sub-label">Files</div>
         <ul class="tasks">
-          <li class="todo"><span class="icon"></span><span><code>docs/ROADMAP.html</code> footer — replace <code>Keep in sync with docs/ROADMAP.md</code> with statement of HTML-only authority</span></li>
-          <li class="todo"><span class="icon"></span><span><code>agent/skills/tool-usage.md</code> — update <code>roadmap-sync.sh</code> row: script no longer syncs ROADMAP.md (deleted); update description to reflect HTML-only flow or remove row</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>docs/ROADMAP.html</code> footer — replaced stale ROADMAP.md ref with HTML-only authority statement</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>agent/skills/tool-usage.md</code> — <code>roadmap-sync.sh</code> row updated to tasks.json→ROADMAP.html flow</span></li>
         </ul>
 
         <div class="callout info">
@@ -310,14 +310,14 @@
     </div>
 
     <!-- ── Phase 2 ── -->
-    <div class="phase-block todo" id="p2">
+    <div class="phase-block active" id="p2">
       <div class="phase-header">
         <div>
           <h3>Phase 2 — Establish ROADMAP.html Authority</h3>
           <div class="est">Branch: clyde/proto-html · Clyde</div>
           <div class="goal">Make html-tracking.md explicitly name ROADMAP.html as the single source of truth and add a tracker-first rule so agents cannot start code before a tracker exists.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge active">In Progress</span>
       </div>
       <div class="phase-body">
 
