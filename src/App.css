@@ -627,7 +627,7 @@
   border-radius: 4px;
   background: rgba(10,10,22,0.82);
   backdrop-filter: blur(4px);
-  pointer-events: none;
+  pointer-events: auto;
   overflow: hidden;
   opacity: 0.9;
 }
