@@ -209,7 +209,7 @@
         <div class="stat-label">App code touched</div>
       </div>
       <div class="stat-card">
-        <div class="stat-val">P2</div>
+        <div class="stat-val">P4</div>
         <div class="stat-label">Current phase</div>
       </div>
     </div>
@@ -236,28 +236,28 @@
         <div class="pbar-label"><span>2 / 2 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card active">
+      <div class="m-card done">
         <div class="m-id">Phase 2</div>
         <div class="m-name">Establish authority</div>
         <div class="m-est">html-tracking.md §0 · tracker-first rule</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 2 tasks</span><span class="badge active">In Progress</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>2 / 2 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card done">
         <div class="m-id">Phase 3</div>
         <div class="m-name">Wire PROJECT_PROTOCOLS.md</div>
         <div class="m-est">.citadel/agents entry point</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 1 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-track"><div class="pbar-fill full" style="width:100%"></div></div>
+        <div class="pbar-label"><span>1 / 1 tasks</span><span class="badge done">Done</span></div>
       </div>
 
-      <div class="m-card">
+      <div class="m-card active">
         <div class="m-id">Phase 4</div>
         <div class="m-name">Finish &amp; merge</div>
         <div class="m-est">Final review · PR · merge</div>
         <div class="pbar-track"><div class="pbar-fill" style="width:0%"></div></div>
-        <div class="pbar-label"><span>0 / 3 tasks</span><span class="badge pending">Pending</span></div>
+        <div class="pbar-label"><span>0 / 3 tasks</span><span class="badge active">In Progress</span></div>
       </div>
 
     </div>
@@ -310,21 +310,21 @@
     </div>
 
     <!-- ── Phase 2 ── -->
-    <div class="phase-block active" id="p2">
+    <div class="phase-block done" id="p2">
       <div class="phase-header">
         <div>
           <h3>Phase 2 — Establish ROADMAP.html Authority</h3>
           <div class="est">Branch: clyde/proto-html · Clyde</div>
           <div class="goal">Make html-tracking.md explicitly name ROADMAP.html as the single source of truth and add a tracker-first rule so agents cannot start code before a tracker exists.</div>
         </div>
-        <span class="badge active">In Progress</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="phase-body">
 
         <div class="sub-label">Files</div>
         <ul class="tasks">
-          <li class="todo"><span class="icon"></span><span><code>agent/skills/html-tracking.md</code> — prepend §0 "Source of Truth" block: ROADMAP.html is canonical; ROADMAP.md does not exist; no markdown file tracks progress</span></li>
-          <li class="todo"><span class="icon"></span><span><code>agent/skills/html-tracking.md</code> — add tracker-first rule to §5 (quest tracker creation): tracker must exist and ROADMAP.html card must be added <em>before</em> any code for the quest is written</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>agent/skills/html-tracking.md</code> — §0 "Source of Truth" block prepended; ROADMAP.html declared canonical; ROADMAP.md declared non-existent</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>agent/skills/html-tracking.md</code> — tracker-first rule added to §5; steps 9-11 updated; blockquote mandate added</span></li>
         </ul>
 
         <div class="callout info">
@@ -334,20 +334,20 @@
     </div>
 
     <!-- ── Phase 3 ── -->
-    <div class="phase-block todo" id="p3">
+    <div class="phase-block done" id="p3">
       <div class="phase-header">
         <div>
           <h3>Phase 3 — Wire PROJECT_PROTOCOLS.md</h3>
           <div class="est">Branch: clyde/proto-html · Clyde</div>
           <div class="goal">Add a Progress Tracking section to .citadel/agents/PROJECT_PROTOCOLS.md so agents loading that file cold know about ROADMAP.html and the html-tracking skill before they do anything else.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge done">Done</span>
       </div>
       <div class="phase-body">
 
         <div class="sub-label">Files</div>
         <ul class="tasks">
-          <li class="todo"><span class="icon"></span><span><code>.citadel/agents/PROJECT_PROTOCOLS.md</code> — add <code>## 7. Progress Tracking</code> section: names ROADMAP.html as project source of truth, names per-quest HTML artifacts, mandates reading <code>agent/skills/html-tracking.md</code> before starting any task, states ROADMAP.md does not exist</span></li>
+          <li class="done"><span class="icon">✓</span><span><code>.citadel/agents/PROJECT_PROTOCOLS.md</code> — §9 Progress Tracking added; ROADMAP.html named as source of truth; tracker-first rule and skill pointer included</span></li>
         </ul>
 
         <div class="callout warn">
@@ -357,14 +357,14 @@
     </div>
 
     <!-- ── Phase 4 ── -->
-    <div class="phase-block todo" id="p4">
+    <div class="phase-block active" id="p4">
       <div class="phase-header">
         <div>
           <h3>Phase 4 — Finish &amp; Merge</h3>
           <div class="est">Branch: clyde/proto-html · Clyde + Human</div>
           <div class="goal">Verify no remaining ROADMAP.md references in agent-readable files, run code-review, open PR to dev.</div>
         </div>
-        <span class="badge pending">Pending</span>
+        <span class="badge active">In Progress</span>
       </div>
       <div class="phase-body">
 
