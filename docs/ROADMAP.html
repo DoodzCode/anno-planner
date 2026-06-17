@@ -302,7 +302,7 @@
 
 <div class="topbar">
   <h1>Anno Planner — Roadmap</h1>
-  <span class="date">Updated 2026-06-14 (M6 Phase 5 complete; M4-B complete; PROTO-HTML started)</span>
+  <span class="date">Updated 2026-06-17 (M6 QoL wave complete — QoL 1–4 merged to main; Phase 6 hardening active)</span>
   <nav>
     <a href="#overview">Overview</a>
     <a href="#m0">M0</a>
@@ -387,7 +387,7 @@
       <div class="m-card active">
         <div class="m-id">M6</div>
         <div class="m-name">Engine &amp; Hardening</div>
-        <div class="m-est">Ongoing · frank</div>
+        <div class="m-est">Phase 6 active · frank</div>
         <div class="pbar-track"><div class="pbar-fill" style="width:86%"></div></div>
         <div class="pbar-label"><span>6 / 7 phases</span><span class="badge active">In Progress</span></div>
       </div>
@@ -620,11 +620,22 @@
           <li class="done"><div class="icon">✓</div><span>Palette building list reflows into 2- or 3-column card grid via CSS container queries as palette widens</span></li>
         </ul>
 
-        <div class="sub-label">Phase 6 — Hardening <span style="color:var(--muted);font-weight:600;margin-left:.5rem">Pending</span></div>
+        <div class="sub-label">QoL Wave — Canvas &amp; Palette refinements <span style="color:var(--done);font-weight:600;margin-left:.5rem">✓ Done</span></div>
         <ul class="tasks">
-          <li class="todo"><div class="icon"></div><span>Playwright E2E: place → compute → save → reload → migrate golden path</span></li>
-          <li class="todo"><div class="icon"></div><span>Enforce coverage gate in CI; PWA cache bump for data changes</span></li>
-          <li class="todo"><div class="icon"></div><span>Update <code>CLAUDE.md</code> / <code>CONTRIBUTING.md</code> / docs to reflect M6 completion</span></li>
+          <li class="done"><div class="icon">✓</div><span>QoL-1 (blueLine): Fixed-size 2568×1440 canvas; overflow-hidden container; scroll suppressed on canvas focus</span></li>
+          <li class="done"><div class="icon">✓</div><span>QoL-2 (greenLine): Collision detection, paint mode (hold P to stamp), farm field overlay (F key)</span></li>
+          <li class="done"><div class="icon">✓</div><span>QoL-3 (leftPanelQOL): Palette collapsible categories (chevron, localStorage); responsive card grid via CSS container queries</span></li>
+          <li class="done"><div class="icon">✓</div><span>QoL-4 (navControls): Arrow-key pan (Shift ×3), left-drag pan, D-delete, minimap click-to-navigate; all merged to main</span></li>
+        </ul>
+
+        <div class="sub-label">Phase 6 — Hardening <span style="color:var(--prog);font-weight:600;margin-left:.5rem">Active</span></div>
+        <ul class="tasks">
+          <li class="todo"><div class="icon"></div><span>T1 — Fix <code>productionMath.ts</code> coverage gaps: <code>variantToChainBuilding</code>, <code>computeTallies</code> legacy path, <code>buildingsNeeded</code> zero-rate (currently failing its own 100% threshold)</span></li>
+          <li class="todo"><div class="icon"></div><span>T2 — Add <code>collide.ts</code> + <code>grid.ts</code> tests: <code>wouldCollide</code>, <code>tileToPx</code>, <code>snapToGrid</code>, <code>effectiveFootprint</code>, <code>nextRotation</code>, <code>footprintsOverlap</code> (0–9% today)</span></li>
+          <li class="todo"><div class="icon"></div><span>T3 — Expand <code>paneLayout.ts</code> to 100%: <code>saveLayout</code> / <code>loadLayout</code> via localStorage mock (81% today)</span></li>
+          <li class="todo"><div class="icon"></div><span>T4 — Wire CI to <code>test:coverage</code> instead of <code>test:run</code> so coverage thresholds are enforced on every push</span></li>
+          <li class="todo"><div class="icon"></div><span>T5 — Playwright E2E: configure <code>playwright.config.ts</code>, create <code>e2e/</code>; golden path (place → compute → save → reload) + migration path (legacy blueprint → no dropped tiles)</span></li>
+          <li class="todo"><div class="icon"></div><span>T6 — Docs + release: update <code>CONTRIBUTING.md</code>; sync ROADMAP; tag <code>v1.0.0</code></span></li>
         </ul>
 
         <div class="gate"><strong>Human gate (Phase 4):</strong> Review workforce numbers (artisans/engineers marked <code>verify: true</code>) against the Anno 1800 wiki before Phase 4 ships.</div>
