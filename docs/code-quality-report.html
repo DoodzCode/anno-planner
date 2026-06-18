@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AOBB Code Quality Report</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #111827; max-width: 960px; margin: 0 auto; padding: 2rem; }
+    h1, h2, h3 { color: #111827; margin-top: 2rem; }
+    h1 { border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+    .metrics { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .metric { background: #f3f4f6; padding: 1rem; border-radius: 8px; flex: 1; min-width: 150px; text-align: center; }
+    .metric span { display: block; font-size: 2rem; font-weight: 700; color: #2563eb; }
+    .severity { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
+    .critical { background: #fee2e2; color: #b91c1c; }
+    .moderate { background: #fef3c7; color: #b45309; }
+    .minor { background: #dcfce7; color: #15803d; }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    th { background: #f9fafb; font-weight: 600; }
+    code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; color: #be185d; }
+    .evidence { font-size: 0.9rem; color: #4b5563; border-left: 3px solid #cbd5e1; padding-left: 1rem; margin-top: 0.5rem; background: #f8fafc; padding: 0.5rem 1rem; }
+    .finding { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; }
+  </style>
+</head>
+<body>
+  <h1>AOBB Code Quality Report</h1>
+
+  <h2>Executive Summary</h2>
+  <p>The Anno 1800 Offline Blueprint Builder (AOBB) codebase successfully implements a robust feature set, but suffers from significant architectural compression. The most critical issue is the <code>Canvas.tsx</code> module, which has absorbed responsibilities across view rendering, domain logic, and state management. The type safety is exceptionally strong, and pure math logic is well-isolated. However, to support parallel development, the tight coupling in the Canvas and UI stores must be unwound.</p>
+  
+  <div class="metrics">
+    <div class="metric"><span>609</span>Lines in Canvas.tsx</div>
+    <div class="metric"><span>5</span>State Ref Variables</div>
+    <div class="metric"><span>203</span>Lines of Pure Math</div>
+  </div>
+
+  <h2>Methodology</h2>
+  <p>The codebase was reviewed through static analysis of the <code>src/</code> directory, examining file sizes, dependency imports, and store designs. The evaluation mapped feature flows from the UI component layer down to the Zustand store and pure domain functions. Test coverage was validated by inspecting <code>__tests__/</code>.</p>
+
+  <h2>Worst Offenders</h2>
+  <table>
+    <tr><th>File</th><th>Line Count</th><th>Primary Issue</th></tr>
+    <tr><td><code>src/components/Canvas.tsx</code></td><td>609</td><td>God file. Mixes Konva rendering, keyboard input, panning/zooming FSM, and collision domain logic.</td></tr>
+    <tr><td><code>src/components/Palette.tsx</code></td><td>284</td><td>Inline localStorage management and complex filtering logic.</td></tr>
+    <tr><td><code>src/state/blueprintStore.ts</code></td><td>146</td><td>Mixes domain state (placements) with UI state (selections).</td></tr>
+  </table>
+
+  <h2>Findings by Dimension</h2>
+
+  <div class="finding">
+    <h3>Architecture & Module Boundaries <span class="severity critical">Critical</span></h3>
+    <p><strong>Verdict:</strong> <code>Canvas.tsx</code> violates the Single Responsibility Principle significantly. It handles interaction logic (panning, painting), global shortcuts, and rendering simultaneously.</p>
+    <div class="evidence">
+      <strong>Evidence:</strong> <code>src/components/Canvas.tsx:166-215</code> handles global window keyboard events directly inside the Canvas component. Lines <code>491-576</code> manually construct the visual hierarchy of every placed building instead of delegating to a sub-component.
+    </div>
+  </div>
+
+  <div class="finding">
+    <h3>State Management <span class="severity moderate">Moderate</span></h3>
+    <p><strong>Verdict:</strong> Global state is mixed with transient UI state, and complex interaction states are hidden in <code>useRef</code> variables.</p>
+    <div class="evidence">
+      <strong>Evidence:</strong> <code>src/state/blueprintStore.ts:9-12</code> defines <code>selectedIds</code> and <code>activeBuildingId</code> alongside <code>placements</code>. <code>Canvas.tsx:73-88</code> uses multiple disconnected refs (<code>isDrawingBox</code>, <code>isSpaceDown</code>, <code>isPanning</code>, <code>isManualPanning</code>) which can lead to invalid interaction states. <code>src/components/Palette.tsx:47-63</code> directly interacts with <code>localStorage</code> inside the component.
+    </div>
+  </div>
+
+  <div class="finding">
+    <h3>Composability & Reusability <span class="severity moderate">Moderate</span></h3>
+    <p><strong>Verdict:</strong> UI elements are monolithic. The Konva stage renders everything directly rather than composing smaller reusable layer or node components.</p>
+    <div class="evidence">
+      <strong>Evidence:</strong> <code>src/components/Canvas.tsx:463-488</code> inline rendering of Influence radius overlay circles. It lacks a <code>&lt;BuildingNode /&gt;</code> or <code>&lt;InfluenceOverlay /&gt;</code> abstraction.
+    </div>
+  </div>
+
+  <div class="finding">
+    <h3>Type Safety & Error Handling <span class="severity minor">Minor</span></h3>
+    <p><strong>Verdict:</strong> Type safety is excellent. No <code>any</code> escapes were found in the application source. Errors in async flows show toasts rather than silently failing.</p>
+    <div class="evidence">
+      <strong>Evidence:</strong> Strong typings in <code>src/lib/productionMath.ts</code> and consistent interface usage in the store. <code>App.tsx:86</code> correctly captures import errors and pipes them to the toast UI.
+    </div>
+  </div>
+
+  <div class="finding">
+    <h3>Testability & Tests <span class="severity critical">Critical Risk</span></h3>
+    <p><strong>Verdict:</strong> High test coverage for math and data integrity, but zero test coverage for the complex Canvas component, representing a high regression risk for the refactor.</p>
+    <div class="evidence">
+      <strong>Evidence:</strong> <code>src/__tests__/</code> contains comprehensive tests for <code>productionMath.test.ts</code> and <code>paneLayout.test.ts</code>, but no snapshot or behavior tests for <code>Canvas.tsx</code> or the interaction state logic.
+    </div>
+  </div>
+
+  <h2>Risk Register</h2>
+  <ul>
+    <li><strong>Refactoring Canvas without Characterization Tests:</strong> Splitting Canvas without a safety net risks breaking panning, zooming, box-selection, or ghost preview logic. A snapshot or manual test script is required.</li>
+    <li><strong>Coordinate Math Regressions:</strong> The <code>dragBoundFunc</code> and pan math relies on exact pixel-to-tile ratios. Altering where this logic lives might introduce offset bugs.</li>
+  </ul>
+</body>
+</html>
